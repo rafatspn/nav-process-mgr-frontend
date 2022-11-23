@@ -1,12 +1,18 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Home from "./pages/Home";
+import loginData from "./data/login.json";
 
 import "./App.css";
-import React from "react";
 
 function App() {
+  console.log(loginData);
+
   return (
     <>
-      <Home />
+      <Router>
+        <Home />
+      </Router>
     </>
   );
 }

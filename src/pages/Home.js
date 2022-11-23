@@ -1,11 +1,11 @@
-import React from 'react'
+import Navigator from '../components/Navigation/Navigator'
+import Loader from '../components/Elements/Loader'
 
-import Loader from '../components/Loader'
 
 export default function Home() {
   return (
     <>
-      <Loader/>
+      <Navigator/>
     </>
   )
 }
