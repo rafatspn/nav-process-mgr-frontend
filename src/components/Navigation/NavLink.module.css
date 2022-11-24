@@ -1,5 +1,55 @@
-.navLink{
-    height: 40px;
-    width: 60px;
-    color: red;
+.nav_box {
+  display: flex;
+  gap: 15px;
+  justify-content: space-around;
+}
+
+.nav_box .nav_item {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  padding: 7px 18px;
+}
+
+.nav_box .nav_item .link {
+  transition: 0.5s ease;
+  color: #365a5e;
+}
+
+.nav_box .nav_item .link_button {
+  transition: 0.5s ease;
+  color: #365a5e;
+  border: none;
+  background: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.active {
+  font-weight: bold;
+  color: #011214;
+}
+
+@media (max_width: 670px) {
+  .nav_box {
+    position: absolute;
+    flex-direction: column;
+    top: 100px;
+    width: 100%;
+    left: 0;
+    display: flex;
+    justify-content: space-around;
+    gap: 0px;
+  }
+
+  .nav_box .nav_item {
+    border-radius: 0;
+  }
+
+  .nav_box {
+    display: flex !important;
+  }
 }

@@ -1,11 +1,11 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import NavLinks from "./NavLinks";
-// import SideDrawer from "../Elements/SideDrawer";
 import useWindowDimensions from "../../hooks/window-dimension";
+import SideDrawer from "../Elements/SideDrawer";
 
-import styles from "./Navigator.module.css";
-import { useState } from "react";
+import style from "./Navigator.module.css";
 
 export default function Navigator() {
   const windowWidth = useWindowDimensions();
@@ -13,16 +13,27 @@ export default function Navigator() {
 
   const sideDrawerOpenHandler = () => {
     setSideDrawerIsOpen(true);
-    console.log(sideDrawerIsOpen);
   };
   const sideDrawerCloseHandler = () => {
-    console.log("Side drawer is closed");
+    setSideDrawerIsOpen(false);
   };
 
   return (
-    <>
-      <header className={styles.header}>
-      <button className={styles.navMenuBtn} onClick={sideDrawerOpenHandler}>
+    <nav>
+      {windowWidth < 670 ? (
+        <SideDrawer show={sideDrawerIsOpen} onClick={sideDrawerCloseHandler}>
+          <NavLinks />
+        </SideDrawer>
+      ) : (
+        <NavLinks />
+      )}
+      <button className={style.nav_menu__button} onClick={sideDrawerOpenHandler}>
+        <span />
+        <span />
+        <span />
+      </button>
+      {/* <header className={styles.header}>
+        <button className={styles.navMenuBtn} onClick={sideDrawerOpenHandler}>
           <span />
           <span />
           <span />
@@ -35,9 +46,12 @@ export default function Navigator() {
             <NavLinks />
           </nav>
         )}
-
       </header>
-      {/* {windowWidth <=670 && <SideDrawer show={sideDrawerIsOpen} />} */}
-    </>
+      {windowWidth <= 670 && (
+        <SideDrawer show={sideDrawerIsOpen} onClick={sideDrawerCloseHandler}>
+          <NavLinks />
+        </SideDrawer>
+      )} */}
+    </nav>
   );
 }
