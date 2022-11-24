@@ -29,14 +29,12 @@
     font-size: 20px;
   }
   
-  .logo a {
-    color: red;
-  }
   
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     .header {
       flex-direction: column;
       height: auto;
+      width: 30%;
     }
   
     .header ul {
@@ -45,12 +43,8 @@
       text-align: center;
     }
   
-    .header a {
-      margin-right: 0;
-    }
-  
     .logo {
       margin: 20px 0;
     }
-  }
+  } */
   
