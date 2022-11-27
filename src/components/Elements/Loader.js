@@ -1,11 +1,11 @@
 import React from 'react'
 
-import styles from "./Loader.module.css"
+import "./Loader.css"
 
 export default function Loader() {
   return (
     <>
-      <div className={styles.ldsRipple}><div></div><div></div></div>
+      <div className='ldsRipple'><div></div><div></div></div>
     </>
   )
 }

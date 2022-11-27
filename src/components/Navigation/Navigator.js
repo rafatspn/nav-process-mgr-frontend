@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import NavLinks from "./NavLinks";
 import useWindowDimensions from "../../hooks/window-dimension";
 import SideDrawer from "../Elements/SideDrawer";
+import Avatar from "../Elements/Avatar";
 
 import style from "./Navigator.module.css";
 
@@ -18,40 +19,37 @@ export default function Navigator() {
     setSideDrawerIsOpen(false);
   };
 
+  const avatarHandler = () => {}
+
   return (
     <nav>
-      {windowWidth < 670 ? (
+      <div className="logo">
+        <NavLink to="/">
+          <Avatar
+            image="/assets/logo.jpg"
+            height="50px"
+            click={avatarHandler}
+          ></Avatar>
+        </NavLink>
+      </div>
+      {width < 670 && sideDrawerIsOpen ? (
+        <BackDrop onClick={sideDrawerCloseHandler} />
+      ) : null}
+      {windowWidth < 670 && sideDrawerIsOpen ? (
         <SideDrawer show={sideDrawerIsOpen} onClick={sideDrawerCloseHandler}>
           <NavLinks />
         </SideDrawer>
       ) : (
         <NavLinks />
       )}
-      <button className={style.nav_menu__button} onClick={sideDrawerOpenHandler}>
+      <button
+        className={style.nav_menu__button}
+        onClick={sideDrawerOpenHandler}
+      >
         <span />
         <span />
         <span />
       </button>
-      {/* <header className={styles.header}>
-        <button className={styles.navMenuBtn} onClick={sideDrawerOpenHandler}>
-          <span />
-          <span />
-          <span />
-        </button>
-        <div className={styles.logo}>
-          <NavLink to="/">SmartBiz</NavLink>
-        </div>
-        {windowWidth > 670 && (
-          <nav>
-            <NavLinks />
-          </nav>
-        )}
-      </header>
-      {windowWidth <= 670 && (
-        <SideDrawer show={sideDrawerIsOpen} onClick={sideDrawerCloseHandler}>
-          <NavLinks />
-        </SideDrawer>
-      )} */}
     </nav>
   );
 }

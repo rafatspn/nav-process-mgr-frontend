@@ -5,7 +5,7 @@ nav {
   justify-content: space-between;
   background: #ffffff;
   box-shadow: 2px 2px 5px lightslategrey, -2px -2px 5px grey;
-  padding: 1rem 2vw;
+  padding: .5rem 1vw;
   position: relative;
 }
 
