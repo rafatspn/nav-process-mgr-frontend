@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Trends() {
+export default function Login() {
   return (
     <div style={{ textAlign: "center" }}>
-      <h1>Trends</h1>
+      <h1>Login</h1>
     </div>
   );
 }
