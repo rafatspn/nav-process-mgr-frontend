@@ -1,6 +1,95 @@
 import { NavLink } from "react-router-dom";
 
 import style from "./NavLink.module.css";
+//import "./NavLink.css"
+
+// export default function NavLinks(props) {
+//   return (
+//     <div className='nav_box'>
+//       <div className={style.nav_item}>
+//         <NavLink
+//           to="/"
+//           className={obj=> obj.isActive ? style.link + ' ' + style.active : style.link}
+//           activeclassname={style.active}
+//           style={{ textDecoration: "none" }}
+//         >
+//           Home
+//         </NavLink>
+//       </div>
+//       <div className={style.nav_item}>
+//         <NavLink
+//           to="/trends"
+//           className={obj=> obj.isActive ? style.link + ' ' + style.active : style.link}
+//           activeclassname={style.active}
+//           style={{ textDecoration: "none" }}
+//         >
+//           Trends
+//         </NavLink>
+//       </div>
+//       <div className={style.nav_item}>
+//         <NavLink
+//           to="/summary"
+//           className={obj=> obj.isActive ? style.link + ' ' + style.active : style.link}
+//           activeclassname={style.active}
+//           style={{ textDecoration: "none" }}
+//         >
+//           Summary
+//         </NavLink>
+//       </div>
+//       <div className={style.nav_item}>
+//         <NavLink
+//           to="/reports"
+//           className={obj=> obj.isActive ? style.link + ' ' + style.active : style.link}
+//           activeclassname={style.active}
+//           style={{ textDecoration: "none" }}
+//         >
+//           Reports
+//         </NavLink>
+//       </div>
+//       <div className={style.nav_item}> 
+//         <NavLink
+//           to="/signup"
+//           className={obj=> obj.isActive ? style.link + ' ' + style.active : style.link}
+//           activeclassname={style.active}
+//           style={{ textDecoration: "none" }}
+//         >
+//           Signup
+//         </NavLink>
+//       </div>
+//       <div className={style.nav_item}>
+//         <NavLink
+//           to="/login"
+//           className={obj=> obj.isActive ? style.link + ' ' + style.active : style.link}
+//           activeclassname={style.active}
+//           style={{ textDecoration: "none" }}
+//         >
+//           Login
+//         </NavLink>
+//       </div>
+//       <div className={style.nav_item}>
+//         <NavLink
+//           to="/login"
+//           className={obj=> obj.isActive ? style.link + ' ' + style.active : style.link}
+//           activeclassname={style.active}
+//           style={{ textDecoration: "none" }}
+//         >
+//           Logout
+//         </NavLink>
+//       </div>
+//     </div>
+//   );
+// }
+
+// obj =>{
+//   console.log(obj.isActive);
+//   if(obj.isActive){
+//     console.log(obj.isActive);
+//     return style.link + ' ' + style.active
+//   }else{
+//     console.log("Bleh");
+//     return style.link
+//   }
+// }
 
 export default function NavLinks(props) {
   return (
@@ -8,8 +97,8 @@ export default function NavLinks(props) {
       <div className={style.nav_item}>
         <NavLink
           to="/"
-          className="link"
-          activeclassname="active"
+          className={obj=> obj.isActive ? style.link + ' ' + style.active : style.link}
+          activeclassname={style.active}
           style={{ textDecoration: "none" }}
         >
           Home
@@ -18,8 +107,8 @@ export default function NavLinks(props) {
       <div className={style.nav_item}>
         <NavLink
           to="/trends"
-          className="link"
-          activeclassname="active"
+          className={obj=> obj.isActive ? style.link + ' ' + style.active : style.link}
+          activeclassname={style.active}
           style={{ textDecoration: "none" }}
         >
           Trends
@@ -28,8 +117,8 @@ export default function NavLinks(props) {
       <div className={style.nav_item}>
         <NavLink
           to="/summary"
-          className="link"
-          activeclassname="active"
+          className={obj=> obj.isActive ? style.link + ' ' + style.active : style.link}
+          activeclassname={style.active}
           style={{ textDecoration: "none" }}
         >
           Summary
@@ -38,8 +127,8 @@ export default function NavLinks(props) {
       <div className={style.nav_item}>
         <NavLink
           to="/reports"
-          className="link"
-          activeclassname="active"
+          className={obj=> obj.isActive ? style.link + ' ' + style.active : style.link}
+          activeclassname={style.active}
           style={{ textDecoration: "none" }}
         >
           Reports
@@ -48,8 +137,8 @@ export default function NavLinks(props) {
       <div className={style.nav_item}> 
         <NavLink
           to="/signup"
-          className="link"
-          activeclassname="active"
+          className={obj=> obj.isActive ? style.link + ' ' + style.active : style.link}
+          activeclassname={style.active}
           style={{ textDecoration: "none" }}
         >
           Signup
@@ -58,8 +147,8 @@ export default function NavLinks(props) {
       <div className={style.nav_item}>
         <NavLink
           to="/login"
-          className="link"
-          activeclassname="active"
+          className={obj=> obj.isActive ? style.link + ' ' + style.active : style.link}
+          activeclassname={style.active}
           style={{ textDecoration: "none" }}
         >
           Login
@@ -67,9 +156,9 @@ export default function NavLinks(props) {
       </div>
       <div className={style.nav_item}>
         <NavLink
-          to="/login"
-          className="link"
-          activeclassname="active"
+          to="/logout"
+          className={obj=> obj.isActive ? style.link + ' ' + style.active : style.link}
+          activeclassname={style.active}
           style={{ textDecoration: "none" }}
         >
           Logout
@@ -78,3 +167,4 @@ export default function NavLinks(props) {
     </div>
   );
 }
+

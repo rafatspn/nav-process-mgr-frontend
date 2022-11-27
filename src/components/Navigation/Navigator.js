@@ -5,6 +5,7 @@ import NavLinks from "./NavLinks";
 import useWindowDimensions from "../../hooks/window-dimension";
 import SideDrawer from "../Elements/SideDrawer";
 import Avatar from "../Elements/Avatar";
+import Backdrop from "../Elements/BackDrop";
 
 import style from "./Navigator.module.css";
 
@@ -13,7 +14,8 @@ export default function Navigator() {
   const [sideDrawerIsOpen, setSideDrawerIsOpen] = useState(false);
 
   const sideDrawerOpenHandler = () => {
-    setSideDrawerIsOpen(true);
+    console.log("Inside side drawer open");
+    setSideDrawerIsOpen((prev)=> !prev);
   };
   const sideDrawerCloseHandler = () => {
     setSideDrawerIsOpen(false);
@@ -23,7 +25,7 @@ export default function Navigator() {
 
   return (
     <nav>
-      <div className="logo">
+      <div className={style.logo}>
         <NavLink to="/">
           <Avatar
             image="/assets/logo.jpg"
@@ -32,11 +34,11 @@ export default function Navigator() {
           ></Avatar>
         </NavLink>
       </div>
-      {width < 670 && sideDrawerIsOpen ? (
-        <BackDrop onClick={sideDrawerCloseHandler} />
-      ) : null}
       {windowWidth < 670 && sideDrawerIsOpen ? (
-        <SideDrawer show={sideDrawerIsOpen} onClick={sideDrawerCloseHandler}>
+        <Backdrop onClick={sideDrawerCloseHandler} />
+      ) : null}
+      {windowWidth < 670 ? (
+        <SideDrawer show={sideDrawerIsOpen}>
           <NavLinks />
         </SideDrawer>
       ) : (

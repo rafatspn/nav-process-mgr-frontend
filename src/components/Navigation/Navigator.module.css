@@ -10,7 +10,7 @@ nav {
 }
 
 .logo {
-  color: #365a5e;
+  color: #282059;
   font-weight: bold;
   font-size: 1.2em;
 }
@@ -31,7 +31,7 @@ nav {
   display: block;
   width: 2.5rem;
   height: 1.5px;
-  background: #367166;
+  background: #282059;
 }
 
 @media (min-width: 670px) {

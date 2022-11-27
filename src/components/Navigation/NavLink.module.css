@@ -16,12 +16,12 @@
 
 .nav_box .nav_item .link {
   transition: 0.5s ease;
-  color: #365a5e;
+  color: #282059;
 }
 
 .nav_box .nav_item .link_button {
   transition: 0.5s ease;
-  color: #365a5e;
+  color: #282059;
   border: none;
   background: white;
   cursor: pointer;
@@ -30,10 +30,10 @@
 
 .active {
   font-weight: bold;
-  color: #011214;
+  color: #160e45;
 }
 
-@media (max_width: 670px) {
+@media (max-width: 670px) {
   .nav_box {
     position: absolute;
     flex-direction: column;
