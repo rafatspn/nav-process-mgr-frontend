@@ -3,6 +3,7 @@ import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap'
 import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
 
+import LatestNews from '../components/Dashboard/LatestNews'
 import PostPerformance from '../components/Dashboard/PostPerformance'
 import CompetitorAnalysis from '../components/Dashboard/CompetitorAnalysis'
 
@@ -15,6 +16,9 @@ export default function Dashboard() {
                         defaultActiveKey="postPerformance"
                         id="uncontrolled-tab-example"
                         className="mb-3 mt-3">
+                        <Tab eventKey="latestNews" title="Latest News">
+                            <LatestNews />
+                        </Tab>
                         <Tab
                             eventKey="postPerformance"
                             title="Post Performance">
