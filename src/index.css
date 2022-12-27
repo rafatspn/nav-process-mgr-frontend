@@ -1,13 +1,51 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html,
 body {
-  font-family: "Poppins", sans-serif;
-  line-height: 1.8;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.8;
+}
+
+.com-logo {
+    width: 9rem;
+}
+
+#typeOfComments {
+    width: 100%;
+    height: 300px;
+}
+
+#typeOfQueries {
+    width: 100%;
+    height: 300px;
+}
+
+#typeOfFeedback {
+    width: 100%;
+    height: 300px;
+}
+
+#publicEngagementByPost {
+    width: 100%;
+    height: 300px;
+}
+
+#typeOfComplainNegativeComments {
+    width: 100%;
+    height: 300px;
+}
+
+#typesOfAppreciation {
+    width: 100%;
+    height: 300px;
+}
+
+.loading-icon {
+    width: 9rem;
 }
