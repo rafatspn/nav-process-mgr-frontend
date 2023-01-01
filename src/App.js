@@ -1,30 +1,40 @@
-import React, { useState } from "react"
+/*global FB*/
+import React, { useState, useCallback, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
-} from "react-router-dom"
+} from "react-router-dom";
 
-import Home from "./pages/Home"
-import Trends from "./pages/Trends"
-import Signup from "./pages/Signup"
-import Login from "./pages/Login"
-import Logout from "./pages/Logout"
-import Reports from "./pages/Reports"
-import Summary from "./pages/Summary"
-import Dashboard from "./pages/Dashboard"
+import Home from "./pages/Home";
+import Trends from "./pages/Trends";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import Logout from "./pages/Logout";
+import Reports from "./pages/Reports";
+import Summary from "./pages/Summary";
+import Dashboard from "./pages/Dashboard";
 
-import { AuthContext } from "./context/AuthContext"
-import Navigator from "./components/Navigation/Navigator"
-import loginData from "./data/login.json"
+import { AuthContext } from "./context/AuthContext";
+import Navigator from "./components/Navigation/Navigator";
+import loginData from "./data/login.json";
 
-import "./App.css"
+import "./App.css";
 
 function App() {
-  let [isLoggedIn, setIsLoggedIn] = useState(false)
+  let [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  let routes
+  window.fbAsyncInit = function () {
+    FB.init({
+      appId: "553895336367545",
+      autoLogAppEvents: true,
+      xfbml: true,
+      version: "v15.0",
+    });
+  };
+
+  let routes;
 
   if (isLoggedIn) {
     routes = (
@@ -37,7 +47,7 @@ function App() {
         <Route path="/logout" element={<Logout />} />
         <Route path="*" element={<Navigate to="/dashboard" />}></Route>
       </Routes>
-    )
+    );
   } else {
     routes = (
       <Routes>
@@ -45,15 +55,15 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<Navigate to="/login" />}></Route>
       </Routes>
-    )
+    );
   }
 
-  const login = (userid) => {
-    setIsLoggedIn(true)
-  }
-  const logout = (userid) => {
-    setIsLoggedIn(false)
-  }
+  const login = useCallback((userid) => {
+    setIsLoggedIn(true);
+  }, []);
+  const logout = useCallback((userid) => {
+    setIsLoggedIn(false);
+  }, []);
   return (
     <>
       <AuthContext.Provider
@@ -65,7 +75,7 @@ function App() {
         </Router>
       </AuthContext.Provider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
