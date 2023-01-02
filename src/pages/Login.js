@@ -32,7 +32,6 @@ export default function Login({ location, history }) {
               type="button"
               className="login_btnfb btn w-100"
               onClick={handleFacebookLogin}
-              disabled={!isFacebookReady}
             >
               Login with Facebook
             </button>

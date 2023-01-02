@@ -25,15 +25,6 @@ import "./App.css";
 function App() {
   let [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  window.fbAsyncInit = function () {
-    FB.init({
-      appId: "553895336367545",
-      autoLogAppEvents: true,
-      xfbml: true,
-      version: "v15.0",
-    });
-  };
-
   let routes;
 
   if (isLoggedIn) {

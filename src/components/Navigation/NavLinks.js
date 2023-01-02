@@ -88,7 +88,7 @@ export default function NavLinks(props) {
             </div>}
             {auth.isLoggedIn && <div className={style.nav_item}>
                 <NavLink
-                    to="/login"
+                    to="/logout"
                     className={(obj) =>
                         obj.isActive
                             ? style.link + ' ' + style.active
