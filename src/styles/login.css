@@ -1,0 +1,63 @@
+.Form_cardt {
+    width: 360px;
+    padding: 99px 25px 25px 25px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    border-radius: 12px;
+    background-color: #fff;
+    position: relative;
+    margin-top: 252px;
+}
+.card_float {
+    position: absolute;
+    top: -33px;
+    left: 18px;
+    width: 323px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    padding: 32px;
+    border: unset;
+    background-color: #10b7b1;
+    color: #fff;
+    border-radius: 12px;
+    box-shadow: rgba(23, 210, 226, 0.2) 0px 7px 29px 0px;
+}
+.login_bottam1 span {
+    font-size: 14px;
+    color: #828282;
+}
+.login_bottam1 .a {
+    text-decoration: none;
+    color: #10b7b1;
+    font-size: 14px;
+    font-weight: 700;
+}
+ 
+.login_bottam1 .a:hover {
+    text-decoration: underline;
+}
+ 
+.login_btn {
+    background-color: #10b7b1;
+    border: 1px solid #10b7b1;
+    color: #fff;
+    font-weight: 400;
+}
+.login_btn_borderd {
+    background-color: #fff;
+    border: 2px solid #10b7b1;
+    color: #10b7b1;
+    font-weight: 400;
+}
+.login_btn_borderd:hover {
+    background-color: #fff;
+    border: 2px solid #10b7b1;
+    color: #10b7b1;
+    font-weight: 400;
+}
+.login_btn:hover {
+    background-color: #10b7b1;
+    border: 1px solid #10b7b1;
+    color: #fff;
+    font-weight: 400;
+}
