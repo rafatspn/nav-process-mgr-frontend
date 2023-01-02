@@ -18,27 +18,23 @@ import Dashboard from "./pages/Dashboard";
 
 import { AuthContext } from "./context/AuthContext";
 import Navigator from "./components/Navigation/Navigator";
+import loginData from "./data/login.json";
 
 import "./App.css";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  let [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const login = useCallback((uid, token) => {
-    setIsLoggedIn(true);
-  }, []);
-  const logout = useCallback(() => {
-    setIsLoggedIn(false);
-  }, []);
+  window.fbAsyncInit = function () {
+    FB.init({
+      appId: "553895336367545",
+      autoLogAppEvents: true,
+      xfbml: true,
+      version: "v15.0",
+    });
+  };
 
-  let routes = (
-    <Routes>
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="*" element={<Navigate to="/login" />}></Route>
-    </Routes>
-  );
-
+  let routes;
 
   if (isLoggedIn) {
     routes = (
@@ -47,25 +43,38 @@ function App() {
         <Route path="/trends" element={<Trends />} />
         <Route path="/reports" element={<Reports />} />
         <Route path="/summary" element={<Summary />} />
+        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route path="/logout" element={<Logout />} />
-        <Route path="*" element={<Navigate to="/" />}></Route>
+        <Route path="*" element={<Navigate to="/dashboard" />}></Route>
+      </Routes>
+    );
+  } else {
+    routes = (
+      <Routes>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<Navigate to="/login" />}></Route>
       </Routes>
     );
   }
 
+  const login = useCallback((userid) => {
+    setIsLoggedIn(true);
+  }, []);
+  const logout = useCallback((userid) => {
+    setIsLoggedIn(false);
+  }, []);
   return (
-    <React.Fragment>
+    <>
       <AuthContext.Provider
         value={{ isLoggedIn, login: login, logout: logout }}
       >
         <Router>
-          <main>
-            <Navigator />
-            {routes}
-          </main>
+          <Navigator />
+          {routes}
         </Router>
       </AuthContext.Provider>
-    </React.Fragment>
+    </>
   );
 }
 
