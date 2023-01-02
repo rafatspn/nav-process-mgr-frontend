@@ -5,7 +5,7 @@
     border-radius: 12px;
     background-color: #fff;
     position: relative;
-    margin-top: 252px;
+    margin-top: 100px;
 }
 .card_float {
     position: absolute;
@@ -17,10 +17,10 @@
     font-weight: 600;
     padding: 32px;
     border: unset;
-    background-color: #10b7b1;
+    background-color: #282059;
     color: #fff;
     border-radius: 12px;
-    box-shadow: rgba(23, 210, 226, 0.2) 0px 7px 29px 0px;
+    box-shadow: #b6aaff 0px 7px 29px 0px;
 }
 .login_bottam1 span {
     font-size: 14px;
@@ -28,7 +28,7 @@
 }
 .login_bottam1 .a {
     text-decoration: none;
-    color: #10b7b1;
+    color: #282059;
     font-size: 14px;
     font-weight: 700;
 }
@@ -38,26 +38,36 @@
 }
  
 .login_btn {
-    background-color: #10b7b1;
-    border: 1px solid #10b7b1;
+    background-color: #282059;
     color: #fff;
-    font-weight: 400;
+    font-weight: 600;
 }
-.login_btn_borderd {
-    background-color: #fff;
-    border: 2px solid #10b7b1;
-    color: #10b7b1;
-    font-weight: 400;
-}
-.login_btn_borderd:hover {
-    background-color: #fff;
-    border: 2px solid #10b7b1;
-    color: #10b7b1;
-    font-weight: 400;
-}
+
 .login_btn:hover {
-    background-color: #10b7b1;
-    border: 1px solid #10b7b1;
+    background-color: #282059;
     color: #fff;
-    font-weight: 400;
+    font-weight: 600;
+}
+
+
+
+.login_btnfb {
+    background-color: #1877f2;
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.login_btnfb:hover {
+    background-color: #1877f2;
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+
+
+.input-group > .form-control {
+
+    padding-left: 8px !important;
 }

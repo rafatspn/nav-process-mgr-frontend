@@ -5,7 +5,7 @@ import NavLinks from "./NavLinks";
 import useWindowDimensions from "../../hooks/window-dimension";
 import SideDrawer from "../Elements/SideDrawer";
 import Avatar from "../Elements/Avatar";
-import Backdrop from "../Elements/BackDrop";
+import Backdrop from "../Elements/Backdrop";
 
 import style from "./Navigator.module.css";
 
@@ -15,13 +15,13 @@ export default function Navigator() {
 
   const sideDrawerOpenHandler = () => {
     console.log("Inside side drawer open");
-    setSideDrawerIsOpen((prev)=> !prev);
+    setSideDrawerIsOpen((prev) => !prev);
   };
   const sideDrawerCloseHandler = () => {
     setSideDrawerIsOpen(false);
   };
 
-  const avatarHandler = () => {}
+  const avatarHandler = () => {};
 
   return (
     <nav>
