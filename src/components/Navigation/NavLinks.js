@@ -60,7 +60,7 @@ export default function NavLinks(props) {
                     Reports
                 </NavLink>
             </div>}
-            {!auth.isLoggedIn && <div className={style.nav_item}>
+            {/* {!auth.isLoggedIn && <div className={style.nav_item}>
                 <NavLink
                     to="/signup"
                     className={(obj) =>
@@ -72,7 +72,7 @@ export default function NavLinks(props) {
                     style={{ textDecoration: 'none' }}>
                     Signup
                 </NavLink>
-            </div>}
+            </div>} */}
             {!auth.isLoggedIn && <div className={style.nav_item}>
                 <NavLink
                     to="/login"

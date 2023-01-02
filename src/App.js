@@ -45,7 +45,7 @@ function App() {
         <Route path="/summary" element={<Summary />} />
         {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route path="/logout" element={<Logout />} />
-        <Route path="*" element={<Navigate to="/dashboard" />}></Route>
+        <Route path="*" element={<Navigate to="/" />}></Route>
       </Routes>
     );
   } else {
