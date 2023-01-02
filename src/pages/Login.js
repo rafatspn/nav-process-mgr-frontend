@@ -26,8 +26,8 @@ export default function Login({ location, history }) {
       <div className="login_form">
         <div className=" d-flex justify-content-center align-items-center ">
           <form className="Form_cardt ">
-            <div className="card card_float mb-4">Sign In </div>
-            <div className="mb-3">
+            {/* <div className="card card_float mb-4">Sign In </div> */}
+            {/* <div className="mb-3">
               <div className="input-group mb-3">
                 <input
                   type="email"
@@ -67,7 +67,7 @@ export default function Login({ location, history }) {
             </div>
             <button type="submit" className="login_btn mb-2 btn w-100">
               SIGN IN
-            </button>
+            </button> */}
 
             <button
               type="submit"
@@ -77,12 +77,12 @@ export default function Login({ location, history }) {
             >
               Login with Facebook
             </button>
-            <div className="login_bottam1 d-flex justify-content-center mt-3">
+            {/* <div className="login_bottam1 d-flex justify-content-center mt-3">
               <span className="pe-2">Don't have an account?</span>
-              {/* <Link href="#" className="a">
+              <Link href="#" className="a">
                             Sign Up
-                        </Link> */}
-            </div>
+                        </Link>
+            </div> */}
           </form>
         </div>
       </div>

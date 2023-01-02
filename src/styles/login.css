@@ -1,6 +1,15 @@
-.Form_cardt {
+/* .Form_cardt {
     width: 360px;
     padding: 99px 25px 25px 25px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    border-radius: 12px;
+    background-color: #fff;
+    position: relative;
+    margin-top: 100px;
+} */
+.Form_cardt {
+    width: 360px;
+    padding: 25px 25px 25px 25px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     border-radius: 12px;
     background-color: #fff;
