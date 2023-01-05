@@ -1,0 +1,20 @@
+.btn_primary{
+    color: #fff;
+    border-radius: 0.5rem;
+    background-color: #010753;
+    border: none;
+    padding: 0.5rem 1.5rem !important; 
+    box-shadow: 5px 5px 10px rgb(55 94 148 / 10%), -5px -5px 10px rgb(255 255 255 / 20%);
+}
+
+.form-control{
+    padding: 0.5rem 0.5rem !important;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #fff;
+    background-color: #010753 !important;
+    border-color: #dee2e6 #dee2e6 #010753 !important;
+}
+.text-primary{
+    color: #010753 !important;
+}
