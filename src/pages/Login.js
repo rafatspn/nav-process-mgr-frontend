@@ -5,13 +5,15 @@ import { Form, Card, Container, Row, Col } from "react-bootstrap";
 
 import { AuthContext } from "../context/AuthContext";
 import useFacebook from "../hooks/facebook-hook";
+import { initializeFacebookSdk } from "../utils/fb-sdk";
 
 import "../styles/login.css";
 
 export default function Login({ location, history }) {
+  initializeFacebookSdk()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [facebook, isFacebookReady] = useFacebook();
+  const [facebook] = useFacebook();
   const auth = useContext(AuthContext);
   const handleFacebookLogin = async () => {
     const response = await facebook.login();

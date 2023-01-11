@@ -17,7 +17,6 @@ const _extends =
 
 const useFacebook = function () {
   const appId = "654290276302520"; //process.env.NEXT_PUBLIC_FACEBOOK_APP_ID
-  const [isReady, setIsReady] = useState(false);
   const facebook = {
     login: async () => {
       const { authResponse, status } = await new Promise((resolve) =>
@@ -38,35 +37,7 @@ const useFacebook = function () {
     },
   };
 
-  // useEffect(() => {
-  //   window.fbAsyncInit = function () {
-  //     const res = FB.init({
-  //       appId,
-  //       autoLogAppEvents: true,
-  //       xfbml: true,
-  //       version: "v15.0",
-  //     })
-  //     setIsReady(true);
-  //   };
-
-  //   (function (d, s, id) {
-  //     if (d.getElementById(id)) {
-  //       setIsReady(true);
-  //       return;
-  //     }
-
-  //     const fjs = d.getElementsByTagName(s)[0];
-  //     const js = d.createElement(s);
-  //     js.id = id;
-  //     js.src = `https://connect.facebook.net/en-US/sdk.js`;
-  //     js.async = true;
-  //     js.defer = true;
-  //     fjs.parentNode.insertBefore(js, fjs);
-  //   })(document, "script", "facebook-jssdk");
-  //   setIsReady(true);
-  // }, []);
-
-  return [facebook, isReady];
+  return [facebook];
 };
 
 export default useFacebook;

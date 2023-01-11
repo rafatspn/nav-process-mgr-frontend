@@ -34,7 +34,6 @@ function App() {
         <Route path="/trends" element={<Trends />} />
         <Route path="/reports" element={<Reports />} />
         <Route path="/summary" element={<Summary />} />
-        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route path="/logout" element={<Logout />} />
         <Route path="*" element={<Navigate to="/" />}></Route>
       </Routes>
