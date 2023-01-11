@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 
-import "./BackDrop.css"
+import "./Backdrop.css";
 
 export default function Backdrop(props) {
   return ReactDOM.createPortal(

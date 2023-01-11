@@ -1,15 +1,6 @@
-/* .Form_cardt {
-    width: 360px;
-    padding: 99px 25px 25px 25px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    border-radius: 12px;
-    background-color: #fff;
-    position: relative;
-    margin-top: 100px;
-} */
 .Form_cardt {
     width: 360px;
-    padding: 25px 25px 25px 25px;
+    padding: 99px 25px 25px 25px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     border-radius: 12px;
     background-color: #fff;
@@ -26,7 +17,7 @@
     font-weight: 600;
     padding: 32px;
     border: unset;
-    background-color: #282059;
+    background-color: #010753;
     color: #fff;
     border-radius: 12px;
     box-shadow: #b6aaff 0px 7px 29px 0px;
@@ -37,7 +28,7 @@
 }
 .login_bottam1 .a {
     text-decoration: none;
-    color: #282059;
+    color: #010753;
     font-size: 14px;
     font-weight: 700;
 }
@@ -47,13 +38,13 @@
 }
  
 .login_btn {
-    background-color: #282059;
+    background-color: #010753;
     color: #fff;
     font-weight: 600;
 }
 
 .login_btn:hover {
-    background-color: #282059;
+    background-color: #010753;
     color: #fff;
     font-weight: 600;
 }
@@ -79,4 +70,7 @@
 .input-group > .form-control {
 
     padding-left: 8px !important;
+}
+.nav-tabs{
+    box-shadow: unset;
 }

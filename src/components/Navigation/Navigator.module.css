@@ -1,10 +1,10 @@
 nav {
-  border-radius: 0 0 5px 5px;
+  /* border-radius: 0 0 5px 5px; */
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: #ffffff;
-  box-shadow: 2px 2px 5px lightslategrey, -2px -2px 5px grey;
+  box-shadow: 2px 2px 5px rgb(55 141 252 / 25%), -2px -2px 5px rgb(206 204 204);
   padding: .5rem 1vw;
   position: relative;
 }
