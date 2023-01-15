@@ -1,71 +1,94 @@
 /*global FB*/
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from 'react'
 import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Navigate
+} from 'react-router-dom'
+import axios from 'axios'
 
-import Home from "./pages/Home";
-import Trends from "./pages/Trends";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
-import Logout from "./pages/Logout";
-import Reports from "./pages/Reports";
-import Summary from "./pages/Summary";
-import Dashboard from "./pages/Dashboard";
+import Home from './pages/Home'
+import Trends from './pages/Trends'
+import Signup from './pages/Signup'
+import Login from './pages/Login'
+import Logout from './pages/Logout'
+import Reports from './pages/Reports'
+import Summary from './pages/Summary'
+import Dashboard from './pages/Dashboard'
 
-import { AuthContext } from "./context/AuthContext";
-import Navigator from "./components/Navigation/Navigator";
-import loginData from "./data/login.json";
+import { AuthContext } from './context/AuthContext'
+import Navigator from './components/Navigation/Navigator'
+import loginData from './data/login.json'
+import config from './config/config.json'
 
-import "./App.css";
+import './App.css'
 
 function App() {
-  let [isLoggedIn, setIsLoggedIn] = useState(false);
+    let [isLoggedIn, setIsLoggedIn] = useState(false)
 
-  let routes;
+    useEffect(() => {
+        if (localStorage.getItem('user')) {
+            setIsLoggedIn(true)
+        } else {
+            setIsLoggedIn(false)
+        }
+    }, [])
+    let routes
 
-  if (isLoggedIn) {
-    routes = (
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/trends" element={<Trends />} />
-        <Route path="/reports" element={<Reports />} />
-        <Route path="/summary" element={<Summary />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route path="*" element={<Navigate to="/" />}></Route>
-      </Routes>
-    );
-  } else {
-    routes = (
-      <Routes>
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="*" element={<Navigate to="/login" />}></Route>
-      </Routes>
-    );
-  }
-
-  const login = useCallback((userid) => {
-    setIsLoggedIn(true);
-  }, []);
-  const logout = useCallback((userid) => {
-    setIsLoggedIn(false);
-  }, []);
-  return (
-    <>
-      <AuthContext.Provider
-        value={{ isLoggedIn, login: login, logout: logout }}
-      >
-        <Router>
-          <Navigator />
-          {routes}
-        </Router>
-      </AuthContext.Provider>
-    </>
-  );
+    if (isLoggedIn) {
+        routes = (
+            <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/trends" element={<Trends />} />
+                <Route path="/reports" element={<Reports />} />
+                <Route path="/summary" element={<Summary />} />
+                <Route path="/logout" element={<Logout />} />
+                <Route path="*" element={<Navigate to="/" />}></Route>
+            </Routes>
+        )
+    } else {
+        routes = (
+            <Routes>
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="*" element={<Navigate to="/login" />}></Route>
+            </Routes>
+        )
+    }
+    const login = useCallback(async (email, password) => {
+        const configData = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        try {
+            const { data } = await axios.post(
+                `${config.url}/api/users/login`,
+                { email, password },
+                configData
+            )
+            localStorage.setItem('user', JSON.stringify(data))
+            setIsLoggedIn(true)
+        } catch (e) {
+            alert('Invalid Credentials')
+        }
+    }, [])
+    const logout = useCallback((userid) => {
+        localStorage.removeItem('user')
+        setIsLoggedIn(false)
+    }, [])
+    return (
+        <>
+            <AuthContext.Provider
+                value={{ isLoggedIn, login: login, logout: logout }}>
+                <Router>
+                    <Navigator />
+                    {routes}
+                </Router>
+            </AuthContext.Provider>
+        </>
+    )
 }
 
-export default App;
+export default App
