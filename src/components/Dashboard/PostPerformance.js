@@ -20,106 +20,98 @@ const PostPerformance = () => {
     useEffect(async () => {
         let typeOfComments = [
             {
-                Area: 'Feedback',
-                Count: 35
+                Area: 'Others',
+                Count: 4623
             },
             {
-                Area: 'Package Details',
-                Count: 22
+                Area: 'Appreciation',
+                Count: 944
             },
             {
-                Area: 'Purchase',
-                Count: 8
+                Area: 'Complain',
+                Count: 160
+            },
+            {
+                Area: 'Dealership',
+                Count: 133
             },
             {
                 Area: 'Query',
-                Count: 335
+                Count: 556
+            },
+            {
+                Area: 'Want to order',
+                Count: 7
             }
         ]
-        setTotalComments(2877)
+        setTotalComments(6423)
         drawBarChartWithImage('typeOfComments', typeOfComments, 'Area', 'Count')
+
+        // let typeOfFeedback = [
+        //     {
+        //         Topic: 'Complain',
+        //         Count: 160,
+        //         icon: 'https://cdn1.iconfinder.com/data/icons/color-bold-style/21/05-512.png'
+        //     },
+        //     {
+        //         Topic: 'Appreciation',
+        //         Count: 944,
+        //         icon: 'https://www.seekpng.com/png/full/134-1341039_big-image-positive-icon.png'
+        //     }
+        // ]
+        // setTotalfFeedback(1104)
+        // drawBarChartWithImage(
+        //     'typeOfFeedback',
+        //     typeOfFeedback,
+        //     'Topic',
+        //     'Count'
+        // )
 
         let typeOfFeedback = [
             {
-                Topic: 'Complain',
-                Count: 60,
-                icon: 'https://cdn1.iconfinder.com/data/icons/color-bold-style/21/05-512.png'
+                type: 'Appreciation',
+                count: 944
             },
             {
-                Topic: 'Appreciation',
-                Count: 64,
-                icon: 'https://www.seekpng.com/png/full/134-1341039_big-image-positive-icon.png'
+                type: 'Complain',
+                count: 160
             }
         ]
-        setTotalfFeedback(3343)
-        drawBarChartWithImage(
-            'typeOfFeedback',
-            typeOfFeedback,
-            'Topic',
-            'Count'
-        )
+        drawPieChart('typeOfFeedback', typeOfFeedback)
 
         let typeOfQueries = [
             {
-                Topic: 'Booking',
-                Count: 16
+                Topic: 'Price',
+                Count: 521
             },
             {
-                Topic: 'Package Details',
-                Count: 39
+                Topic: 'Contact Number',
+                Count: 19
             },
             {
-                Topic: 'Flight availability',
-                Count: 9
+                Topic: 'Job Seeking',
+                Count: 12
             },
             {
-                Topic: 'Office Location',
-                Count: 11
-            },
-            {
-                Topic: 'Offer',
-                Count: 18
-            },
-            {
-                Topic: 'Covid-19',
-                Count: 16
-            },
-            {
-                Topic: 'Price Query',
-                Count: 155
-            },
-            {
-                Topic: 'Refund',
-                Count: 6
-            },
-            {
-                Topic: 'Visa',
-                Count: 33
-            },
-            {
-                Topic: 'Ticket Cancelation',
-                Count: 9
+                Topic: 'Usage',
+                Count: 4
             }
         ]
-        setTotalQueries(797)
+        setTotalQueries(556)
         drawBarChartWithImage('typeOfQueries', typeOfQueries, 'Topic', 'Count')
 
         let typeOfComplainNegativeComments = [
             {
-                type: 'Airlince Ticket',
-                count: 10
+                type: 'Gift',
+                count: 47
             },
             {
-                type: 'Cash Back Offer',
-                count: 18
+                type: 'Price',
+                count: 46
             },
             {
-                type: 'Website issue',
-                count: 30
-            },
-            {
-                type: 'Service',
-                count: 42
+                type: 'Info',
+                count: 7
             }
         ]
         drawPieChart(
@@ -129,16 +121,16 @@ const PostPerformance = () => {
 
         let typesOfAppreciation = [
             {
-                type: 'Tour Guide',
-                count: 15
+                type: 'Wish',
+                count: 38
             },
             {
-                type: 'Visa Processing',
-                count: 15
+                type: 'Congratulations',
+                count: 48
             },
             {
-                type: 'Experience',
-                count: 70
+                type: 'Quality',
+                count: 14
             }
         ]
         drawPieChart('typesOfAppreciation', typesOfAppreciation)
@@ -151,24 +143,24 @@ const PostPerformance = () => {
             }
         }
 
-        let pageId = '730393906972869'
-        const { data } = await axios.get(
-            `${config.url}/api/posts/topThree/${pageId}`,
-            configData
-        )
-        setTopThreePosts(data)
+        // let pageId = '730393906972869'
+        // const { data } = await axios.get(
+        //     `${config.url}/api/posts/performance/${pageId}`,
+        //     configData
+        // )
+        // setTopThreePosts(data.topThreePosts)
         let publicEngagementByPost = [
             {
-                post: 'Post 1',
-                comment: data[0].count
+                post: 'এলো বিশ্ব ফুটবলের গ্রেটেস্ট..',
+                comment: 959
             },
             {
-                post: 'Post 2',
-                comment: data[1].count
+                post: 'বাংলাদেশী তরুণ অণুজীব বিজ্ঞানী..',
+                comment: 495
             },
             {
-                post: 'Post 3',
-                comment: data[2].count
+                post: 'লাল সবুজেই..',
+                comment: 419
             }
         ]
         // let publicEngagementByPost = [
@@ -197,9 +189,9 @@ const PostPerformance = () => {
         //         total: 191
         //     }
         // ]
-        setPostOneTotal(data[0].count)
-        setPostTwoTotal(data[1].count)
-        setPostThreeTotal(data[2].count)
+        setPostOneTotal(959)
+        setPostTwoTotal(495)
+        setPostThreeTotal(419)
         drawMultiLineChart('publicEngagementByPost', publicEngagementByPost)
     }, [])
 
@@ -306,10 +298,7 @@ const PostPerformance = () => {
 
         // Set themes
         // https://www.amcharts.com/docs/v5/concepts/themes/
-        root.setThemes([
-            am5themes_Animated.new(root),
-            am5themes_Kelly.new(root)
-        ])
+        root.setThemes([am5themes_Animated.new(root)])
 
         // Create chart
         // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
@@ -345,8 +334,8 @@ const PostPerformance = () => {
         // Set themes
         // https://www.amcharts.com/docs/v5/concepts/themes/
         root.setThemes([
-            am5themes_Animated.new(root),
-            am5themes_Kelly.new(root)
+            am5themes_Animated.new(root)
+            // am5themes_Kelly.new(root)
         ])
 
         // Create chart
@@ -500,9 +489,9 @@ const PostPerformance = () => {
                                 <h5 className="text-primary pb-3">
                                     Customer Perception
                                 </h5>
-                                <h5 className="text-success">
+                                {/* <h5 className="text-success">
                                     Total: {totalfFeedback}
-                                </h5>
+                                </h5> */}
                             </div>
                         </div>
                         <div id="typeOfFeedback"></div>
@@ -560,37 +549,36 @@ const PostPerformance = () => {
                                 <h6>Total Engagement: {postThreeTotal}</h6>
                             </div>
                         </div>
-                        {topThreePosts.length > 0 && (
-                            <div className="row mt-4 text-center">
-                                <div className="col-md-4">
-                                    <a
-                                        href={topThreePosts[0].url}
-                                        target="_blank"
-                                        type="button"
-                                        className="btn btn_primary">
-                                        Post 1
-                                    </a>
-                                </div>
-                                <div className="col-md-4">
-                                    <a
-                                        href={topThreePosts[1].url}
-                                        target="_blank"
-                                        type="button"
-                                        className="btn btn_primary">
-                                        Post 2
-                                    </a>
-                                </div>
-                                <div className="col-md-4">
-                                    <a
-                                        href={topThreePosts[2].url}
-                                        target="_blank"
-                                        type="button"
-                                        className="btn btn_primary">
-                                        Post 3
-                                    </a>
-                                </div>
+
+                        <div className="row mt-4 text-center">
+                            <div className="col-md-4">
+                                <a
+                                    href="https://www.facebook.com/730393906972869_6416874951658041"
+                                    target="_blank"
+                                    type="button"
+                                    className="btn btn_primary">
+                                    Post 1
+                                </a>
                             </div>
-                        )}
+                            <div className="col-md-4">
+                                <a
+                                    href="https://www.facebook.com/730393906972869_5459938064018406"
+                                    target="_blank"
+                                    type="button"
+                                    className="btn btn_primary">
+                                    Post 2
+                                </a>
+                            </div>
+                            <div className="col-md-4">
+                                <a
+                                    href="https://www.facebook.com/730393906972869_6499182893427246"
+                                    target="_blank"
+                                    type="button"
+                                    className="btn btn_primary">
+                                    Post 3
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
