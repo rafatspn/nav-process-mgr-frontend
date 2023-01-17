@@ -1,55 +1,55 @@
 .nav_box {
-  display: flex;
-  gap: 15px;
-  justify-content: space-around;
+    display: flex;
+    gap: 15px;
+    justify-content: space-around;
 }
 
 .nav_box .nav_item {
-  display: flex;
-  overflow: hidden;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  padding: 7px 18px;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    padding: 7px 18px;
 }
 
 .nav_box .nav_item .link {
-  transition: 0.5s ease;
-  color: #282059;
+    transition: 0.5s ease;
+    color: #e20612;
 }
 
 .nav_box .nav_item .link_button {
-  transition: 0.5s ease;
-  color: #282059;
-  border: none;
-  background: white;
-  cursor: pointer;
-  font-size: 16px;
+    transition: 0.5s ease;
+    color: #e20612;
+    border: none;
+    background: white;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 .active {
-  font-weight: bold;
-  color: #160e45;
+    font-weight: bold;
+    color: #e20612;
 }
 
 @media (max-width: 670px) {
-  .nav_box {
-    position: absolute;
-    flex-direction: column;
-    top: 100px;
-    width: 100%;
-    left: 0;
-    display: flex;
-    justify-content: space-around;
-    gap: 0px;
-  }
+    .nav_box {
+        position: absolute;
+        flex-direction: column;
+        top: 100px;
+        width: 100%;
+        left: 0;
+        display: flex;
+        justify-content: space-around;
+        gap: 0px;
+    }
 
-  .nav_box .nav_item {
-    border-radius: 0;
-  }
+    .nav_box .nav_item {
+        border-radius: 0;
+    }
 
-  .nav_box {
-    display: flex !important;
-  }
+    .nav_box {
+        display: flex !important;
+    }
 }

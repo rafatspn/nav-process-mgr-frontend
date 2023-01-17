@@ -20,3 +20,8 @@
 .text-primary {
     color: #e20612 !important;
 }
+
+#publicSentiment {
+    width: 100%;
+    height: 500px;
+}
