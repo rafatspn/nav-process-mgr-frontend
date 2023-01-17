@@ -21,36 +21,36 @@ const PostPerformance = () => {
         const generateGraph = async () => {
             let typeOfComments = [
                 {
-                    Area: 'Others',
-                    Count: 4623
+                    area: 'Others',
+                    count: 4623
                 },
                 {
-                    Area: 'Appreciation',
-                    Count: 944
+                    area: 'Appreciation',
+                    count: 944
                 },
                 {
-                    Area: 'Complain',
-                    Count: 160
+                    area: 'Complain',
+                    count: 160
                 },
                 {
-                    Area: 'Dealership',
-                    Count: 133
+                    area: 'Dealership',
+                    count: 133
                 },
                 {
-                    Area: 'Query',
-                    Count: 556
+                    area: 'Query',
+                    count: 556
                 },
                 {
-                    Area: 'Want to order',
-                    Count: 7
+                    area: 'Want to order',
+                    count: 7
                 }
             ]
             setTotalComments(6423)
             drawBarChartWithImage(
                 'typeOfComments',
                 typeOfComments,
-                'Area',
-                'Count'
+                'area',
+                'count'
             )
 
             // let typeOfFeedback = [
@@ -87,28 +87,28 @@ const PostPerformance = () => {
 
             let typeOfQueries = [
                 {
-                    Topic: 'Price',
-                    Count: 521
+                    topic: 'Price',
+                    count: 521
                 },
                 {
-                    Topic: 'Contact Number',
-                    Count: 19
+                    topic: 'Contact Number',
+                    count: 19
                 },
                 {
-                    Topic: 'Job Seeking',
-                    Count: 12
+                    topic: 'Job Seeking',
+                    count: 12
                 },
                 {
-                    Topic: 'Usage',
-                    Count: 4
+                    topic: 'Usage',
+                    count: 4
                 }
             ]
             setTotalQueries(556)
             drawBarChartWithImage(
                 'typeOfQueries',
                 typeOfQueries,
-                'Topic',
-                'Count'
+                'topic',
+                'count'
             )
 
             let typeOfComplainNegativeComments = [
@@ -205,46 +205,46 @@ const PostPerformance = () => {
             setPostThreeTotal(419)
             drawMultiLineChart('publicEngagementByPost', publicEngagementByPost)
 
-            var sentimentData = [
+            let sentimentData = [
                 {
-                    name: 'Very Happy',
-                    percent: 10,
-                    pictureSettings: {
+                    sentiment: 'Very Happy',
+                    count: 10,
+                    logo: {
                         src: 'https://e7.pngegg.com/pngimages/726/726/png-clipart-smiling-emoji-illustration-emoji-happiness-smiley-sticker-applause-love-heart.png'
                     }
                 },
                 {
-                    name: 'Happy',
-                    percent: 50,
-                    pictureSettings: {
+                    sentiment: 'Happy',
+                    count: 50,
+                    logo: {
                         src: 'https://icon2.cleanpng.com/20180202/veq/kisspng-emoji-blushing-smiley-clip-art-blushing-emoji-png-hd-5a753fbd3e1a52.2262150515176334692544.jpg'
                     }
                 },
                 {
-                    name: 'Neutral',
-                    percent: 30,
-                    pictureSettings: {
+                    sentiment: 'Neutral',
+                    count: 30,
+                    logo: {
                         src: 'https://www.pngfind.com/pngs/m/10-102223_download-slightly-smiling-emoji-icon-emojis-png-ios.png'
                     }
                 },
                 {
-                    name: 'Sad',
-                    percent: 15,
-                    pictureSettings: {
+                    sentiment: 'Sad',
+                    count: 15,
+                    logo: {
                         src: 'https://www.transparentpng.com/thumb/sad-emoji/Ej7iyi-sad-emoji-cut-out.png'
                     }
                 },
                 {
-                    name: 'Very Sad',
-                    percent: 5,
-                    pictureSettings: {
+                    sentiment: 'Very Sad',
+                    count: 5,
+                    logo: {
                         src: 'https://img.favpng.com/0/25/24/face-with-tears-of-joy-emoji-crying-laughter-sticker-png-favpng-gxKCtgzxBTVc3b4cdSe49qkJd_t.jpg'
                     }
                 },
                 {
-                    name: 'Unknown',
-                    percent: 0,
-                    pictureSettings: {
+                    sentiment: 'Unknown',
+                    count: 0,
+                    logo: {
                         src: 'https://user-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_630,w_1200,f_auto,q_auto/60063/thinking_emoji_b8fpll.png'
                     }
                 }
@@ -276,7 +276,7 @@ const PostPerformance = () => {
         var xAxis = chart.xAxes.push(
             am5xy.CategoryAxis.new(root, {
                 paddingTop: 40,
-                categoryField: 'name',
+                categoryField: 'sentiment',
                 renderer: xRenderer
             })
         )
@@ -296,8 +296,8 @@ const PostPerformance = () => {
                 name: 'Income',
                 xAxis: xAxis,
                 yAxis: yAxis,
-                valueYField: 'percent',
-                categoryXField: 'name',
+                valueYField: 'count',
+                categoryXField: 'sentiment',
                 sequencedInterpolation: true,
                 calculateAggregates: true,
                 maskBullets: false,
@@ -381,7 +381,7 @@ const PostPerformance = () => {
 
             var image = imageContainer.children.push(
                 am5.Picture.new(root, {
-                    templateField: 'pictureSettings',
+                    templateField: 'logo',
                     centerX: am5.p50,
                     centerY: am5.p50,
                     width: 60,
