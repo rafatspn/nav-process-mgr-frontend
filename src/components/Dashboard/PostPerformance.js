@@ -3,6 +3,7 @@ import * as am5 from '@amcharts/amcharts5'
 import * as am5xy from '@amcharts/amcharts5/xy'
 import * as am5percent from '@amcharts/amcharts5/percent'
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
+import * as am5hierarchy from '@amcharts/amcharts5/hierarchy'
 import am5themes_Kelly from '@amcharts/amcharts5/themes/Kelly'
 import axios from 'axios'
 import './PostPerformance.css'
@@ -250,9 +251,91 @@ const PostPerformance = () => {
                 }
             ]
             drawColumnChartWithImageBullets('publicSentiment', sentimentData)
+            let postData = [
+                {
+                    name: 'Root',
+                    value: 0,
+                    children: [
+                        {
+                            name: 'C0',
+                            children: [
+                                {
+                                    name: 'C2A1',
+                                    children: [
+                                        {
+                                            name: 'C2A0A2',
+                                            value: 24
+                                        },
+                                        {
+                                            name: 'C2A0B2',
+                                            value: 89
+                                        },
+                                        {
+                                            name: 'C2A0C2',
+                                            children: []
+                                        },
+                                        {
+                                            name: 'C2A0D2',
+                                            children: [
+                                                {
+                                                    name: 'C2A0D3A3',
+                                                    value: 28
+                                                },
+                                                {
+                                                    name: 'C2A0D3B3',
+                                                    value: 14
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    name: 'C2B1',
+                                    value: 40
+                                },
+                                {
+                                    name: 'C2C1',
+                                    children: []
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+            drawForcedDirectedTreeGraphs('postAnatomy', postData)
         }
         generateGraph()
     }, [])
+
+    const drawForcedDirectedTreeGraphs = (destinationDiv, data) => {
+        var root = am5.Root.new(destinationDiv)
+
+        root.setThemes([am5themes_Animated.new(root)])
+
+        var container = root.container.children.push(
+            am5.Container.new(root, {
+                width: am5.percent(100),
+                height: am5.percent(100),
+                layout: root.verticalLayout
+            })
+        )
+
+        var series = container.children.push(
+            am5hierarchy.ForceDirected.new(root, {
+                downDepth: 1,
+                initialDepth: 2,
+                topDepth: 1,
+                valueField: 'value',
+                categoryField: 'name',
+                childDataField: 'children',
+                //minRadius: 30
+                maxRadius: am5.percent(15)
+            })
+        )
+
+        series.data.setAll(data)
+        series.set('selectedDataItem', series.dataItems[0])
+    }
 
     const drawColumnChartWithImageBullets = (destinationDiv, data) => {
         var root = am5.Root.new(destinationDiv)
@@ -824,6 +907,26 @@ const PostPerformance = () => {
                     <div className="bg-white rounded p-4 shadow">
                         <h5 className="text-primary">Public Sentiment</h5>
                         <div id="publicSentiment"></div>
+                    </div>
+                </div>
+            </div>
+            <div className="row mt-3 mb-3">
+                <div className="col-md-4">
+                    <div className="bg-white rounded p-4 shadow">
+                        <h5 className="text-primary pb-3">Post 1</h5>
+                        <div id="postAnatomy"></div>
+                    </div>
+                </div>
+                <div className="col-md-4">
+                    <div className="bg-white rounded p-4 shadow">
+                        <h5 className="text-primary pb-3">Post 2</h5>
+                        <div id="typesOfAppreciation"></div>
+                    </div>
+                </div>
+                <div className="col-md-4">
+                    <div className="bg-white rounded p-4 shadow">
+                        <h5 className="text-primary pb-3">Post 3</h5>
+                        <div id="typesOfAppreciation"></div>
                     </div>
                 </div>
             </div>
