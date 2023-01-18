@@ -19,32 +19,22 @@ const PostPerformance = () => {
 
     useEffect(() => {
         const generateGraph = async () => {
-            let typeOfComments = [
-                {
-                    area: 'Others',
-                    count: 4623
-                },
-                {
-                    area: 'Appreciation',
-                    count: 944
-                },
-                {
-                    area: 'Complain',
-                    count: 160
-                },
-                {
-                    area: 'Dealership',
-                    count: 133
-                },
-                {
-                    area: 'Query',
-                    count: 556
-                },
-                {
-                    area: 'Want to order',
-                    count: 7
+            const configData = {
+                headers: {
+                    Authorization: `Bearer ${
+                        JSON.parse(localStorage.getItem('user')).token
+                    }`
                 }
-            ]
+            }
+
+            let pageId = '730393906972869'
+            const { data } = await axios.get(
+                `${config.url}/api/posts/performance/${pageId}`,
+                configData
+            )
+            console.log(data)
+
+            let typeOfComments = data.talkingAbout
             setTotalComments(6423)
             drawBarChartWithImage(
                 'typeOfComments',
@@ -53,36 +43,7 @@ const PostPerformance = () => {
                 'count'
             )
 
-            // let typeOfFeedback = [
-            //     {
-            //         Topic: 'Complain',
-            //         Count: 160,
-            //         icon: 'https://cdn1.iconfinder.com/data/icons/color-bold-style/21/05-512.png'
-            //     },
-            //     {
-            //         Topic: 'Appreciation',
-            //         Count: 944,
-            //         icon: 'https://www.seekpng.com/png/full/134-1341039_big-image-positive-icon.png'
-            //     }
-            // ]
-            // setTotalfFeedback(1104)
-            // drawBarChartWithImage(
-            //     'typeOfFeedback',
-            //     typeOfFeedback,
-            //     'Topic',
-            //     'Count'
-            // )
-
-            let typeOfFeedback = [
-                {
-                    type: 'Appreciation',
-                    count: 944
-                },
-                {
-                    type: 'Complain',
-                    count: 160
-                }
-            ]
+            let typeOfFeedback = data.perception
             drawPieChart('typeOfFeedback', typeOfFeedback)
 
             let typeOfQueries = [
@@ -146,20 +107,7 @@ const PostPerformance = () => {
             ]
             drawPieChart('typesOfAppreciation', typesOfAppreciation)
 
-            const configData = {
-                headers: {
-                    Authorization: `Bearer ${
-                        JSON.parse(localStorage.getItem('user')).token
-                    }`
-                }
-            }
-
-            // let pageId = '730393906972869'
-            // const { data } = await axios.get(
-            //     `${config.url}/api/posts/performance/${pageId}`,
-            //     configData
-            // )
-            // setTopThreePosts(data.topThreePosts)
+            setTopThreePosts(data.topThreePosts)
             let publicEngagementByPost = [
                 {
                     post: 'এলো বিশ্ব ফুটবলের গ্রেটেস্ট..',
@@ -205,50 +153,12 @@ const PostPerformance = () => {
             setPostThreeTotal(419)
             drawMultiLineChart('publicEngagementByPost', publicEngagementByPost)
 
-            let sentimentData = [
-                {
-                    sentiment: 'Very Happy',
-                    count: 10,
-                    logo: {
-                        src: 'https://e7.pngegg.com/pngimages/726/726/png-clipart-smiling-emoji-illustration-emoji-happiness-smiley-sticker-applause-love-heart.png'
-                    }
-                },
-                {
-                    sentiment: 'Happy',
-                    count: 50,
-                    logo: {
-                        src: 'https://icon2.cleanpng.com/20180202/veq/kisspng-emoji-blushing-smiley-clip-art-blushing-emoji-png-hd-5a753fbd3e1a52.2262150515176334692544.jpg'
-                    }
-                },
-                {
-                    sentiment: 'Neutral',
-                    count: 30,
-                    logo: {
-                        src: 'https://www.pngfind.com/pngs/m/10-102223_download-slightly-smiling-emoji-icon-emojis-png-ios.png'
-                    }
-                },
-                {
-                    sentiment: 'Sad',
-                    count: 15,
-                    logo: {
-                        src: 'https://www.transparentpng.com/thumb/sad-emoji/Ej7iyi-sad-emoji-cut-out.png'
-                    }
-                },
-                {
-                    sentiment: 'Very Sad',
-                    count: 5,
-                    logo: {
-                        src: 'https://img.favpng.com/0/25/24/face-with-tears-of-joy-emoji-crying-laughter-sticker-png-favpng-gxKCtgzxBTVc3b4cdSe49qkJd_t.jpg'
-                    }
-                },
-                {
-                    sentiment: 'Unknown',
-                    count: 0,
-                    logo: {
-                        src: 'https://user-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_630,w_1200,f_auto,q_auto/60063/thinking_emoji_b8fpll.png'
-                    }
+            let sentimentData = data.publicSentiment
+            for (let i = 0; i < sentimentData.length; i++) {
+                if (sentimentData[i].sentiment === 'Unknown') {
+                    sentimentData.splice(i, 1)
                 }
-            ]
+            }
             drawColumnChartWithImageBullets('publicSentiment', sentimentData)
         }
         generateGraph()
