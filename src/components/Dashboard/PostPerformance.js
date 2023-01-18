@@ -20,96 +20,57 @@ const PostPerformance = () => {
 
     useEffect(() => {
         const generateGraph = async () => {
-            let typeOfComments = [
-                {
-                    Area: 'Others',
-                    Count: 4623
-                },
-                {
-                    Area: 'Appreciation',
-                    Count: 944
-                },
-                {
-                    Area: 'Complain',
-                    Count: 160
-                },
-                {
-                    Area: 'Dealership',
-                    Count: 133
-                },
-                {
-                    Area: 'Query',
-                    Count: 556
-                },
-                {
-                    Area: 'Want to order',
-                    Count: 7
+            const configData = {
+                headers: {
+                    Authorization: `Bearer ${
+                        JSON.parse(localStorage.getItem('user')).token
+                    }`
                 }
-            ]
+            }
+
+            let pageId = '730393906972869'
+            const { data } = await axios.get(
+                `${config.url}/api/posts/performance/${pageId}`,
+                configData
+            )
+            console.log(data)
+
+            let typeOfComments = data.talkingAbout
             setTotalComments(6423)
             drawBarChartWithImage(
                 'typeOfComments',
                 typeOfComments,
-                'Area',
-                'Count'
+                'area',
+                'count'
             )
 
-            // let typeOfFeedback = [
-            //     {
-            //         Topic: 'Complain',
-            //         Count: 160,
-            //         icon: 'https://cdn1.iconfinder.com/data/icons/color-bold-style/21/05-512.png'
-            //     },
-            //     {
-            //         Topic: 'Appreciation',
-            //         Count: 944,
-            //         icon: 'https://www.seekpng.com/png/full/134-1341039_big-image-positive-icon.png'
-            //     }
-            // ]
-            // setTotalfFeedback(1104)
-            // drawBarChartWithImage(
-            //     'typeOfFeedback',
-            //     typeOfFeedback,
-            //     'Topic',
-            //     'Count'
-            // )
-
-            let typeOfFeedback = [
-                {
-                    type: 'Appreciation',
-                    count: 944
-                },
-                {
-                    type: 'Complain',
-                    count: 160
-                }
-            ]
+            let typeOfFeedback = data.perception
             drawPieChart('typeOfFeedback', typeOfFeedback)
 
             let typeOfQueries = [
                 {
-                    Topic: 'Price',
-                    Count: 521
+                    topic: 'Price',
+                    count: 521
                 },
                 {
-                    Topic: 'Contact Number',
-                    Count: 19
+                    topic: 'Contact Number',
+                    count: 19
                 },
                 {
-                    Topic: 'Job Seeking',
-                    Count: 12
+                    topic: 'Job Seeking',
+                    count: 12
                 },
                 {
-                    Topic: 'Usage',
-                    Count: 4
+                    topic: 'Usage',
+                    count: 4
                 }
             ]
             setTotalQueries(556)
             drawBarChartWithImage(
                 'typeOfQueries',
                 typeOfQueries,
-                'Topic',
-                'Count'
+                'topic',
+                'count'
             )
 
             let typeOfComplainNegativeComments = [
@@ -147,20 +108,7 @@ const PostPerformance = () => {
             ]
             drawPieChart('typesOfAppreciation', typesOfAppreciation)
 
-            const configData = {
-                headers: {
-                    Authorization: `Bearer ${
-                        JSON.parse(localStorage.getItem('user')).token
-                    }`
-                }
-            }
-
-            // let pageId = '730393906972869'
-            // const { data } = await axios.get(
-            //     `${config.url}/api/posts/performance/${pageId}`,
-            //     configData
-            // )
-            // setTopThreePosts(data.topThreePosts)
+            setTopThreePosts(data.topThreePosts)
             let publicEngagementByPost = [
                 {
                     post: 'এলো বিশ্ব ফুটবলের গ্রেটেস্ট..',
@@ -206,50 +154,12 @@ const PostPerformance = () => {
             setPostThreeTotal(419)
             drawMultiLineChart('publicEngagementByPost', publicEngagementByPost)
 
-            var sentimentData = [
-                {
-                    name: 'Very Happy',
-                    percent: 10,
-                    pictureSettings: {
-                        src: 'https://e7.pngegg.com/pngimages/726/726/png-clipart-smiling-emoji-illustration-emoji-happiness-smiley-sticker-applause-love-heart.png'
-                    }
-                },
-                {
-                    name: 'Happy',
-                    percent: 50,
-                    pictureSettings: {
-                        src: 'https://icon2.cleanpng.com/20180202/veq/kisspng-emoji-blushing-smiley-clip-art-blushing-emoji-png-hd-5a753fbd3e1a52.2262150515176334692544.jpg'
-                    }
-                },
-                {
-                    name: 'Neutral',
-                    percent: 30,
-                    pictureSettings: {
-                        src: 'https://www.pngfind.com/pngs/m/10-102223_download-slightly-smiling-emoji-icon-emojis-png-ios.png'
-                    }
-                },
-                {
-                    name: 'Sad',
-                    percent: 15,
-                    pictureSettings: {
-                        src: 'https://www.transparentpng.com/thumb/sad-emoji/Ej7iyi-sad-emoji-cut-out.png'
-                    }
-                },
-                {
-                    name: 'Very Sad',
-                    percent: 5,
-                    pictureSettings: {
-                        src: 'https://img.favpng.com/0/25/24/face-with-tears-of-joy-emoji-crying-laughter-sticker-png-favpng-gxKCtgzxBTVc3b4cdSe49qkJd_t.jpg'
-                    }
-                },
-                {
-                    name: 'Unknown',
-                    percent: 0,
-                    pictureSettings: {
-                        src: 'https://user-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_630,w_1200,f_auto,q_auto/60063/thinking_emoji_b8fpll.png'
-                    }
+            let sentimentData = data.publicSentiment
+            for (let i = 0; i < sentimentData.length; i++) {
+                if (sentimentData[i].sentiment === 'Unknown') {
+                    sentimentData.splice(i, 1)
                 }
-            ]
+            }
             drawColumnChartWithImageBullets('publicSentiment', sentimentData)
             let postData = [
                 {
@@ -359,7 +269,7 @@ const PostPerformance = () => {
         var xAxis = chart.xAxes.push(
             am5xy.CategoryAxis.new(root, {
                 paddingTop: 40,
-                categoryField: 'name',
+                categoryField: 'sentiment',
                 renderer: xRenderer
             })
         )
@@ -379,8 +289,8 @@ const PostPerformance = () => {
                 name: 'Income',
                 xAxis: xAxis,
                 yAxis: yAxis,
-                valueYField: 'percent',
-                categoryXField: 'name',
+                valueYField: 'count',
+                categoryXField: 'sentiment',
                 sequencedInterpolation: true,
                 calculateAggregates: true,
                 maskBullets: false,
@@ -464,7 +374,7 @@ const PostPerformance = () => {
 
             var image = imageContainer.children.push(
                 am5.Picture.new(root, {
-                    templateField: 'pictureSettings',
+                    templateField: 'logo',
                     centerX: am5.p50,
                     centerY: am5.p50,
                     width: 60,
