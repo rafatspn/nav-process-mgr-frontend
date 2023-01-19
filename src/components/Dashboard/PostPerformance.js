@@ -161,41 +161,82 @@ const PostPerformance = () => {
                 }
             }
             drawColumnChartWithImageBullets('publicSentiment', sentimentData)
-            let postData = [
-                {
-                    x: am5.percent(50),
-                    y: am5.percent(50),
-                    image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg',
-                    children: [
-                        {
-                            name: 'Chrome',
-                            value: 1,
-                            image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
-                        },
-                        {
-                            name: 'Firefox',
-                            value: 2,
-                            image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
-                        },
-                        {
-                            name: 'IE',
-                            value: 9,
-                            image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
-                        },
-                        {
-                            name: 'Safari',
-                            value: 1,
-                            image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
-                        },
-                        {
-                            name: 'Opera',
-                            value: 1,
-                            image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
-                        }
-                    ]
-                }
-            ]
-            drawForcedDirectedTreeGraphs('postAnatomy', postData)
+
+            let topicData = []
+            let topPostData = data.postTopics.postData
+            for (let n = 0; n < data.postTopics.topicData.length; n++) {
+                topicData.push([
+                    {
+                        x: am5.percent(50),
+                        y: am5.percent(50),
+                        image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg',
+                        children: data.postTopics.topicData[n]
+                    }
+                ])
+            }
+
+            // let postData_1 = [
+            //     {
+            //         x: am5.percent(50),
+            //         y: am5.percent(50),
+            //         image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg',
+            //         children: data.postTopics[0]
+            //     }
+            // ]
+            // let postData_2 = [
+            //     {
+            //         x: am5.percent(50),
+            //         y: am5.percent(50),
+            //         image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg',
+            //         children: data.postTopics[2]
+            //     }
+            // ]
+            // let postData_3 = [
+            //     {
+            //         x: am5.percent(50),
+            //         y: am5.percent(50),
+            //         image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg',
+            //         children: data.postTopics[3]
+            //     }
+            // ]
+            // let postData = [
+            //     {
+            //         x: am5.percent(50),
+            //         y: am5.percent(50),
+            //         image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg',
+            //         children: [
+            //             {
+            //                 name: 'Chrome',
+            //                 value: 1,
+            //                 image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
+            //             },
+            //             {
+            //                 name: 'Firefox',
+            //                 value: 2,
+            //                 image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
+            //             },
+            //             {
+            //                 name: 'IE',
+            //                 value: 9,
+            //                 image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
+            //             },
+            //             {
+            //                 name: 'Safari',
+            //                 value: 1,
+            //                 image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
+            //             },
+            //             {
+            //                 name: 'Opera',
+            //                 value: 1,
+            //                 image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
+            //             }
+            //         ]
+            //     }
+            // ]
+            drawForcedDirectedTreeGraphs('postAnatomy_1', topicData[0])
+            drawForcedDirectedTreeGraphs('postAnatomy_2', topicData[1])
+            drawForcedDirectedTreeGraphs('postAnatomy_3', topicData[2])
+            drawForcedDirectedTreeGraphs('postAnatomy_4', topicData[3])
         }
         generateGraph()
     }, [])
@@ -218,7 +259,7 @@ const PostPerformance = () => {
                 downDepth: 1,
                 initialDepth: 1,
                 topDepth: 0,
-                valueField: 'value',
+                valueField: 'count',
                 categoryField: 'name',
                 childDataField: 'children',
                 xField: 'x',
@@ -243,7 +284,7 @@ const PostPerformance = () => {
         // Set up labels
         series.labels.template.setAll({
             fill: am5.color(0x000000),
-            y: 45,
+            y: 50,
             //y: am5.percent(10),
             oversizedBehavior: 'none'
         })
@@ -850,19 +891,28 @@ const PostPerformance = () => {
                 <div className="col-md-6">
                     <div className="bg-white rounded p-4 shadow">
                         <h5 className="text-primary pb-3">Post 1</h5>
-                        <div id="postAnatomy"></div>
+                        <div></div>
+                        <div id="postAnatomy_1"></div>
                     </div>
                 </div>
                 <div className="col-md-6">
                     <div className="bg-white rounded p-4 shadow">
                         <h5 className="text-primary pb-3">Post 2</h5>
-                        <div id="typesOfAppreciation"></div>
+                        <div id="postAnatomy_2"></div>
+                    </div>
+                </div>
+            </div>
+            <div className="row mt-3 mb-3">
+                <div className="col-md-6">
+                    <div className="bg-white rounded p-4 shadow">
+                        <h5 className="text-primary pb-3">Post 3</h5>
+                        <div id="postAnatomy_3"></div>
                     </div>
                 </div>
                 <div className="col-md-6">
                     <div className="bg-white rounded p-4 shadow">
-                        <h5 className="text-primary pb-3">Post 3</h5>
-                        <div id="typesOfAppreciation"></div>
+                        <h5 className="text-primary pb-3">Post 4</h5>
+                        <div id="postAnatomy_4"></div>
                     </div>
                 </div>
             </div>
