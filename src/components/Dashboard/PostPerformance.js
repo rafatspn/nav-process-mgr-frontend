@@ -163,51 +163,34 @@ const PostPerformance = () => {
             drawColumnChartWithImageBullets('publicSentiment', sentimentData)
             let postData = [
                 {
-                    name: 'Root',
-                    value: 0,
+                    x: am5.percent(50),
+                    y: am5.percent(50),
+                    image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg',
                     children: [
                         {
-                            name: 'C0',
-                            children: [
-                                {
-                                    name: 'C2A1',
-                                    children: [
-                                        {
-                                            name: 'C2A0A2',
-                                            value: 24
-                                        },
-                                        {
-                                            name: 'C2A0B2',
-                                            value: 89
-                                        },
-                                        {
-                                            name: 'C2A0C2',
-                                            children: []
-                                        },
-                                        {
-                                            name: 'C2A0D2',
-                                            children: [
-                                                {
-                                                    name: 'C2A0D3A3',
-                                                    value: 28
-                                                },
-                                                {
-                                                    name: 'C2A0D3B3',
-                                                    value: 14
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                {
-                                    name: 'C2B1',
-                                    value: 40
-                                },
-                                {
-                                    name: 'C2C1',
-                                    children: []
-                                }
-                            ]
+                            name: 'Chrome',
+                            value: 1,
+                            image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
+                        },
+                        {
+                            name: 'Firefox',
+                            value: 2,
+                            image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
+                        },
+                        {
+                            name: 'IE',
+                            value: 9,
+                            image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
+                        },
+                        {
+                            name: 'Safari',
+                            value: 1,
+                            image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
+                        },
+                        {
+                            name: 'Opera',
+                            value: 1,
+                            image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
                         }
                     ]
                 }
@@ -233,17 +216,60 @@ const PostPerformance = () => {
         var series = container.children.push(
             am5hierarchy.ForceDirected.new(root, {
                 downDepth: 1,
-                initialDepth: 2,
-                topDepth: 1,
+                initialDepth: 1,
+                topDepth: 0,
                 valueField: 'value',
                 categoryField: 'name',
                 childDataField: 'children',
-                //minRadius: 30
-                maxRadius: am5.percent(15)
+                xField: 'x',
+                yField: 'y',
+                minRadius: 30,
+                manyBodyStrength: -200
             })
         )
 
+        // Disable circles
+        // series.circles.template.set('forceHidden', true)
+        // series.outerCircles.template.set('forceHidden', true)
+
+        // ... except for central node
+        // series.circles.template.adapters.add(
+        //     'forceHidden',
+        //     function (forceHidden, target) {
+        //         return target.dataItem.get('depth') != 0 ? false : forceHidden
+        //     }
+        // )
+
+        // Set up labels
+        series.labels.template.setAll({
+            fill: am5.color(0x000000),
+            y: 45,
+            //y: am5.percent(10),
+            oversizedBehavior: 'none'
+        })
+
+        // Use adapter to leave central node label centered
+        // series.labels.template.adapters.add('y', function (y, target) {
+        //     return target.dataItem.get('depth') == 0 ? 0 : y
+        // })
+
+        // Use template.setup function to prep up node with an image
+        series.nodes.template.setup = function (target) {
+            target.events.on('dataitemchanged', function (ev) {
+                var icon = target.children.push(
+                    am5.Picture.new(root, {
+                        width: 70,
+                        height: 70,
+                        centerX: am5.percent(50),
+                        centerY: am5.percent(50),
+                        src: ev.target.dataItem.dataContext.image
+                    })
+                )
+            })
+        }
+
         series.data.setAll(data)
+
         series.set('selectedDataItem', series.dataItems[0])
     }
 
@@ -821,19 +847,19 @@ const PostPerformance = () => {
                 </div>
             </div>
             <div className="row mt-3 mb-3">
-                <div className="col-md-4">
+                <div className="col-md-6">
                     <div className="bg-white rounded p-4 shadow">
                         <h5 className="text-primary pb-3">Post 1</h5>
                         <div id="postAnatomy"></div>
                     </div>
                 </div>
-                <div className="col-md-4">
+                <div className="col-md-6">
                     <div className="bg-white rounded p-4 shadow">
                         <h5 className="text-primary pb-3">Post 2</h5>
                         <div id="typesOfAppreciation"></div>
                     </div>
                 </div>
-                <div className="col-md-4">
+                <div className="col-md-6">
                     <div className="bg-white rounded p-4 shadow">
                         <h5 className="text-primary pb-3">Post 3</h5>
                         <div id="typesOfAppreciation"></div>
