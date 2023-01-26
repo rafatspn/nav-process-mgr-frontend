@@ -76,15 +76,19 @@ const PostPerformance = () => {
             let typeOfComplainNegativeComments = [
                 {
                     type: 'Gift',
-                    count: 47
+                    count: 37
                 },
                 {
                     type: 'Price',
-                    count: 46
+                    count: 36
                 },
                 {
                     type: 'Info',
                     count: 7
+                },
+                {
+                    type: 'Quality',
+                    count: 20
                 }
             ]
             drawPieChart(
@@ -458,15 +462,15 @@ const PostPerformance = () => {
         series.set('heatRules', [
             {
                 dataField: 'valueY',
-                min: am5.color(0xe5dc36),
-                max: am5.color(0x5faa46),
+                min: am5.color(0x6771dc),
+                max: am5.color(0x6771dc),
                 target: series.columns.template,
                 key: 'fill'
             },
             {
                 dataField: 'valueY',
-                min: am5.color(0xe5dc36),
-                max: am5.color(0x5faa46),
+                min: am5.color(0x67b7dc),
+                max: am5.color(0x67b7dc),
                 target: circleTemplate,
                 key: 'fill'
             }
