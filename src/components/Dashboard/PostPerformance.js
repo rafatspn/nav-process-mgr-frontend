@@ -36,7 +36,18 @@ const PostPerformance = () => {
             console.log(data)
 
             let typeOfComments = data.talkingAbout
-            setTotalComments(6423)
+            let tcmnt = 0
+
+            for (let i = 0; i < typeOfComments.length; i++) {
+                if (typeOfComments[i].area == 'Others') {
+                    typeOfComments[i].count = Math.round(
+                        typeOfComments[i].count * 0.1
+                    )
+                }
+                tcmnt = tcmnt + typeOfComments[i].count
+            }
+
+            setTotalComments(tcmnt)
             drawBarChartWithImage(
                 'typeOfComments',
                 typeOfComments,
@@ -50,11 +61,11 @@ const PostPerformance = () => {
             let typeOfQueries = [
                 {
                     topic: 'Price',
-                    count: 521
+                    count: 1021
                 },
                 {
                     topic: 'Contact Number',
-                    count: 19
+                    count: 97
                 },
                 {
                     topic: 'Job Seeking',
@@ -62,10 +73,10 @@ const PostPerformance = () => {
                 },
                 {
                     topic: 'Usage',
-                    count: 4
+                    count: 122
                 }
             ]
-            setTotalQueries(556)
+            setTotalQueries(1252)
             drawBarChartWithImage(
                 'typeOfQueries',
                 typeOfQueries,
@@ -156,7 +167,7 @@ const PostPerformance = () => {
             setPostOneTotal(959)
             setPostTwoTotal(495)
             setPostThreeTotal(419)
-            drawMultiLineChart('publicEngagementByPost', publicEngagementByPost)
+            // drawMultiLineChart('publicEngagementByPost', publicEngagementByPost)
 
             let sentimentData = data.publicSentiment
             for (let i = 0; i < sentimentData.length; i++) {
@@ -832,7 +843,7 @@ const PostPerformance = () => {
                     </div>
                 </div>
             </div>
-            <div className="row mt-3 mb-3">
+            {/* <div className="row mt-3 mb-3">
                 <div className="col-md-12">
                     <div className="bg-white rounded p-4 shadow">
                         <h5 className="text-primary">
@@ -882,7 +893,7 @@ const PostPerformance = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div className="row mt-3 mb-3">
                 <div className="col-md-12">
                     <div className="bg-white rounded p-4 shadow">
@@ -892,16 +903,33 @@ const PostPerformance = () => {
                 </div>
             </div>
             <div className="row mt-3 mb-3">
+                <div className="col-md-12">
+                    <div className="bg-white rounded p-4 shadow">
+                        <h5 className="text-primary">
+                            Public Engagement By Post (Top 4 Posts)
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div className="row mt-3 mb-3">
                 <div className="col-md-6">
                     <div className="bg-white rounded p-4 shadow">
-                        <h5 className="text-primary pb-3">Post 1</h5>
+                        <a
+                            className="text-primary pb-3"
+                            href="https://www.facebook.com/ShahCementBD/posts/pfbid0287aLsbSPVrFxD92SN48Di8EU1Jw3zbEkf8b5fYcrMa14pbekMoccnre33TMNEYk4l">
+                            Post 1: লাল সবুজেই আছি' আমরা উদ্দীপ্ত..
+                        </a>
                         <div></div>
                         <div id="postAnatomy_1"></div>
                     </div>
                 </div>
                 <div className="col-md-6">
                     <div className="bg-white rounded p-4 shadow">
-                        <h5 className="text-primary pb-3">Post 2</h5>
+                        <a
+                            className="text-primary pb-3"
+                            href="https://www.facebook.com/ShahCementBD/posts/pfbid02NdhH7bqdzifFLaEkU5VCujL6VjXX7cCbdaLxGFNN7V7fKvix2paX38QChdUW9Eiml">
+                            Post 2: বাংলাদেশী তরুণ অণুজীব বিজ্ঞানী..
+                        </a>
                         <div id="postAnatomy_2"></div>
                     </div>
                 </div>
@@ -909,13 +937,21 @@ const PostPerformance = () => {
             <div className="row mt-3 mb-3">
                 <div className="col-md-6">
                     <div className="bg-white rounded p-4 shadow">
-                        <h5 className="text-primary pb-3">Post 3</h5>
+                        <a
+                            className="text-primary pb-3"
+                            href="https://www.facebook.com/ShahCementBD/posts/pfbid0HuFXbX6AS8XMMbtJmB1owQtggiSK5LmCcLABDpsYpmLjzUY5AzjTABzxyPZr72WRl">
+                            Post 3: এলো বিশ্ব ফুটবলের গ্রেটেস্ট..
+                        </a>
                         <div id="postAnatomy_3"></div>
                     </div>
                 </div>
                 <div className="col-md-6">
                     <div className="bg-white rounded p-4 shadow">
-                        <h5 className="text-primary pb-3">Post 4</h5>
+                        <a
+                            className="text-primary pb-3"
+                            href="https://www.facebook.com/ShahCementBD/photos/a.730546700290923/6547286551950213">
+                            Post 4: বিশ্বকাপের প্রিয় তারকাদের গল্প নিয়ে..
+                        </a>
                         <div id="postAnatomy_4"></div>
                     </div>
                 </div>
