@@ -29,10 +29,131 @@ const CompetitorAnalysis = () => {
             ]
 
             drawBarChart('activityChart', activityData, 'name', 'activityScore')
+
+            let sentimentData = [
+                { name: 'Shah Cement', sentimentScore: 0.81 },
+                { name: 'Seven Rings', sentimentScore: 0.87 },
+                { name: 'Crown Cement ', sentimentScore: 0.76 },
+                { name: 'Premier Cement', sentimentScore: 0.63 }
+            ]
+
+            drawImageBarChart('sentimentChart', sentimentData)
         }
 
         generateGraph()
     }, [])
+
+    const drawImageBarChart = (destinationDiv, finalData) => {
+        // Create root element
+        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+        var root = am5.Root.new(destinationDiv)
+
+        // Set themes
+        // https://www.amcharts.com/docs/v5/concepts/themes/
+        root.setThemes([am5themes_Animated.new(root)])
+
+        // Create chart
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/
+        var chart = root.container.children.push(
+            am5xy.XYChart.new(root, {
+                panX: false,
+                panY: false,
+                wheelX: 'panX',
+                wheelY: 'zoomX',
+                layout: root.verticalLayout
+            })
+        )
+
+        // Data
+        var colors = chart.get('colors')
+
+        var data = [
+            {
+                country: 'Shah Cement',
+                visits: 0.88,
+                icon: 'https://e7.pngegg.com/pngimages/726/726/png-clipart-smiling-emoji-illustration-emoji-happiness-smiley-sticker-applause-love-heart.png',
+                columnSettings: { fill: colors.next() }
+            },
+            {
+                country: 'Seven Rings',
+                visits: 0.88,
+                icon: 'https://e7.pngegg.com/pngimages/726/726/png-clipart-smiling-emoji-illustration-emoji-happiness-smiley-sticker-applause-love-heart.png',
+                columnSettings: { fill: colors.next() }
+            },
+            {
+                country: 'Crown Cement',
+                visits: 0.72,
+                icon: 'https://icon2.cleanpng.com/20180202/veq/kisspng-emoji-blushing-smiley-clip-art-blushing-emoji-png-hd-5a753fbd3e1a52.2262150515176334692544.jpg',
+                columnSettings: { fill: colors.next() }
+            },
+            {
+                country: 'Premier Cement',
+                visits: 0.63,
+                icon: 'https://icon2.cleanpng.com/20180202/veq/kisspng-emoji-blushing-smiley-clip-art-blushing-emoji-png-hd-5a753fbd3e1a52.2262150515176334692544.jpg',
+                columnSettings: { fill: colors.next() }
+            }
+        ]
+
+        // Create axes
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+        var xAxis = chart.xAxes.push(
+            am5xy.CategoryAxis.new(root, {
+                categoryField: 'country',
+                renderer: am5xy.AxisRendererX.new(root, {
+                    minGridDistance: 30
+                }),
+                bullet: function (root, axis, dataItem) {
+                    return am5xy.AxisBullet.new(root, {
+                        location: 0.5,
+                        sprite: am5.Picture.new(root, {
+                            width: 24,
+                            height: 24,
+                            centerY: am5.p50,
+                            centerX: am5.p50,
+                            src: dataItem.dataContext.icon
+                        })
+                    })
+                }
+            })
+        )
+
+        xAxis.get('renderer').labels.template.setAll({
+            paddingTop: 20
+        })
+
+        xAxis.data.setAll(data)
+
+        var yAxis = chart.yAxes.push(
+            am5xy.ValueAxis.new(root, {
+                renderer: am5xy.AxisRendererY.new(root, {})
+            })
+        )
+
+        // Add series
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+        var series = chart.series.push(
+            am5xy.ColumnSeries.new(root, {
+                xAxis: xAxis,
+                yAxis: yAxis,
+                valueYField: 'visits',
+                categoryXField: 'country'
+            })
+        )
+
+        series.columns.template.setAll({
+            tooltipText: '{categoryX}: {valueY}',
+            tooltipY: 0,
+            strokeOpacity: 0,
+            templateField: 'columnSettings'
+        })
+
+        series.data.setAll(data)
+
+        // Make stuff animate on load
+        // https://www.amcharts.com/docs/v5/concepts/animations/
+        series.appear()
+        chart.appear(1000, 100)
+    }
 
     const drawBarChart = (destinationDiv, finalData, keyName, valueName) => {
         var root = am5.Root.new(destinationDiv)
@@ -243,6 +364,21 @@ const CompetitorAnalysis = () => {
                             </div>
                         </div>
                         <div id="activityChart"></div>
+                    </div>
+                </div>
+                <div className="col-md-6">
+                    <div className="bg-white rounded p-4 shadow">
+                        <div className="row">
+                            <div className="d-flex justify-content-between">
+                                <h5 className="text-primary pb-3">
+                                    Market Sentiment
+                                </h5>
+                                {/* <h5 className="text-success">
+                                    Total: {totalComments}
+                                </h5> */}
+                            </div>
+                        </div>
+                        <div id="sentimentChart"></div>
                     </div>
                 </div>
             </div>

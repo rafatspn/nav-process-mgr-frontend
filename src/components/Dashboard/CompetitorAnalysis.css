@@ -2,3 +2,8 @@
     width: 100%;
     height: 400px;
 }
+
+#sentimentChart {
+    width: 100%;
+    height: 500px;
+}
