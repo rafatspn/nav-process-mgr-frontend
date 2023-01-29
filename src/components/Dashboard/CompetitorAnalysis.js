@@ -1,41 +1,36 @@
 import React, { useEffect } from 'react'
+import axios from 'axios'
 import * as am5 from '@amcharts/amcharts5'
 import * as am5xy from '@amcharts/amcharts5/xy'
 import * as am5percent from '@amcharts/amcharts5/percent'
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
+import config from '../../config/config.json'
 
 import './CompetitorAnalysis.css'
 
 const CompetitorAnalysis = () => {
     useEffect(() => {
-        const generateGraph = () => {
-            let activityData = [
-                {
-                    name: 'Shah Cement',
-                    activityScore: 497
-                },
-                {
-                    name: 'Seven Rings',
-                    activityScore: 253
-                },
-                {
-                    name: 'Crown Cement',
-                    activityScore: 123
-                },
-                {
-                    name: 'Premier Cement',
-                    activityScore: 443
+        const generateGraph = async () => {
+            const configData = {
+                headers: {
+                    Authorization: `Bearer ${
+                        JSON.parse(localStorage.getItem('user')).token
+                    }`
                 }
-            ]
+            }
+
+            let pageId = '730393906972869'
+            const { data } = await axios.get(
+                `${config.url}/api/posts/competitor/${pageId}`,
+                configData
+            )
+            console.log(data)
+
+            let activityData = data.activityData
 
             drawBarChart('activityChart', activityData, 'name', 'activityScore')
 
-            let sentimentData = [
-                { name: 'Shah Cement', sentimentScore: 0.81 },
-                { name: 'Seven Rings', sentimentScore: 0.87 },
-                { name: 'Crown Cement ', sentimentScore: 0.76 },
-                { name: 'Premier Cement', sentimentScore: 0.63 }
-            ]
+            let sentimentData = data.sentimentData
 
             drawImageBarChart('sentimentChart', sentimentData)
         }
@@ -67,38 +62,45 @@ const CompetitorAnalysis = () => {
         // Data
         var colors = chart.get('colors')
 
-        var data = [
-            {
-                country: 'Shah Cement',
-                visits: 0.88,
-                icon: 'https://e7.pngegg.com/pngimages/726/726/png-clipart-smiling-emoji-illustration-emoji-happiness-smiley-sticker-applause-love-heart.png',
-                columnSettings: { fill: colors.next() }
-            },
-            {
-                country: 'Seven Rings',
-                visits: 0.88,
-                icon: 'https://e7.pngegg.com/pngimages/726/726/png-clipart-smiling-emoji-illustration-emoji-happiness-smiley-sticker-applause-love-heart.png',
-                columnSettings: { fill: colors.next() }
-            },
-            {
-                country: 'Crown Cement',
-                visits: 0.72,
-                icon: 'https://icon2.cleanpng.com/20180202/veq/kisspng-emoji-blushing-smiley-clip-art-blushing-emoji-png-hd-5a753fbd3e1a52.2262150515176334692544.jpg',
-                columnSettings: { fill: colors.next() }
-            },
-            {
-                country: 'Premier Cement',
-                visits: 0.63,
-                icon: 'https://icon2.cleanpng.com/20180202/veq/kisspng-emoji-blushing-smiley-clip-art-blushing-emoji-png-hd-5a753fbd3e1a52.2262150515176334692544.jpg',
-                columnSettings: { fill: colors.next() }
+        var data = finalData
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].sentimentScore == NaN) {
+                data[i].sentimentScore = 0
             }
-        ]
+            data[i].columnSettings = { fill: colors.next() }
+        }
+        // var data = [
+        //     {
+        //         country: 'Shah Cement',
+        //         visits: 0.88,
+        //         icon: 'https://e7.pngegg.com/pngimages/726/726/png-clipart-smiling-emoji-illustration-emoji-happiness-smiley-sticker-applause-love-heart.png',
+        //         columnSettings: { fill: colors.next() }
+        //     },
+        //     {
+        //         country: 'Seven Rings',
+        //         visits: 0.88,
+        //         icon: 'https://e7.pngegg.com/pngimages/726/726/png-clipart-smiling-emoji-illustration-emoji-happiness-smiley-sticker-applause-love-heart.png',
+        //         columnSettings: { fill: colors.next() }
+        //     },
+        //     {
+        //         country: 'Crown Cement',
+        //         visits: 0.72,
+        //         icon: 'https://icon2.cleanpng.com/20180202/veq/kisspng-emoji-blushing-smiley-clip-art-blushing-emoji-png-hd-5a753fbd3e1a52.2262150515176334692544.jpg',
+        //         columnSettings: { fill: colors.next() }
+        //     },
+        //     {
+        //         country: 'Premier Cement',
+        //         visits: 0.63,
+        //         icon: 'https://icon2.cleanpng.com/20180202/veq/kisspng-emoji-blushing-smiley-clip-art-blushing-emoji-png-hd-5a753fbd3e1a52.2262150515176334692544.jpg',
+        //         columnSettings: { fill: colors.next() }
+        //     }
+        // ]
 
         // Create axes
         // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
         var xAxis = chart.xAxes.push(
             am5xy.CategoryAxis.new(root, {
-                categoryField: 'country',
+                categoryField: 'name',
                 renderer: am5xy.AxisRendererX.new(root, {
                     minGridDistance: 30
                 }),
@@ -135,8 +137,8 @@ const CompetitorAnalysis = () => {
             am5xy.ColumnSeries.new(root, {
                 xAxis: xAxis,
                 yAxis: yAxis,
-                valueYField: 'visits',
-                categoryXField: 'country'
+                valueYField: 'sentimentScore',
+                categoryXField: 'name'
             })
         )
 
@@ -366,18 +368,11 @@ const CompetitorAnalysis = () => {
                         <div id="activityChart"></div>
                     </div>
                 </div>
-                <div className="col-md-6">
+            </div>
+            <div className="row mt-3 mb-3">
+                <div className="col-md-12">
                     <div className="bg-white rounded p-4 shadow">
-                        <div className="row">
-                            <div className="d-flex justify-content-between">
-                                <h5 className="text-primary pb-3">
-                                    Market Sentiment
-                                </h5>
-                                {/* <h5 className="text-success">
-                                    Total: {totalComments}
-                                </h5> */}
-                            </div>
-                        </div>
+                        <h5 className="text-primary">Market Sentiment</h5>
                         <div id="sentimentChart"></div>
                     </div>
                 </div>
