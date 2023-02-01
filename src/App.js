@@ -56,6 +56,32 @@ function App() {
             </Routes>
         )
     }
+
+    const fbLogin = useCallback(
+        async (userId, userName, email, accessToken, profilePicture) => {
+            const configData = {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+
+            try {
+                const { data } = await axios.post(
+                    `${config.url}/api/users/fbLogin`,
+                    { userId, userName, accessToken, email, profilePicture },
+                    configData
+                )
+                localStorage.setItem('user', JSON.stringify(data))
+                console.log(data)
+                setIsLoggedIn(true)
+            } catch (e) {
+                console.log(e)
+                alert('Login Failed')
+            }
+        },
+        []
+    )
+
     const login = useCallback(async (email, password) => {
         const configData = {
             headers: {
@@ -81,7 +107,12 @@ function App() {
     return (
         <>
             <AuthContext.Provider
-                value={{ isLoggedIn, login: login, logout: logout }}>
+                value={{
+                    isLoggedIn,
+                    login: login,
+                    fbLogin: fbLogin,
+                    logout: logout
+                }}>
                 <Router>
                     <Navigator />
                     {routes}

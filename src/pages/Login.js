@@ -21,7 +21,13 @@ export default function Login({ location, history }) {
         if (response.status && response.status == 'unknown') {
             window.alert('Failed to login. Please try again later')
         } else {
-            auth.login()
+            auth.fbLogin(
+                response.userID,
+                response.name,
+                response.email,
+                response.accessToken,
+                response.picture.data.url
+            )
         }
     }
 
@@ -50,12 +56,12 @@ export default function Login({ location, history }) {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         <button className="btn btn-primary mt-3">Login</button>
-                        {/* <button
+                        <button
                             type="button"
                             className="login_btnfb btn w-100"
                             onClick={handleFacebookLogin}>
                             Login with Facebook
-                        </button> */}
+                        </button>
                     </form>
                 </div>
             </div>
