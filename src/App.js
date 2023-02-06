@@ -44,6 +44,7 @@ function App() {
                 <Route path="/reports" element={<Reports />} />
                 <Route path="/summary" element={<Summary />} />
                 <Route path="/logout" element={<Logout />} />
+                <Route path="/myBusiness" element={<Reports />} />
                 <Route path="*" element={<Navigate to="/" />}></Route>
             </Routes>
         )
@@ -83,6 +84,7 @@ function App() {
     )
 
     const login = useCallback(async (email, password) => {
+        console.log('email.pass', email, password)
         const configData = {
             headers: {
                 'Content-Type': 'application/json'
@@ -98,6 +100,7 @@ function App() {
             setIsLoggedIn(true)
         } catch (e) {
             alert('Invalid Credentials')
+            // setIsLoggedIn(true)
         }
     }, [])
     const logout = useCallback((userid) => {

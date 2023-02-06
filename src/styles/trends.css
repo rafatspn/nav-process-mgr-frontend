@@ -1,0 +1,83 @@
+.trand_btnbox {
+    background-color: #f7f7f7;
+    color: #1e2a4e;
+    border-radius: 4px;
+    padding: 10px 10px;
+    font-size: 12px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+        border-radius 0.15s ease;
+}
+.trand_btnbox :hover {
+    background-color: #f7f7f7;
+    color: #1e2a4e;
+    font-size: 12px;
+    border-radius: 4px;
+    padding: 10px 10px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+        border-radius 0.15s ease;
+}
+.stong_title {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #000 !important;
+    font-weight: 600;
+    line-height: 1;
+}
+.stong_title span {
+    font-size: 14px;
+    color: #000;
+    font-weight: 400;
+    line-height: 1;
+}
+.trand_card {
+    width: 500px;
+}
+@media (max-width: 575.98px) {
+    .trand_card {
+        width: 350px;
+    }
+}
+.bg-bdg {
+    padding: 5px 8px;
+    background-color: #6cecf6;
+    color: #000;
+}
+.form_control {
+    display: block !important;
+    width: 100% !important;
+    padding: 1rem 1.5rem !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    color: #e52527 !important;
+    background-color: #ffffff !important;
+    background-clip: padding-box !important;
+    border: 0 solid #d9dfe7 !important;
+    border-bottom: 2px solid #adadad !important;
+    appearance: none !important;
+    border-radius: unset !important;
+    box-shadow: unset !important;
+    transition: unset !important;
+}
+.trand_btnsearch {
+    background-color: #e52527;
+    color: #fff;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+        border-radius 0.15s ease;
+}
+.trand_btnanot {
+    background-color: #e52527;
+    color: #fff;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 14px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+        border-radius 0.15s ease;
+}
