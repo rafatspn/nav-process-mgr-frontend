@@ -1,12 +1,20 @@
-.Form_cardt {
-    width: 360px;
-    padding: 99px 25px 25px 25px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    border-radius: 12px;
-    background-color: #fff;
-    position: relative;
-    margin-top: 100px;
+.login_form {
+    background-image: url('../../public/assets/DA-04-01.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+    width: 100%;
 }
+
+.Form_cardt {
+    padding: 16px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+        border-radius 0.15s ease;
+}
+
 .card_float {
     position: absolute;
     top: -33px;
@@ -32,11 +40,11 @@
     font-size: 14px;
     font-weight: 700;
 }
- 
+
 .login_bottam1 .a:hover {
     text-decoration: underline;
 }
- 
+
 .login_btn {
     background-color: #010753;
     color: #fff;
@@ -49,28 +57,101 @@
     font-weight: 600;
 }
 
-
-
 .login_btnfb {
     background-color: #1877f2;
     color: #fff;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 16px;
+    padding: 5px 14px;
 }
-
+.login_btnlog {
+    background-color: #1e2a4e;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 5px 14px;
+}
+.login_btnlog:hover {
+    background-color: #1e2a4e;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+}
 .login_btnfb:hover {
     background-color: #1877f2;
     color: #fff;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 16px;
 }
-
-
 
 .input-group > .form-control {
-
     padding-left: 8px !important;
 }
-.nav-tabs{
+.nav-tabs {
     box-shadow: unset;
+}
+.form_control {
+    display: block;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #7b8ab8;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 0 solid #d9dfe7;
+    border-bottom: 2px solid #adadad;
+    appearance: none;
+    border-radius: unset;
+    box-shadow: unset;
+    transition: unset;
+}
+.accordion_box {
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+        border-radius 0.15s ease;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 10px 0px rgb(0 0 0 / 10%);
+    -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 5px 10px 0px rgb(0 0 0 / 10%);
+    -o-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+}
+.card {
+    /* padding: 25px 25px 25px 25px; */
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    border-radius: 12px;
+    background-color: #fff;
+    position: relative;
+    margin-bottom: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+        border-radius 0.15s ease;
+}
+.login_btnbox {
+    background-color: #f7f7f7;
+    color: #1e2a4e;
+    border-radius: 4px;
+    padding: 10px 10px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+        border-radius 0.15s ease;
+}
+.login_btnbox :hover {
+    background-color: #f7f7f7;
+    color: #1e2a4e;
+    border-radius: 4px;
+    padding: 10px 10px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
+        border-radius 0.15s ease;
+}
+.facebook {
+    background-color: #fff;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-bottom: 2px;
 }
