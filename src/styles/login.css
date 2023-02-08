@@ -8,13 +8,6 @@
     width: 100%;
 }
 
-.Form_cardt {
-    padding: 16px;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
-        border-radius 0.15s ease;
-}
-
 .card_float {
     position: absolute;
     top: -33px;

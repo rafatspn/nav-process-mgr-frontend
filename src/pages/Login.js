@@ -2,16 +2,25 @@
 
 import React, { useState, useContext, useCallback, useEffect } from 'react'
 import { Form, Card, Container, Row, Col } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-import { faFacebook } from '@fortawesome/free-solid-svg-icons'
 import { AuthContext } from '../context/AuthContext'
 import useFacebook from '../hooks/facebook-hook'
 
 import '../styles/login.css'
 
 export default function Login({ location, history }) {
-    //initializeFacebookSdk()
+    const [expanded, setExpanded] = useState(false)
+    const [expandedo, setExpandedo] = useState(false)
+    const [expandedp, setExpandedp] = useState(false)
+    const handleClick = () => {
+        setExpanded(!expanded)
+    }
+    const handleClick1 = () => {
+        setExpandedo(!expandedo)
+    }
+    const handleClick2 = () => {
+        setExpandedp(!expandedp)
+    }
+    initializeFacebookSdk()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -34,14 +43,9 @@ export default function Login({ location, history }) {
     }
 
     const loginHandler = async (e) => {
-        console.log('kanta')
         e.preventDefault()
         auth.login(email, password)
     }
-    // for accordion
-    const [isOpen, setIsOpen] = useState(false)
-    const [isOpen1, setIsOpen1] = useState(false)
-    const [isOpen2, setIsOpen2] = useState(false)
 
     return (
         <>
@@ -74,101 +78,123 @@ export default function Login({ location, history }) {
                             <div className=" d-flex justify-content-center align-items-center mt-2">
                                 <h6>Or, Login using your email</h6>
                             </div>
+
                             <div className="accordion_box p-3 mt-4">
                                 <div className="card">
                                     <button
                                         className="btn w-100 login_btnbox "
-                                        onClick={() => setIsOpen(!isOpen)}>
+                                        onClick={handleClick}>
                                         NEW HERE - SIGN UP
                                     </button>
-                                    {isOpen && (
-                                        <form className="Form_cardt pt-3 ">
-                                            <label>Email</label>
-                                            <input
-                                                type="email"
-                                                className="form-control form_control"
-                                                value={email}
-                                                onChange={(e) =>
-                                                    setEmail(e.target.value)
-                                                }
-                                            />
-                                            <label className="mt-3">
-                                                Password
-                                            </label>
-                                            <input
-                                                type="password"
-                                                className="form-control form_control"
-                                                value={password}
-                                                onChange={(e) =>
-                                                    setPassword(e.target.value)
-                                                }
-                                            />
-                                            <button className="login_btnlog btn mt-5 w-100">
-                                                Sign Up
-                                            </button>
-                                        </form>
-                                    )}
+
+                                    <form
+                                        className="Form_cardt  "
+                                        style={{
+                                            height: expanded ? '210px' : '0px',
+                                            transition: 'height 0.5s ease-out',
+                                            overflow: 'hidden'
+                                        }}>
+                                        <label className="mt-2 ms-2">
+                                            Email
+                                        </label>
+                                        <input
+                                            type="email"
+                                            className="form-control form_control"
+                                            value={email}
+                                            onChange={(e) =>
+                                                setEmail(e.target.value)
+                                            }
+                                        />
+                                        <label className="mt-2 ms-2">
+                                            Password
+                                        </label>
+                                        <input
+                                            type="password"
+                                            className="form-control form_control"
+                                            value={password}
+                                            onChange={(e) =>
+                                                setPassword(e.target.value)
+                                            }
+                                        />
+                                        <button className="login_btnlog btn mt-3 mb-2 w-100">
+                                            Sign Up
+                                        </button>
+                                    </form>
                                 </div>
                                 <div className="card">
                                     <button
                                         className="btn w-100 login_btnbox "
-                                        onClick={() => setIsOpen1(!isOpen1)}>
+                                        onClick={handleClick1}>
                                         LOG IN
                                     </button>
-                                    {isOpen1 && (
-                                        <form
-                                            className="Form_cardt pt-3 "
-                                            onSubmit={loginHandler}>
-                                            <label>Email</label>
-                                            <input
-                                                type="email"
-                                                value={email}
-                                                className="form-control form_control"
-                                                onChange={(e) =>
-                                                    setEmail(e.target.value)
-                                                }
-                                            />
-                                            <label className="mt-3">
-                                                Password
-                                            </label>
-                                            <input
-                                                type="password"
-                                                value={password}
-                                                className="form-control form_control"
-                                                onChange={(e) =>
-                                                    setPassword(e.target.value)
-                                                }
-                                            />
-                                            <button className="login_btnlog btn mt-5 w-100">
-                                                LOG IN
-                                            </button>
-                                        </form>
-                                    )}
+
+                                    <form
+                                        className="Form_cardt  "
+                                        style={{
+                                            height: expandedo ? '210px' : '0px',
+                                            transition: 'height 0.5s ease-out',
+                                            overflow: 'hidden'
+                                        }}
+                                        onSubmit={loginHandler}>
+                                        <label className="mt-2 ms-2">
+                                            Email
+                                        </label>
+                                        <input
+                                            type="email"
+                                            value={email}
+                                            className="form-control form_control"
+                                            onChange={(e) =>
+                                                setEmail(e.target.value)
+                                            }
+                                        />
+                                        <label className="mt-2 ms-2">
+                                            Password
+                                        </label>
+                                        <input
+                                            type="password"
+                                            value={password}
+                                            className="form-control form_control"
+                                            onChange={(e) =>
+                                                setPassword(e.target.value)
+                                            }
+                                        />
+                                        <button className="login_btnlog btn mt-3 mb-2 w-100">
+                                            LOG IN
+                                        </button>
+                                    </form>
                                 </div>
                                 <div className="card">
                                     <button
                                         className="btn w-100 login_btnbox "
-                                        onClick={() => setIsOpen2(!isOpen2)}>
+                                        onClick={handleClick2}>
                                         FORGOT PASSWORD
                                     </button>
-                                    {isOpen2 && (
-                                        <form className="Form_cardt pt-3">
-                                            <label>Email</label>
-                                            <input
-                                                type="email"
-                                                className="form-control form_control"
-                                                onChange={(e) =>
-                                                    setEmail(e.target.value)
-                                                }
-                                            />
 
-                                            <button className="login_btnlog btn mt-5 w-100">
-                                                Next
-                                            </button>
-                                        </form>
-                                    )}
+                                    <form
+                                        className="Form_cardt "
+                                        style={{
+                                            height: expandedp ? '130px' : '0px',
+                                            transition: 'height 0.5s ease-out',
+                                            overflow: 'hidden'
+                                        }}>
+                                        <label className="mt-2 ms-2">
+                                            Email
+                                        </label>
+                                        <input
+                                            type="email"
+                                            className="form-control form_control"
+                                            onChange={(e) =>
+                                                setEmail(e.target.value)
+                                            }
+                                        />
+
+                                        <button className="login_btnlog btn mt-3 mb-2 w-100">
+                                            Next
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
+
                             <div
                                 className="mt-3 pb-5 text-center
                         ">
