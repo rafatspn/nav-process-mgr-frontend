@@ -2,6 +2,10 @@
 
 import React, { useState, useContext, useCallback, useEffect } from 'react'
 import { Form, Card, Container, Row, Col } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { initializeFacebookSdk } from '../utils/fb-sdk'
+
+import { faFacebook } from '@fortawesome/free-solid-svg-icons'
 import { AuthContext } from '../context/AuthContext'
 import useFacebook from '../hooks/facebook-hook'
 

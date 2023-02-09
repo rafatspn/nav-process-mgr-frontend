@@ -11,7 +11,7 @@ export function initializeFacebookSdk() {
 
     function initialize() {
         window.FB.init({
-            appId: '654290276302520',
+            appId: '1084137262240752',
             cookie: true,
             xfbml: true,
             version: 'v15.0'
