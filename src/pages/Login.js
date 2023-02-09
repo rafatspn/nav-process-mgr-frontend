@@ -3,6 +3,7 @@
 import React, { useState, useContext, useCallback, useEffect } from 'react'
 import { Form, Card, Container, Row, Col } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { initializeFacebookSdk } from '../utils/fb-sdk'
 
 import { faFacebook } from '@fortawesome/free-solid-svg-icons'
 import { AuthContext } from '../context/AuthContext'
@@ -11,7 +12,7 @@ import useFacebook from '../hooks/facebook-hook'
 import '../styles/login.css'
 
 export default function Login({ location, history }) {
-    //initializeFacebookSdk()
+    initializeFacebookSdk()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -34,7 +35,6 @@ export default function Login({ location, history }) {
     }
 
     const loginHandler = async (e) => {
-        console.log('kanta')
         e.preventDefault()
         auth.login(email, password)
     }
