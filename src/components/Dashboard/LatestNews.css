@@ -177,3 +177,8 @@
 .img_width2 {
     width: 16px;
 }
+
+#latestNews {
+    width: 100%;
+    height: 350px;
+}
