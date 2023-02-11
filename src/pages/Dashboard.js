@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button, Card, Container, Row, Col } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
 
@@ -14,14 +14,14 @@ export default function Dashboard() {
             <div className="row">
                 <div className="col-md-12">
                     <Tabs
-                        defaultActiveKey="postPerformance"
+                        defaultActiveKey="latestNews"
                         id="uncontrolled-tab-example"
                         className="mb-3 mt-3">
                         <Tab eventKey="latestNews" title="Latest News">
                             <LatestNews />
                         </Tab>
                         <Tab
-                            className=" ps-5 pe-5 "
+                            className="ps-5 pe-5 "
                             eventKey="postPerformance"
                             title="Post Performance">
                             <PostPerformance />

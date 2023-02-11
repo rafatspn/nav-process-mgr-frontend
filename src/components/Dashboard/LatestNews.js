@@ -267,7 +267,7 @@ const LatestNews = () => {
 
     return (
         <>
-            <div className="container-fluid">
+            <div className="container-fluid pb-2">
                 <div className="row mt-3">
                     <div className="col-md-12">
                         <div className="bg-white rounded p-4 shadow">

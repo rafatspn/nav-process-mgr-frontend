@@ -4,8 +4,10 @@ import * as am5xy from '@amcharts/amcharts5/xy'
 import * as am5percent from '@amcharts/amcharts5/percent'
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
 import * as am5hierarchy from '@amcharts/amcharts5/hierarchy'
-import am5themes_Kelly from '@amcharts/amcharts5/themes/Kelly'
 import axios from 'axios'
+import Tab from 'react-bootstrap/Tab'
+import Tabs from 'react-bootstrap/Tabs'
+
 import './PostPerformance.css'
 import config from '../../config/config.json'
 
@@ -169,13 +171,13 @@ const PostPerformance = () => {
             setPostThreeTotal(419)
             // drawMultiLineChart('publicEngagementByPost', publicEngagementByPost)
 
-            let sentimentData = data.publicSentiment
-            for (let i = 0; i < sentimentData.length; i++) {
-                if (sentimentData[i].sentiment === 'Unknown') {
-                    sentimentData.splice(i, 1)
-                }
-            }
-            drawColumnChartWithImageBullets('publicSentiment', sentimentData)
+            // let sentimentData = data.publicSentiment
+            // for (let i = 0; i < sentimentData.length; i++) {
+            //     if (sentimentData[i].sentiment === 'Unknown') {
+            //         sentimentData.splice(i, 1)
+            //     }
+            // }
+            // drawColumnChartWithImageBullets('publicSentiment', sentimentData)
 
             let topicData = []
             let topPostData = data.postTopics.postData
@@ -779,7 +781,7 @@ const PostPerformance = () => {
                 </div>
             </div>
             <div className="row mt-3">
-                <div className="col-md-6">
+                <div className="col-md-12">
                     <div className="bg-white rounded p-4 shadow">
                         <div className="row">
                             <div className="d-flex justify-content-between">
@@ -794,23 +796,48 @@ const PostPerformance = () => {
                         <div id="typeOfComments"></div>
                     </div>
                 </div>
-                <div className="col-md-6">
+                {/* <div className="col-md-6">
                     <div className="bg-white rounded p-4 shadow">
                         <div className="row">
                             <div className="d-flex justify-content-between">
                                 <h5 className="text-primary pb-3">
                                     Customer Perception
-                                </h5>
-                                {/* <h5 className="text-success">
+                                </h5> */}
+                {/* <h5 className="text-success">
                                     Total: {totalfFeedback}
                                 </h5> */}
-                            </div>
+                {/* </div>
                         </div>
                         <div id="typeOfFeedback"></div>
                     </div>
-                </div>
+                </div> */}
             </div>
             <div className="row mt-3">
+                <div className="col-md-12">
+                    <div className="bg-white rounded p-4 shadow">
+                        <h5 className="text-primary pb-3">What matters most</h5>
+                        <Tabs
+                            defaultActiveKey="queries"
+                            id="justify-tab-example"
+                            className="mb-3"
+                            justify>
+                            <Tab eventKey="queries" title="Queries">
+                                <h5 className="text-success">
+                                    Total: {totalQueries}
+                                </h5>
+                                <div id="typeOfQueries"></div>
+                            </Tab>
+                            <Tab eventKey="appreciation" title="Appreciation">
+                                <div id="typesOfAppreciation"></div>
+                            </Tab>
+                            <Tab eventKey="complain" title="Complain">
+                                <div id="typeOfComplainNegativeComments"></div>
+                            </Tab>
+                        </Tabs>
+                    </div>
+                </div>
+            </div>
+            {/* <div className="row mt-3">
                 <div className="col-md-12">
                     <div className="bg-white rounded p-4 shadow">
                         <div className="row">
@@ -826,8 +853,8 @@ const PostPerformance = () => {
                         <div id="typeOfQueries"></div>
                     </div>
                 </div>
-            </div>
-            <div className="row mt-3 mb-3">
+            </div> */}
+            {/* <div className="row mt-3 mb-3">
                 <div className="col-md-6">
                     <div className="bg-white rounded p-4 shadow">
                         <h5 className="text-primary pb-3">Type of Complain</h5>
@@ -842,7 +869,7 @@ const PostPerformance = () => {
                         <div id="typesOfAppreciation"></div>
                     </div>
                 </div>
-            </div>
+            </div> */}
             {/* <div className="row mt-3 mb-3">
                 <div className="col-md-12">
                     <div className="bg-white rounded p-4 shadow">
@@ -894,14 +921,14 @@ const PostPerformance = () => {
                     </div>
                 </div>
             </div> */}
-            <div className="row mt-3 mb-3">
+            {/* <div className="row mt-3 mb-3">
                 <div className="col-md-12">
                     <div className="bg-white rounded p-4 shadow">
                         <h5 className="text-primary">Public Sentiment</h5>
                         <div id="publicSentiment"></div>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <div className="row mt-3 mb-3">
                 <div className="col-md-12">
                     <div className="bg-white rounded p-4 shadow">
