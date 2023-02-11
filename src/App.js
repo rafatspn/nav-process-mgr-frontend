@@ -67,9 +67,17 @@ function App() {
             }
 
             try {
+                //let access_token = await FB.getAuthResponse()['accessToken']
+
                 const { data } = await axios.post(
                     `${config.url}/api/users/fbLogin`,
-                    { userId, userName, accessToken, email, profilePicture },
+                    {
+                        userId,
+                        userName,
+                        accessToken,
+                        email,
+                        profilePicture
+                    },
                     configData
                 )
                 localStorage.setItem('user', JSON.stringify(data))
