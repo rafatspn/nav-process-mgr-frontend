@@ -57,8 +57,8 @@ const PostPerformance = () => {
                 'count'
             )
 
-            let typeOfFeedback = data.perception
-            drawPieChart('typeOfFeedback', typeOfFeedback)
+            // let typeOfFeedback = data.perception
+            // drawPieChart('typeOfFeedback', typeOfFeedback)
 
             let typeOfQueries = [
                 {
