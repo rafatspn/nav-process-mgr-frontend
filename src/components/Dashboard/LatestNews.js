@@ -54,8 +54,15 @@ function Card({ title, description, image, date, source, strength }) {
         <div className="col-lg-3 col-md-3 col-sm-6">
             <div className="card card_news ">
                 <div className="d-flex mb-2 justify-content-end">
-                    <span className="me-2">0</span>
-                    <span>X</span>
+                    {/* <span className="me-2">0</span> */}
+                    <img
+                        className="me-2 img_width"
+                        src="/assets/heart-regular.svg"
+                    />
+                    <img
+                        className=" img_width2"
+                        src="/assets/xmark-solid.svg"
+                    />
                 </div>
                 <img src={image} height="150px" />
                 <h6 className="mt-2">{title}</h6>
@@ -752,7 +759,10 @@ const LatestNews = () => {
                         <div className="card card_custom">
                             <div className="d-flex">
                                 <div className="me">
-                                    {/* <img src="" /> */}0
+                                    <img
+                                        className="img_width"
+                                        src="/assets/waterfire.jpg"
+                                    />
                                 </div>
                                 <span className="head">Govt Project</span>
                             </div>
@@ -762,7 +772,10 @@ const LatestNews = () => {
                         <div className="card card_custom2">
                             <div className="d-flex">
                                 <div className="me">
-                                    {/* <img src="" /> */}0
+                                    <img
+                                        className="img_width2"
+                                        src="/assets/water.webp"
+                                    />
                                 </div>
                                 <span className="head">Economical</span>
                             </div>
@@ -772,7 +785,10 @@ const LatestNews = () => {
                         <div className="card card_custom3">
                             <div className="d-flex">
                                 <div className="me">
-                                    {/* <img src="" /> */}0
+                                    <img
+                                        className="img_width"
+                                        src="/assets/medicine.webp"
+                                    />
                                 </div>
                                 <span className="head">Construction</span>
                             </div>
@@ -782,7 +798,10 @@ const LatestNews = () => {
                         <div className="card card_custom4">
                             <div className="d-flex">
                                 <div className="me">
-                                    {/* <img src="" /> */}0
+                                    <img
+                                        className="img_width"
+                                        src="/assets/blokchain.png"
+                                    />
                                 </div>
                                 <span className="head">Cement Industry</span>
                             </div>
