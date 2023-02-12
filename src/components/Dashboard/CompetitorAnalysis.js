@@ -592,6 +592,178 @@ const CompetitorAnalysis = () => {
                     </div>
                 </div>
             </div>
+            <div className="row mt-5 mb-5">
+                <div className="col-lg-2 col-sm-6 col-md-2"></div>
+                <div className="col-lg-2 col-sm-6 col-md-2">
+                    <div className="d-flex justify-content-center">
+                        <img
+                            className="img_width mb-2"
+                            src="/assets/emoji.webp"
+                        />
+                    </div>
+                    <div className="pBox c1">0%-20%</div>
+                </div>
+                <div className="col-lg-2 col-sm-6 col-md-2">
+                    <div className="d-flex justify-content-center">
+                        <img
+                            className="img_width mb-2"
+                            src="/assets/emoji.webp"
+                        />
+                    </div>
+                    <div className="pBox c2">20%-40%</div>
+                </div>
+                <div className="col-lg-2 col-sm-6 col-md-2">
+                    <div className="d-flex justify-content-center">
+                        <img
+                            className="img_width mb-2"
+                            src="/assets/emoji.webp"
+                        />
+                    </div>
+                    <div className="pBox c3">40%-60%</div>
+                </div>
+                <div className="col-lg-2 col-sm-6 col-md-2">
+                    <div className="d-flex justify-content-center">
+                        <img
+                            className="img_width mb-2"
+                            src="/assets/emoji.webp"
+                        />
+                    </div>
+                    <div className="pBox c4">60%-80%</div>
+                </div>
+                <div className="col-lg-2 col-sm-6 col-md-2">
+                    <div className="d-flex justify-content-center">
+                        <img
+                            className="img_width mb-2"
+                            src="/assets/emoji.webp"
+                        />
+                    </div>
+                    <div className="pBox c5">80%-100%</div>
+                </div>
+            </div>
+            <div className="row mt-3 mb-3">
+                <div className="col-lg-2 col-sm-6 col-md-4">
+                    <div className="d-flex justify-content-center">
+                        <img
+                            className="img_width_img mb-2"
+                            src="/assets/cp.jpg"
+                        />
+                    </div>
+                </div>
+                <div className="col-lg-2 col-sm-6 col-md-4">
+                    <h6 className="text-center">78.8%</h6>
+                </div>
+                <div className="col-lg-6 col-sm-12 col-md-4">
+                    <div class="progress progress_custom">
+                        <div
+                            class="progress-bar bg-warning w-75"
+                            role="progressbar"
+                            aria-valuenow="75"
+                            aria-valuemin="0"
+                            aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div className="col-lg-2 col-sm-6 col-md-4">
+                    <div className="d-flex justify-content-center">
+                        <img
+                            className="img_width_emoji  mb-2"
+                            src="/assets/emoji.webp"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div className="row mt-3 mb-3">
+                <div className="col-lg-2 col-sm-6 col-md-4">
+                    <div className="d-flex justify-content-center">
+                        <img
+                            className="img_width_img mb-2"
+                            src="/assets/cp.jpg"
+                        />
+                    </div>
+                </div>
+                <div className="col-lg-2 col-sm-6 col-md-4">
+                    <h6 className="text-center">78.8%</h6>
+                </div>
+                <div className="col-lg-6 col-sm-12 col-md-4">
+                    <div class="progress progress_custom">
+                        <div
+                            class="progress-bar bg-warning w-75"
+                            role="progressbar"
+                            aria-valuenow="75"
+                            aria-valuemin="0"
+                            aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div className="col-lg-2 col-sm-6 col-md-4">
+                    <div className="d-flex justify-content-center">
+                        <img
+                            className="img_width_emoji  mb-2"
+                            src="/assets/emoji.webp"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div className="row mt-3 mb-3">
+                <div className="col-lg-2 col-sm-6 col-md-4">
+                    <div className="d-flex justify-content-center">
+                        <img
+                            className="img_width_img mb-2"
+                            src="/assets/cp.jpg"
+                        />
+                    </div>
+                </div>
+                <div className="col-lg-2 col-sm-6 col-md-4">
+                    <h6 className="text-center">78.8%</h6>
+                </div>
+                <div className="col-lg-6 col-sm-12 col-md-4">
+                    <div class="progress progress_custom">
+                        <div
+                            class="progress-bar bg-warning w-75"
+                            role="progressbar"
+                            aria-valuenow="75"
+                            aria-valuemin="0"
+                            aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div className="col-lg-2 col-sm-6 col-md-4">
+                    <div className="d-flex justify-content-center">
+                        <img
+                            className="img_width_emoji  mb-2"
+                            src="/assets/emoji.webp"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div className="row mt-3 mb-3">
+                <div className="col-lg-2 col-sm-6 col-md-4">
+                    <div className="d-flex justify-content-center">
+                        <img
+                            className="img_width_img mb-2"
+                            src="/assets/cp.jpg"
+                        />
+                    </div>
+                </div>
+                <div className="col-lg-2 col-sm-6 col-md-4">
+                    <h6 className="text-center">78.8%</h6>
+                </div>
+                <div className="col-lg-6 col-sm-12 col-md-4">
+                    <div class="progress progress_custom">
+                        <div
+                            class="progress-bar bg-warning w-75"
+                            role="progressbar"
+                            aria-valuenow="75"
+                            aria-valuemin="0"
+                            aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div className="col-lg-2 col-sm-6 col-md-4">
+                    <div className="d-flex justify-content-center">
+                        <img
+                            className="img_width_emoji  mb-2"
+                            src="/assets/emoji.webp"
+                        />
+                    </div>
+                </div>
+            </div>
         </>
     )
 }

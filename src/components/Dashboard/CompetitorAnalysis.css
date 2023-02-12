@@ -12,3 +12,34 @@
     width: 100%;
     height: 500px;
 }
+.img_width {
+    width: 20px;
+}
+.pBox {
+    padding: 1px 20px;
+    background-color: red;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+}
+.c2 {
+    background-color: rgb(216, 149, 49);
+}
+.c3 {
+    background-color: rgb(243, 187, 103);
+}
+.c4 {
+    background-color: rgb(21, 243, 125);
+}
+.c5 {
+    background-color: rgb(14, 97, 39);
+}
+.img_width_emoji {
+    width: 40px;
+}
+.img_width_img {
+    width: 100px;
+}
+.progress_custom {
+    border-radius: 0px;
+}
