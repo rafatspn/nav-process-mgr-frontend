@@ -24,7 +24,7 @@ export default function Login({ location, history }) {
     const handleClick2 = () => {
         setExpandedp(!expandedp)
     }
-    //initializeFacebookSdk()
+    initializeFacebookSdk()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 

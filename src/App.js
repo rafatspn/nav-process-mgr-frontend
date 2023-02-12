@@ -26,9 +26,12 @@ import './App.css'
 
 function App() {
     let [isLoggedIn, setIsLoggedIn] = useState(false)
+    let [userId, setUserId] = useState()
 
     useEffect(() => {
         if (localStorage.getItem('user')) {
+            let userInfo = JSON.parse(localStorage.getItem('user'))
+            setUserId(userInfo.userId)
             setIsLoggedIn(true)
         } else {
             setIsLoggedIn(false)
@@ -39,8 +42,8 @@ function App() {
     if (isLoggedIn) {
         routes = (
             <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/trends" element={<Trends />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/reports" element={<Reports />} />
                 <Route path="/summary" element={<Summary />} />
                 <Route path="/logout" element={<Logout />} />
@@ -82,6 +85,7 @@ function App() {
                 )
                 localStorage.setItem('user', JSON.stringify(data))
                 console.log(data)
+                setUserId(userId)
                 setIsLoggedIn(true)
             } catch (e) {
                 console.log(e)
@@ -120,6 +124,7 @@ function App() {
             <AuthContext.Provider
                 value={{
                     isLoggedIn,
+                    userId,
                     login: login,
                     fbLogin: fbLogin,
                     logout: logout
