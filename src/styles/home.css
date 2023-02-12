@@ -32,7 +32,10 @@
     line-height: 1;
 }
 .trand_card {
-    width: 500px;
+    width: 600px;
+}
+.trand_card img {
+    border-radius: 50%;
 }
 @media (max-width: 575.98px) {
     .trand_card {
