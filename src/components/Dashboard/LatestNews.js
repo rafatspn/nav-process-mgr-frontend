@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
 import am4themes_animated from '@amcharts/amcharts4/themes/animated'
+import axios from 'axios'
 
 import './LatestNews.css'
+import config from '../../config/config.json'
 
 const data = [
     {
@@ -43,38 +45,40 @@ const data = [
         strength: '0'
     }
 ]
-function Card({ title, description, image, date, source, strength }) {
+function Card({ title, description, imageUrl, dateTime, name, url }) {
     return (
-        <div className="col-lg-3 col-md-3 col-sm-6">
-            <div className="card card_news ">
-                <div className="d-flex mb-2 justify-content-end">
-                    {/* <span className="me-2">0</span> */}
-                    <img
+        <div className="col-lg-3 col-md-3 col-sm-6 mb-2">
+            <a href={url} target="_blank" className="text-decoration-none">
+                <div className="card card_news">
+                    <div className="d-flex mb-2 justify-content-end">
+                        {/* <span className="me-2">0</span> */}
+                        {/* <img
                         className="me-2 img_width"
                         src="/assets/heart-regular.svg"
                     />
                     <img
                         className=" img_width2"
                         src="/assets/xmark-solid.svg"
-                    />
-                </div>
-                <img src={image} height="150px" />
-                <h6 className="mt-2">{title}</h6>
-                <p>{description}</p>
-                <span className="mb-1">
-                    <strong>Date:</strong> {date} <strong>an hour ago</strong>
-                </span>
-                <span className="mb-1">
-                    <strong>Source:</strong> {source}
-                </span>
-                <span className="mb-1">
-                    <strong>Strength:</strong> {strength}
-                </span>
-            </div>{' '}
+                    /> */}
+                    </div>
+                    <img src={imageUrl} height="150px" />
+                    <h6 className="mt-2 ellipsis-title">{title}</h6>
+                    <p className="ellipsis">{description}</p>
+                    <span className="mb-1">
+                        <strong>Date:</strong> {dateTime}{' '}
+                        {/* <strong>an hour ago</strong> */}
+                    </span>
+                    <span className="mb-1">
+                        <strong>Source:</strong> {name}
+                    </span>
+                </div>{' '}
+            </a>
         </div>
     )
 }
 const LatestNews = () => {
+    const [allData, setAllData] = useState({})
+
     useEffect(() => {
         let latestNeswData = [
             { topic: 'Others', date: '2022-09-26T00:00:00.000Z', count: 1 },
@@ -149,6 +153,26 @@ const LatestNews = () => {
         ]
 
         latestNewsChart(latestNeswData)
+
+        const getAllData = async () => {
+            const configData = {
+                headers: {
+                    Authorization: `Bearer ${
+                        JSON.parse(localStorage.getItem('user')).token
+                    }`
+                }
+            }
+
+            let pageId = '730393906972869'
+            const { data } = await axios.get(
+                `${config.url}/api/news/${pageId}`,
+                configData
+            )
+            setAllData(data)
+            console.log(data)
+        }
+
+        getAllData()
     }, [])
 
     function latestNewsChart(newsData) {
@@ -169,7 +193,7 @@ const LatestNews = () => {
                 //entry.value3 = 0;
                 //entry.value4 = 0;
                 //entry.value5 = 0;
-            } else if (newsData[i].topic == 'Economical') {
+            } else if (newsData[i].topic == 'ECNEC') {
                 //entry.value = 0;
                 entry.value2 = newsData[i].count
                 //entry.value3 = 0;
@@ -224,10 +248,10 @@ const LatestNews = () => {
         var series2 = chart.series.push(new am4charts.LineSeries())
         series2.dataFields.valueY = 'value2'
         series2.dataFields.categoryX = 'date'
-        series2.name = 'Economical'
+        series2.name = 'ECNEC'
         series2.strokeWidth = 3
         series2.bullets.push(new am4charts.CircleBullet())
-        series2.tooltipText = 'Economical in {date}: {value2}'
+        series2.tooltipText = 'ECNEC in {date}: {value2}'
         series2.legendSettings.valueText = '{value2}'
 
         var series3 = chart.series.push(new am4charts.LineSeries())
@@ -298,7 +322,7 @@ const LatestNews = () => {
                                         src="/assets/water.webp"
                                     />
                                 </div>
-                                <span className="head">Economical</span>
+                                <span className="head">ECNEC</span>
                             </div>
                         </div>
                     </div>
@@ -342,7 +366,7 @@ const LatestNews = () => {
                         <div className="card card_topic">
                             <div className="d-flex">
                                 <span className="head_topic">Topics:</span>
-                                <span className="butan2 btn">Income</span>
+                                <span className="butan2 btn">Notice</span>
                             </div>
                         </div>
                     </div>
@@ -366,9 +390,10 @@ const LatestNews = () => {
                     </div>
                 </div>
                 <div className="row mt-4">
-                    {data.map((cardData) => (
-                        <Card key={cardData.title} {...cardData} />
-                    ))}
+                    {allData.constructionNews &&
+                        allData.constructionNews.map((cardData, index) => (
+                            <Card key={index} {...cardData} />
+                        ))}
                 </div>
             </div>
         </>
