@@ -21,7 +21,7 @@ export default function Home() {
             }
 
             const { data } = await axios.get(
-                `${config.url}/api/users/${auth.userId}/pages`,
+                `${config.url}/api/users/934522851260163/pages`,
                 configData
             )
             setPages(data)
