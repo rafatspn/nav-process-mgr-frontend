@@ -9,8 +9,7 @@ import '../styles/home.css'
 
 export default function Home() {
     const auth = useContext(AuthContext)
-    const [pages, setPages] = useState()
-
+    const [pages, setPages] = useState([])
     useEffect(() => {
         const getPages = async () => {
             const configData = {
@@ -26,10 +25,34 @@ export default function Home() {
                 configData
             )
             setPages(data)
+
+            console.log('creationDate', data.creationDate)
         }
+
         getPages()
     }, [])
 
+    const [searchResults, setSearchResults] = useState(pages)
+    const [searchTerm, setSearchTerm] = useState('')
+    useEffect(() => {
+        setSearchResults(pages)
+    }, [pages])
+    const handleSearch = (e) => {
+        setSearchTerm(e.target.value)
+
+        let results = pages.filter((item) => {
+            if (typeof item === 'string') {
+                return item.toLowerCase().includes(searchTerm.toLowerCase())
+            } else {
+                return JSON.stringify(item)
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase())
+            }
+        })
+        setSearchResults(results)
+    }
+
+    console.log('pages', searchResults)
     return (
         <>
             <div className="container">
@@ -44,49 +67,55 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="col-5">
-                        <div class="flex-sm-column  flex-column flex-md-row flex-lg-row d-flex mb-3">
+                        <div className="flex-sm-column  flex-column flex-md-row flex-lg-row d-flex mb-3">
                             <input
                                 type="text"
-                                class="form-control form_control"
+                                className="form-control form_control"
                                 placeholder="Search"
                                 aria-label="Recipient's username"
                                 aria-describedby="basic-addon2"
+                                value={searchTerm}
+                                onChange={handleSearch}
                             />
                             <button
-                                class="btn trand_btnsearch"
+                                className="btn trand_btnsearch"
                                 id="basic-addon2">
                                 Search
                             </button>{' '}
                         </div>{' '}
                     </div>
                     <div className="col-10 mt-5">
-                        {pages &&
-                            pages.map((page) => (
+                        {searchResults &&
+                            searchResults.map((page) => (
                                 <div className="card trand_card mb-3 p-3">
-                                    <div class="d-flex">
-                                        <div class="flex-shrink-0">
+                                    <div className="d-flex">
+                                        <div className="flex-shrink-0">
                                             <img
                                                 src={page.profilePicture}
                                                 height="100px"
                                                 onClick={page.pageURL}
                                             />
                                         </div>
-                                        <div class="flex-grow-1 ms-3">
+                                        <div className="flex-grow-1 ms-3">
                                             <strong className="stong_title">
                                                 {page.pageName}
-                                                <span class="badge bg-bdg">
-                                                    facebook
-                                                </span>
+
+                                                <a href={page.pageURL}>
+                                                    {' '}
+                                                    <span className="badge bg-bdg">
+                                                        facebook
+                                                    </span>
+                                                </a>
                                             </strong>
                                             <div className="d-flex">
                                                 <strong className="stong_title">
                                                     Page Id:{' '}
                                                     <span>
                                                         {page.pageId}
-                                                        <span class="badge bg-bdg">
+                                                        <span className="badge bg-bdg">
                                                             status
                                                         </span>{' '}
-                                                        <span class="badge bg-bdg">
+                                                        <span className="badge bg-bdg">
                                                             updated token
                                                         </span>
                                                     </span>
@@ -96,7 +125,11 @@ export default function Home() {
                                                 <strong className="stong_title">
                                                     Subscribe on:{' '}
                                                     <span>
-                                                        {page.creationDate}
+                                                        {new Date(
+                                                            Date.parse(
+                                                                page.creationDate
+                                                            )
+                                                        ).toLocaleString()}
                                                     </span>
                                                 </strong>
                                             </div>
