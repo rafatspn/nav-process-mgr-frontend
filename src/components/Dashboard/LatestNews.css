@@ -198,3 +198,10 @@
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
 }
+.btn_outline_danger {
+    background-color: transparent;
+    border-radius: 6px;
+    border: 1px solid red;
+    padding: 0.25rem 0.5rem;
+    color: red;
+}

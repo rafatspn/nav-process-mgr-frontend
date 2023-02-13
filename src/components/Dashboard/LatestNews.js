@@ -47,7 +47,7 @@ const data = [
 ]
 function Card({ title, description, imageUrl, dateTime, name, url }) {
     return (
-        <div className="col-lg-3 col-md-3 col-sm-6 mb-2">
+        <div className="">
             <a href={url} target="_blank" className="text-decoration-none">
                 <div className="card card_news">
                     <div className="d-flex mb-2 justify-content-end">
@@ -390,10 +390,75 @@ const LatestNews = () => {
                     </div>
                 </div>
                 <div className="row mt-4">
-                    {allData.constructionNews &&
-                        allData.constructionNews.map((cardData, index) => (
-                            <Card key={index} {...cardData} />
-                        ))}
+                    <div className="col-lg-3 col-md-3 col-3">
+                        {allData.govtProjectNews &&
+                            allData.govtProjectNews.map((cardData, index) => (
+                                <Card
+                                    className="w-100"
+                                    key={index}
+                                    {...cardData}
+                                />
+                            ))}
+                        <div className="d-flex justify-content-center">
+                            <button
+                                type="button"
+                                className=" mt-3 btn btn_outline_danger">
+                                Load More
+                            </button>
+                        </div>
+                    </div>
+                    <div className="col-lg-3 col-md-3 col-3">
+                        {allData.ecnecNews &&
+                            allData.ecnecNews.map((cardData, index) => (
+                                <Card
+                                    className="w-100"
+                                    key={index}
+                                    {...cardData}
+                                />
+                            ))}
+                        <div className="d-flex justify-content-center">
+                            <button
+                                type="button"
+                                className=" mt-3 btn btn_outline_danger">
+                                Load More
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="col-lg-3 col-md-3 col-3">
+                        {allData.constructionNews &&
+                            allData.constructionNews.map((cardData, index) => (
+                                <Card
+                                    className="w-100"
+                                    key={index}
+                                    {...cardData}
+                                />
+                            ))}
+                        <div className="d-flex justify-content-center">
+                            <button
+                                type="button"
+                                className=" mt-3 btn btn_outline_danger">
+                                Load More
+                            </button>
+                        </div>
+                    </div>
+                    <div className="col-lg-3 col-md-3 col-3">
+                        {allData.cementNews &&
+                            allData.cementNews.map((cardData, index) => (
+                                <Card
+                                    className="w-100"
+                                    key={index}
+                                    {...cardData}
+                                />
+                            ))}
+                        <div className="d-flex justify-content-center">
+                            <button
+                                type="button"
+                                className=" mt-3 btn btn_outline_danger">
+                                Load More
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
