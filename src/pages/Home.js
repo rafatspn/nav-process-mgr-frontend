@@ -52,6 +52,11 @@ export default function Home() {
         setSearchResults(results)
     }
 
+    const setPageDetails = (page) => {
+        console.log(page)
+        auth.managePage(page)
+    }
+
     console.log('pages', searchResults)
     return (
         <>
@@ -86,8 +91,10 @@ export default function Home() {
                     </div>
                     <div className="col-10 mt-5">
                         {searchResults &&
-                            searchResults.map((page) => (
-                                <div className="card trand_card mb-3 p-3">
+                            searchResults.map((page, idx) => (
+                                <div
+                                    className="card trand_card mb-3 p-3"
+                                    key={idx}>
                                     <div className="d-flex">
                                         <div className="flex-shrink-0">
                                             <img
@@ -139,14 +146,18 @@ export default function Home() {
                                                     <span>234567589</span>
                                                 </strong>
                                             </div> */}
-                                            {/* <div className="d-flex mt-3">
-                                                <button className="btn trand_btnbox  me-2">
+                                            <div className="d-flex mt-3">
+                                                <button
+                                                    className="btn trand_btnbox me-2"
+                                                    onClick={() =>
+                                                        setPageDetails(page)
+                                                    }>
                                                     MANAGE
                                                 </button>
-                                                <button className="btn trand_btnbox ">
+                                                {/* <button className="btn trand_btnbox ">
                                                     REMOVE LICENSE
-                                                </button>
-                                            </div> */}
+                                                </button> */}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

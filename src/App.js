@@ -27,6 +27,7 @@ import './App.css'
 function App() {
     let [isLoggedIn, setIsLoggedIn] = useState(false)
     let [userId, setUserId] = useState()
+    let [page, setPage] = useState()
 
     useEffect(() => {
         if (localStorage.getItem('user')) {
@@ -61,6 +62,11 @@ function App() {
         )
     }
 
+    const managePage = (page) => {
+        console.log(page)
+        setPage(page)
+    }
+
     const fbLogin = useCallback(
         async (userId, userName, email, accessToken, profilePicture) => {
             const configData = {
@@ -71,7 +77,7 @@ function App() {
 
             try {
                 //let access_token = await FB.getAuthResponse()['accessToken']
-                console.log('inside fb login1 ')
+
                 const { data } = await axios.post(
                     `${config.url}/api/users/fbLogin`,
                     {
@@ -84,7 +90,7 @@ function App() {
                     configData
                 )
                 localStorage.setItem('user', JSON.stringify(data))
-                console.log('inside fb login2 ')
+
                 console.log(data)
                 setUserId(userId)
                 setIsLoggedIn(true)
@@ -126,6 +132,8 @@ function App() {
                 value={{
                     isLoggedIn,
                     userId,
+                    page,
+                    managePage: managePage,
                     login: login,
                     fbLogin: fbLogin,
                     logout: logout
