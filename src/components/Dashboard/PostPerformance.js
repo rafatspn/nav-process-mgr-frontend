@@ -36,7 +36,7 @@ const PostPerformance = () => {
                 configData
             )
             console.log(data)
-
+            setTopThreePosts(data.postTopics.postData)
             let typeOfComments = data.talkingAbout
             let tcmnt = 0
 
@@ -186,7 +186,7 @@ const PostPerformance = () => {
                     {
                         x: am5.percent(50),
                         y: am5.percent(50),
-                        image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg',
+                        image: '/assets/shah_cement_logo.jpg',
                         children: data.postTopics.topicData[n]
                     }
                 ])
@@ -941,22 +941,27 @@ const PostPerformance = () => {
             <div className="row mt-3 mb-3">
                 <div className="col-md-6">
                     <div className="bg-white rounded p-4 shadow">
-                        <a
-                            className="text-primary pb-3"
-                            href="https://www.facebook.com/ShahCementBD/posts/pfbid0287aLsbSPVrFxD92SN48Di8EU1Jw3zbEkf8b5fYcrMa14pbekMoccnre33TMNEYk4l">
-                            Post 1: লাল সবুজেই আছি' আমরা উদ্দীপ্ত..
-                        </a>
+                        {topThreePosts[0] && (
+                            <a
+                                className="text-primary pb-3 ellipsis"
+                                target="_blank"
+                                href={topThreePosts[0].url}>
+                                Post 1: {topThreePosts[0].message}
+                            </a>
+                        )}
                         <div></div>
                         <div id="postAnatomy_1"></div>
                     </div>
                 </div>
                 <div className="col-md-6">
                     <div className="bg-white rounded p-4 shadow">
-                        <a
-                            className="text-primary pb-3"
-                            href="https://www.facebook.com/ShahCementBD/posts/pfbid02NdhH7bqdzifFLaEkU5VCujL6VjXX7cCbdaLxGFNN7V7fKvix2paX38QChdUW9Eiml">
-                            Post 2: বাংলাদেশী তরুণ অণুজীব বিজ্ঞানী..
-                        </a>
+                        {topThreePosts[1] && (
+                            <a
+                                className="text-primary pb-3 ellipsis"
+                                href={topThreePosts[1].url}>
+                                Post 2: {topThreePosts[1].message}
+                            </a>
+                        )}
                         <div id="postAnatomy_2"></div>
                     </div>
                 </div>
@@ -964,21 +969,25 @@ const PostPerformance = () => {
             <div className="row mt-3 mb-3">
                 <div className="col-md-6">
                     <div className="bg-white rounded p-4 shadow">
-                        <a
-                            className="text-primary pb-3"
-                            href="https://www.facebook.com/ShahCementBD/posts/pfbid0HuFXbX6AS8XMMbtJmB1owQtggiSK5LmCcLABDpsYpmLjzUY5AzjTABzxyPZr72WRl">
-                            Post 3: এলো বিশ্ব ফুটবলের গ্রেটেস্ট..
-                        </a>
+                        {topThreePosts[2] && (
+                            <a
+                                className="text-primary pb-3 ellipsis"
+                                href={topThreePosts[2].url}>
+                                Post 3: {topThreePosts[2].message}
+                            </a>
+                        )}
                         <div id="postAnatomy_3"></div>
                     </div>
                 </div>
                 <div className="col-md-6">
                     <div className="bg-white rounded p-4 shadow">
-                        <a
-                            className="text-primary pb-3"
-                            href="https://www.facebook.com/ShahCementBD/photos/a.730546700290923/6547286551950213">
-                            Post 4: বিশ্বকাপের প্রিয় তারকাদের গল্প নিয়ে..
-                        </a>
+                        {topThreePosts[3] && (
+                            <a
+                                className="text-primary pb-3 ellipsis"
+                                href={topThreePosts[3].url}>
+                                Post 4: {topThreePosts[3].message}
+                            </a>
+                        )}
                         <div id="postAnatomy_4"></div>
                     </div>
                 </div>
