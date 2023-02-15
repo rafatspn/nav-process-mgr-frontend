@@ -7,9 +7,29 @@ import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
 import config from '../../config/config.json'
 
 import './CompetitorAnalysis.css'
+function ProgressBar({ progress }) {
+    const progressBarStyle = {
+        width: `${progress * 100}%`,
+        height: '10px',
+        backgroundColor: '#ffc107',
+        borderRadius: '10px'
+    }
 
+    return (
+        <div className="progress mb-2">
+            <div
+                className="progress-bar bg-warning"
+                role="progressbar"
+                style={progressBarStyle}
+                aria-valuenow={progress * 100}
+                aria-valuemin="0"
+                aria-valuemax="100"></div>
+        </div>
+    )
+}
 const CompetitorAnalysis = () => {
     const [graphData, setGraphData] = useState()
+
     useEffect(() => {
         const generateGraph = async () => {
             const configData = {
@@ -27,7 +47,12 @@ const CompetitorAnalysis = () => {
             )
 
             setGraphData(data)
+            console.log('graphData', graphData)
 
+            // for (let i = 0; i < graphData.length; i++) {
+            //     setProgress(graphData[i].sentimentData)
+            // }
+            // console.log('progress', progress)
             let activityData = data.activityData
 
             drawBarChart('activityChart', activityData, 'name', 'activityScore')
@@ -145,6 +170,7 @@ const CompetitorAnalysis = () => {
         // https://www.amcharts.com/docs/v5/concepts/animations/
         chart.appear(1000, 100)
     }
+
     return (
         <>
             <div className="row mt-4">
@@ -249,14 +275,10 @@ const CompetitorAnalysis = () => {
                             </h6>
                         </div>
                         <div className="col-lg-6 col-sm-12 col-md-4">
-                            <div class="progress progress_custom">
-                                <div
-                                    class="progress-bar bg-warning w-75"
-                                    role="progressbar"
-                                    aria-valuenow="100"
-                                    aria-valuemin="0"
-                                    aria-valuemax="100"></div>
-                            </div>
+                            <ProgressBar
+                                className="progress progress_custom"
+                                progress={dt.sentimentScore}
+                            />
                         </div>
                         <div className="col-lg-2 col-sm-6 col-md-4">
                             <div className="d-flex justify-content-center">

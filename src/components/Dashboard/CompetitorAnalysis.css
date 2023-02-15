@@ -42,4 +42,8 @@
 }
 .progress_custom {
     border-radius: 0px;
+    height: 0.6rem !important;
+}
+.progress {
+    height: unset;
 }
