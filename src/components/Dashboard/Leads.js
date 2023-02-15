@@ -8,9 +8,9 @@ import './Leads.css'
 
 let optionsArr = [
     { text: 'Select', id: 'select' },
-    { text: 'Who are Complaining', id: 'complain' },
-    { text: 'Who are Appreciating', id: 'appreciation' },
-    { text: 'Queries', id: 'queries' }
+    { text: 'Who are Complaining', id: 'Complain' },
+    { text: 'Who are Appreciating', id: 'Appreciation' },
+    { text: 'Queries', id: 'Queries' }
 ]
 
 const Leads = () => {
@@ -53,12 +53,39 @@ const Leads = () => {
             )
             console.log(data)
             setFilteredValues(data)
-
-            // console.log('creationDate', data.creationDate)
         }
 
         getLeads()
     }, [selectedOption])
+
+    const downloadExcel = async () => {
+        const response = await axios({
+            url: `${config.url}/api/comments/users?pageId=${
+                auth.page ? auth.page.pdageId : null
+            }&topic=${selectedOption}&type=excel`,
+            method: 'GET',
+            responseType: 'blob',
+            headers: {
+                Authorization: `Bearer ${
+                    JSON.parse(localStorage.getItem('user')).token
+                }`
+            }
+        })
+
+        const href = URL.createObjectURL(response.data)
+
+        const link = document.createElement('a')
+        link.href = href
+        link.setAttribute(
+            'download',
+            `userData_${new Date().getTime()}_${selectedOption}_dn.xlsx`
+        )
+        document.body.appendChild(link)
+        link.click()
+
+        document.body.removeChild(link)
+        URL.revokeObjectURL(href)
+    }
 
     return (
         <>
@@ -132,7 +159,7 @@ const Leads = () => {
                                         ))}
                                 </tbody>
                             </table>
-                            <div className="mt-3">
+                            <div className="mt-3" onClick={downloadExcel}>
                                 <img
                                     className="img_width ms-2"
                                     src="/assets/download.svg"
