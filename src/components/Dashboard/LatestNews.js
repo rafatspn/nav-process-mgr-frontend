@@ -45,9 +45,10 @@ const data = [
         strength: '0'
     }
 ]
-function Card({ title, description, imageUrl, dateTime, name, url }) {
+
+function Card({ title, description, imageUrl, dateTime, name, url, category }) {
     return (
-        <div className="">
+        <div className="mb-2">
             <a href={url} target="_blank" className="text-decoration-none">
                 <div className="card card_news">
                     <div className="d-flex mb-2 justify-content-end">
@@ -61,11 +62,18 @@ function Card({ title, description, imageUrl, dateTime, name, url }) {
                         src="/assets/xmark-solid.svg"
                     /> */}
                     </div>
-                    <img src={imageUrl} height="150px" />
+                    {category && (
+                        <img
+                            src="https://images.prothomalo.com/prothomalo-bangla%2F2020-12%2Fec3a4dcd-b1a4-4cd6-b2ab-083eba916d31%2Fprothomalo_bangla_2020_09_4dc58fa1_4e01_4fe8_bb4e_366278f87917_govt.png?auto=format%2Ccompress&format=webp&w=768&dpr=1.0"
+                            height="150px"
+                        />
+                    )}
+                    {!category && <img src={imageUrl} height="150px" />}
                     <h6 className="mt-2 ellipsis-title">{title}</h6>
                     <p className="ellipsis">{description}</p>
                     <span className="mb-1">
-                        <strong>Date:</strong> {dateTime}{' '}
+                        <strong>Date:</strong>{' '}
+                        {new Date(dateTime).toLocaleString('en-US')}{' '}
                         {/* <strong>an hour ago</strong> */}
                     </span>
                     <span className="mb-1">
@@ -76,84 +84,16 @@ function Card({ title, description, imageUrl, dateTime, name, url }) {
         </div>
     )
 }
+
 const LatestNews = () => {
     const [allData, setAllData] = useState({})
+    const [allMasterData, setAllMasterData] = useState({})
+    const [govtNewsNoOfClick, setGovtNewsNoOfClick] = useState(1)
+    const [ecnecNoOfClick, setEcnecNoOfClick] = useState(1)
+    const [constNewsNoOfClick, setConstNewsNoOfClick] = useState(1)
+    const [cementNewsNoOfClick, setCementNewsNoOfClick] = useState(1)
 
     useEffect(() => {
-        let latestNeswData = [
-            { topic: 'Others', date: '2022-09-26T00:00:00.000Z', count: 1 },
-            { topic: 'Others', date: '2022-09-29T00:00:00.000Z', count: 1 },
-            {
-                topic: 'Govt Project',
-                date: '2022-09-29T00:00:00.000Z',
-                count: 4
-            },
-            { topic: 'Others', date: '2022-09-30T00:00:00.000Z', count: 1 },
-            {
-                topic: 'Govt Project',
-                date: '2022-09-30T00:00:00.000Z',
-                count: 1
-            },
-            {
-                topic: 'Govt Project',
-                date: '2022-10-02T00:00:00.000Z',
-                count: 2
-            },
-            { topic: 'Others', date: '2022-10-06T00:00:00.000Z', count: 1 },
-            {
-                topic: 'Govt Project',
-                date: '2022-10-06T00:00:00.000Z',
-                count: 3
-            },
-            {
-                topic: 'Govt Project',
-                date: '2022-10-09T00:00:00.000Z',
-                count: 3
-            },
-            {
-                topic: 'Govt Project',
-                date: '2022-10-10T00:00:00.000Z',
-                count: 2
-            },
-            {
-                topic: 'Govt Project',
-                date: '2022-10-14T00:00:00.000Z',
-                count: 1
-            },
-            {
-                topic: 'Govt Project',
-                date: '2022-10-15T00:00:00.000Z',
-                count: 1
-            },
-            {
-                topic: 'Abrar Murder',
-                date: '2022-10-16T00:00:00.000Z',
-                count: 1
-            },
-            {
-                topic: 'Govt Project',
-                date: '2022-10-16T00:00:00.000Z',
-                count: 3
-            },
-            {
-                topic: 'Govt Project',
-                date: '2022-10-17T00:00:00.000Z',
-                count: 2
-            },
-            {
-                topic: 'Govt Project',
-                date: '2022-10-18T00:00:00.000Z',
-                count: 1
-            },
-            {
-                topic: 'Govt Project',
-                date: '2022-10-20T00:00:00.000Z',
-                count: 2
-            }
-        ]
-
-        latestNewsChart(latestNeswData)
-
         const getAllData = async () => {
             const configData = {
                 headers: {
@@ -168,8 +108,15 @@ const LatestNews = () => {
                 `${config.url}/api/news/${pageId}`,
                 configData
             )
+            latestNewsChart(data.latestNeswData)
+            setAllMasterData(JSON.parse(JSON.stringify(data)))
+
+            data.govtProjectNews = data.govtProjectNews.slice(0, 10)
+            data.ecnecNews = data.ecnecNews.slice(0, 10)
+            data.constructionNews = data.constructionNews.slice(0, 10)
+            data.cementNews = data.cementNews.slice(0, 10)
+
             setAllData(data)
-            console.log(data)
         }
 
         getAllData()
@@ -211,12 +158,6 @@ const LatestNews = () => {
                 //entry.value3 = 0;
                 entry.value4 = newsData[i].count
                 //entry.value5 = 0;
-            } else if (newsData[i].topic == 'Others') {
-                //entry.value = 0;
-                //entry.value2 = 0;
-                //entry.value3 = 0;
-                //entry.value4 = 0;
-                entry.value5 = newsData[i].count
             }
             input.push(entry)
         }
@@ -287,6 +228,64 @@ const LatestNews = () => {
 
         // Add legend
         chart.legend = new am4charts.Legend()
+    }
+
+    const loadMore = (callFor) => {
+        if (callFor === 'Govt Project') {
+            let start = govtNewsNoOfClick * 10
+            let end = start + 10
+            let lastTenElements = allMasterData.govtProjectNews.slice(
+                start,
+                end
+            )
+            setAllData({
+                ...allData,
+                govtProjectNews: [
+                    ...allData.govtProjectNews,
+                    ...lastTenElements
+                ]
+            })
+            setGovtNewsNoOfClick(govtNewsNoOfClick + 1)
+            console.log(allMasterData.govtProjectNews)
+        } else if (callFor === 'ECNEC') {
+            let start = ecnecNoOfClick * 10
+            let end = start + 10
+            let lastTenElements = allMasterData.ecnecNews.slice(start, end)
+            console.log(lastTenElements)
+            setAllData({
+                ...allData,
+                ecnecNews: [...allData.ecnecNews, ...lastTenElements]
+            })
+            console.log(allData.ecnecNews)
+            setEcnecNoOfClick(ecnecNoOfClick + 1)
+            console.log(start, end, ecnecNoOfClick, allMasterData.ecnecNews)
+        } else if (callFor === 'Construction') {
+            let start = constNewsNoOfClick * 10
+            let end = start + 10
+            let lastTenElements = allMasterData.constructionNews.slice(
+                start,
+                end
+            )
+            setAllData({
+                ...allData,
+                constructionNews: [
+                    ...allData.constructionNews,
+                    ...lastTenElements
+                ]
+            })
+            setConstNewsNoOfClick(constNewsNoOfClick + 1)
+            console.log(allMasterData.constructionNews)
+        } else if (callFor === 'Cement Industry') {
+            let start = cementNewsNoOfClick * 10
+            let end = start + 10
+            let lastTenElements = allMasterData.cementNews.slice(start, end)
+            setAllData({
+                ...allData,
+                cementNews: [...allData.cementNews, ...lastTenElements]
+            })
+            setCementNewsNoOfClick(cementNewsNoOfClick + 1)
+            console.log(allMasterData.cementNews)
+        }
     }
 
     return (
@@ -400,11 +399,17 @@ const LatestNews = () => {
                                 />
                             ))}
                         <div className="d-flex justify-content-center">
-                            <button
-                                type="button"
-                                className=" mt-3 btn btn_outline_danger">
-                                Load More
-                            </button>
+                            {allMasterData.govtProjectNews &&
+                                allMasterData.govtProjectNews.length > 10 && (
+                                    <button
+                                        type="button"
+                                        className=" mt-3 btn btn_outline_danger"
+                                        onClick={() =>
+                                            loadMore('Govt Project')
+                                        }>
+                                        Load More
+                                    </button>
+                                )}
                         </div>
                     </div>
                     <div className="col-lg-3 col-md-3 col-3">
@@ -417,11 +422,15 @@ const LatestNews = () => {
                                 />
                             ))}
                         <div className="d-flex justify-content-center">
-                            <button
-                                type="button"
-                                className=" mt-3 btn btn_outline_danger">
-                                Load More
-                            </button>
+                            {allMasterData.ecnecNews &&
+                                allMasterData.ecnecNews.length > 10 && (
+                                    <button
+                                        type="button"
+                                        className=" mt-3 btn btn_outline_danger"
+                                        onClick={() => loadMore('ECNEC')}>
+                                        Load More
+                                    </button>
+                                )}
                         </div>
                     </div>
 
@@ -435,11 +444,17 @@ const LatestNews = () => {
                                 />
                             ))}
                         <div className="d-flex justify-content-center">
-                            <button
-                                type="button"
-                                className=" mt-3 btn btn_outline_danger">
-                                Load More
-                            </button>
+                            {allMasterData.constructionNews &&
+                                allMasterData.constructionNews.length > 10 && (
+                                    <button
+                                        type="button"
+                                        className=" mt-3 btn btn_outline_danger"
+                                        onClick={() =>
+                                            loadMore('Construction')
+                                        }>
+                                        Load More
+                                    </button>
+                                )}
                         </div>
                     </div>
                     <div className="col-lg-3 col-md-3 col-3">
@@ -452,11 +467,17 @@ const LatestNews = () => {
                                 />
                             ))}
                         <div className="d-flex justify-content-center">
-                            <button
-                                type="button"
-                                className=" mt-3 btn btn_outline_danger">
-                                Load More
-                            </button>
+                            {allMasterData.cementNews &&
+                                allMasterData.cementNews.length > 10 && (
+                                    <button
+                                        type="button"
+                                        className=" mt-3 btn btn_outline_danger"
+                                        onClick={() =>
+                                            loadMore('Cement Industry')
+                                        }>
+                                        Load More
+                                    </button>
+                                )}
                         </div>
                     </div>
                 </div>
