@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import * as am5 from '@amcharts/amcharts5'
 import * as am5xy from '@amcharts/amcharts5/xy'
@@ -9,6 +9,7 @@ import config from '../../config/config.json'
 import './CompetitorAnalysis.css'
 
 const CompetitorAnalysis = () => {
+    const [graphData, setGraphData] = useState()
     useEffect(() => {
         const generateGraph = async () => {
             const configData = {
@@ -25,9 +26,9 @@ const CompetitorAnalysis = () => {
                 configData
             )
 
-            let activityData = data.activityData
+            setGraphData(data)
 
-            console.log(activityData)
+            let activityData = data.activityData
 
             drawBarChart('activityChart', activityData, 'name', 'activityScore')
         }
@@ -171,7 +172,6 @@ const CompetitorAnalysis = () => {
                     </button>
                 </div>
             </div>
-
             <div className="row mt-3 mb-3">
                 <div className="col-md-12">
                     <div className="bg-white rounded p-4 shadow">
@@ -230,7 +230,45 @@ const CompetitorAnalysis = () => {
                     <div className="pBox c5">80%-100%</div>
                 </div>
             </div>
-            <div className="row mt-3 mb-3">
+            {graphData &&
+                graphData.sentimentData &&
+                graphData.sentimentData.map((dt) => (
+                    <div className="row mt-3 mb-3">
+                        <div className="col-lg-2 col-sm-6 col-md-4">
+                            <div className="d-flex justify-content-center">
+                                <img
+                                    className="img_width_img mb-2"
+                                    src="/assets/cp.jpg"
+                                />
+                            </div>
+                        </div>
+                        <div className="col-lg-2 col-sm-6 col-md-4">
+                            <h6 className="text-center">
+                                {Math.round(dt.sentimentScore * 100).toFixed(2)}
+                                %
+                            </h6>
+                        </div>
+                        <div className="col-lg-6 col-sm-12 col-md-4">
+                            <div class="progress progress_custom">
+                                <div
+                                    class="progress-bar bg-warning w-75"
+                                    role="progressbar"
+                                    aria-valuenow="100"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div className="col-lg-2 col-sm-6 col-md-4">
+                            <div className="d-flex justify-content-center">
+                                <img
+                                    className="img_width_emoji  mb-2"
+                                    src={dt.icon}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            {/* <div className="row mt-3 mb-3">
                 <div className="col-lg-2 col-sm-6 col-md-4">
                     <div className="d-flex justify-content-center">
                         <img
@@ -322,38 +360,7 @@ const CompetitorAnalysis = () => {
                         />
                     </div>
                 </div>
-            </div>
-            <div className="row mt-3 mb-3">
-                <div className="col-lg-2 col-sm-6 col-md-4">
-                    <div className="d-flex justify-content-center">
-                        <img
-                            className="img_width_img mb-2"
-                            src="/assets/cp.jpg"
-                        />
-                    </div>
-                </div>
-                <div className="col-lg-2 col-sm-6 col-md-4">
-                    <h6 className="text-center">78.8%</h6>
-                </div>
-                <div className="col-lg-6 col-sm-12 col-md-4">
-                    <div class="progress progress_custom">
-                        <div
-                            class="progress-bar bg-warning w-75"
-                            role="progressbar"
-                            aria-valuenow="75"
-                            aria-valuemin="0"
-                            aria-valuemax="100"></div>
-                    </div>
-                </div>
-                <div className="col-lg-2 col-sm-6 col-md-4">
-                    <div className="d-flex justify-content-center">
-                        <img
-                            className="img_width_emoji  mb-2"
-                            src="/assets/emoji.webp"
-                        />
-                    </div>
-                </div>
-            </div>
+            </div> */}
         </>
     )
 }
