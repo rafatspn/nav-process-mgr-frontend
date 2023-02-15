@@ -86,7 +86,7 @@ function Card({ title, description, imageUrl, dateTime, name, url, category }) {
 }
 
 const LatestNews = () => {
-    const [allData, setAllData] = useState({})
+    const [allData, setAllData] = useState('')
     const [allMasterData, setAllMasterData] = useState({})
     const [govtNewsNoOfClick, setGovtNewsNoOfClick] = useState(1)
     const [ecnecNoOfClick, setEcnecNoOfClick] = useState(1)
@@ -108,6 +108,7 @@ const LatestNews = () => {
                 `${config.url}/api/news/${pageId}`,
                 configData
             )
+
             latestNewsChart(data.latestNeswData)
             setAllMasterData(JSON.parse(JSON.stringify(data)))
 
@@ -294,193 +295,231 @@ const LatestNews = () => {
                 <div className="row mt-3">
                     <div className="col-md-12">
                         <div className="bg-white rounded p-4 shadow">
+                            {!allData && (
+                                <h3 className="text-center">Loading..</h3>
+                            )}
                             <div id="latestNews"></div>
                         </div>
                     </div>
                 </div>
-                <div className="row mt-4">
-                    <div className="col-lg-3 col-md-3 col-sm-6">
-                        <div className="card card_custom">
-                            <div className="d-flex">
-                                <div className="me">
-                                    <img
-                                        className="img_width"
-                                        src="/assets/waterfire.jpg"
-                                    />
+                {allData && (
+                    <>
+                        <div className="row mt-4">
+                            <div className="col-lg-3 col-md-3 col-sm-6">
+                                <div className="card card_custom">
+                                    <div className="d-flex">
+                                        <div className="me">
+                                            <img
+                                                className="img_width"
+                                                src="/assets/waterfire.jpg"
+                                            />
+                                        </div>
+                                        <span className="head">
+                                            Govt Project
+                                        </span>
+                                    </div>
                                 </div>
-                                <span className="head">Govt Project</span>
                             </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-3 col-md-3 col-sm-6">
-                        <div className="card card_custom2">
-                            <div className="d-flex">
-                                <div className="me">
-                                    <img
-                                        className="img_width2"
-                                        src="/assets/water.webp"
-                                    />
+                            <div className="col-lg-3 col-md-3 col-sm-6">
+                                <div className="card card_custom2">
+                                    <div className="d-flex">
+                                        <div className="me">
+                                            <img
+                                                className="img_width2"
+                                                src="/assets/water.webp"
+                                            />
+                                        </div>
+                                        <span className="head">ECNEC</span>
+                                    </div>
                                 </div>
-                                <span className="head">ECNEC</span>
                             </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-3 col-md-3 col-sm-6">
-                        <div className="card card_custom3">
-                            <div className="d-flex">
-                                <div className="me">
-                                    <img
-                                        className="img_width"
-                                        src="/assets/medicine.webp"
-                                    />
+                            <div className="col-lg-3 col-md-3 col-sm-6">
+                                <div className="card card_custom3">
+                                    <div className="d-flex">
+                                        <div className="me">
+                                            <img
+                                                className="img_width"
+                                                src="/assets/medicine.webp"
+                                            />
+                                        </div>
+                                        <span className="head">
+                                            Construction
+                                        </span>
+                                    </div>
                                 </div>
-                                <span className="head">Construction</span>
                             </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-3 col-md-3 col-sm-6">
-                        <div className="card card_custom4">
-                            <div className="d-flex">
-                                <div className="me">
-                                    <img
-                                        className="img_width"
-                                        src="/assets/blokchain.png"
-                                    />
+                            <div className="col-lg-3 col-md-3 col-sm-6">
+                                <div className="card card_custom4">
+                                    <div className="d-flex">
+                                        <div className="me">
+                                            <img
+                                                className="img_width"
+                                                src="/assets/blokchain.png"
+                                            />
+                                        </div>
+                                        <span className="head">
+                                            Cement Industry
+                                        </span>
+                                    </div>
                                 </div>
-                                <span className="head">Cement Industry</span>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div className="row mt-2">
-                    <div className="col-lg-3 col-md-3 col-sm-6">
-                        <div className="card card_topic">
-                            <div className="d-flex">
-                                <span className="head_topic">Topics:</span>
-                                <span className="butan btn">Bridge</span>
+                        <div className="row mt-2">
+                            <div className="col-lg-3 col-md-3 col-sm-6">
+                                <div className="card card_topic">
+                                    <div className="d-flex">
+                                        <span className="head_topic">
+                                            Topics:
+                                        </span>
+                                        <span className="butan btn">
+                                            Bridge
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-lg-3 col-md-3 col-sm-6">
+                                <div className="card card_topic">
+                                    <div className="d-flex">
+                                        <span className="head_topic">
+                                            Topics:
+                                        </span>
+                                        <span className="butan2 btn">
+                                            Notice
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-lg-3 col-md-3 col-sm-6">
+                                <div className="card card_topic">
+                                    <div className="d-flex">
+                                        <span className="head_topic">
+                                            Topics:
+                                        </span>
+                                        <span className="butan3 btn">
+                                            Construction matirial
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-lg-3 col-md-3 col-sm-6">
+                                <div className="card card_topic">
+                                    <div className="d-flex">
+                                        <span className="head_topic">
+                                            Topics:
+                                        </span>
+                                        <span className="butan4 btn">
+                                            Cement
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="col-lg-3 col-md-3 col-sm-6">
-                        <div className="card card_topic">
-                            <div className="d-flex">
-                                <span className="head_topic">Topics:</span>
-                                <span className="butan2 btn">Notice</span>
+                        <div className="row mt-4">
+                            <div className="col-lg-3 col-md-3 col-3">
+                                {allData.govtProjectNews &&
+                                    allData.govtProjectNews.map(
+                                        (cardData, index) => (
+                                            <Card
+                                                className="w-100"
+                                                key={index}
+                                                {...cardData}
+                                            />
+                                        )
+                                    )}
+                                <div className="d-flex justify-content-center">
+                                    {allMasterData.govtProjectNews &&
+                                        allMasterData.govtProjectNews.length >
+                                            10 && (
+                                            <button
+                                                type="button"
+                                                className=" mt-3 btn btn_outline_danger"
+                                                onClick={() =>
+                                                    loadMore('Govt Project')
+                                                }>
+                                                Load More
+                                            </button>
+                                        )}
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-3 col-md-3 col-sm-6">
-                        <div className="card card_topic">
-                            <div className="d-flex">
-                                <span className="head_topic">Topics:</span>
-                                <span className="butan3 btn">
-                                    Construction matirial
-                                </span>
+                            <div className="col-lg-3 col-md-3 col-3">
+                                {allData.ecnecNews &&
+                                    allData.ecnecNews.map((cardData, index) => (
+                                        <Card
+                                            className="w-100"
+                                            key={index}
+                                            {...cardData}
+                                        />
+                                    ))}
+                                <div className="d-flex justify-content-center">
+                                    {allMasterData.ecnecNews &&
+                                        allMasterData.ecnecNews.length > 10 && (
+                                            <button
+                                                type="button"
+                                                className=" mt-3 btn btn_outline_danger"
+                                                onClick={() =>
+                                                    loadMore('ECNEC')
+                                                }>
+                                                Load More
+                                            </button>
+                                        )}
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-3 col-md-3 col-sm-6">
-                        <div className="card card_topic">
-                            <div className="d-flex">
-                                <span className="head_topic">Topics:</span>
-                                <span className="butan4 btn">Cement</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="row mt-4">
-                    <div className="col-lg-3 col-md-3 col-3">
-                        {allData.govtProjectNews &&
-                            allData.govtProjectNews.map((cardData, index) => (
-                                <Card
-                                    className="w-100"
-                                    key={index}
-                                    {...cardData}
-                                />
-                            ))}
-                        <div className="d-flex justify-content-center">
-                            {allMasterData.govtProjectNews &&
-                                allMasterData.govtProjectNews.length > 10 && (
-                                    <button
-                                        type="button"
-                                        className=" mt-3 btn btn_outline_danger"
-                                        onClick={() =>
-                                            loadMore('Govt Project')
-                                        }>
-                                        Load More
-                                    </button>
-                                )}
-                        </div>
-                    </div>
-                    <div className="col-lg-3 col-md-3 col-3">
-                        {allData.ecnecNews &&
-                            allData.ecnecNews.map((cardData, index) => (
-                                <Card
-                                    className="w-100"
-                                    key={index}
-                                    {...cardData}
-                                />
-                            ))}
-                        <div className="d-flex justify-content-center">
-                            {allMasterData.ecnecNews &&
-                                allMasterData.ecnecNews.length > 10 && (
-                                    <button
-                                        type="button"
-                                        className=" mt-3 btn btn_outline_danger"
-                                        onClick={() => loadMore('ECNEC')}>
-                                        Load More
-                                    </button>
-                                )}
-                        </div>
-                    </div>
 
-                    <div className="col-lg-3 col-md-3 col-3">
-                        {allData.constructionNews &&
-                            allData.constructionNews.map((cardData, index) => (
-                                <Card
-                                    className="w-100"
-                                    key={index}
-                                    {...cardData}
-                                />
-                            ))}
-                        <div className="d-flex justify-content-center">
-                            {allMasterData.constructionNews &&
-                                allMasterData.constructionNews.length > 10 && (
-                                    <button
-                                        type="button"
-                                        className=" mt-3 btn btn_outline_danger"
-                                        onClick={() =>
-                                            loadMore('Construction')
-                                        }>
-                                        Load More
-                                    </button>
-                                )}
+                            <div className="col-lg-3 col-md-3 col-3">
+                                {allData.constructionNews &&
+                                    allData.constructionNews.map(
+                                        (cardData, index) => (
+                                            <Card
+                                                className="w-100"
+                                                key={index}
+                                                {...cardData}
+                                            />
+                                        )
+                                    )}
+                                <div className="d-flex justify-content-center">
+                                    {allMasterData.constructionNews &&
+                                        allMasterData.constructionNews.length >
+                                            10 && (
+                                            <button
+                                                type="button"
+                                                className=" mt-3 btn btn_outline_danger"
+                                                onClick={() =>
+                                                    loadMore('Construction')
+                                                }>
+                                                Load More
+                                            </button>
+                                        )}
+                                </div>
+                            </div>
+                            <div className="col-lg-3 col-md-3 col-3">
+                                {allData.cementNews &&
+                                    allData.cementNews.map(
+                                        (cardData, index) => (
+                                            <Card
+                                                className="w-100"
+                                                key={index}
+                                                {...cardData}
+                                            />
+                                        )
+                                    )}
+                                <div className="d-flex justify-content-center">
+                                    {allMasterData.cementNews &&
+                                        allMasterData.cementNews.length >
+                                            10 && (
+                                            <button
+                                                type="button"
+                                                className=" mt-3 btn btn_outline_danger"
+                                                onClick={() =>
+                                                    loadMore('Cement Industry')
+                                                }>
+                                                Load More
+                                            </button>
+                                        )}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div className="col-lg-3 col-md-3 col-3">
-                        {allData.cementNews &&
-                            allData.cementNews.map((cardData, index) => (
-                                <Card
-                                    className="w-100"
-                                    key={index}
-                                    {...cardData}
-                                />
-                            ))}
-                        <div className="d-flex justify-content-center">
-                            {allMasterData.cementNews &&
-                                allMasterData.cementNews.length > 10 && (
-                                    <button
-                                        type="button"
-                                        className=" mt-3 btn btn_outline_danger"
-                                        onClick={() =>
-                                            loadMore('Cement Industry')
-                                        }>
-                                        Load More
-                                    </button>
-                                )}
-                        </div>
-                    </div>
-                </div>
+                    </>
+                )}
             </div>
         </>
     )
