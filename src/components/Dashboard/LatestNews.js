@@ -186,14 +186,14 @@ const LatestNews = () => {
         series1.legendSettings.valueText = '{value}'
         series1.visible = false
 
-        var series2 = chart.series.push(new am4charts.LineSeries())
-        series2.dataFields.valueY = 'value2'
-        series2.dataFields.categoryX = 'date'
-        series2.name = 'ECNEC'
-        series2.strokeWidth = 3
-        series2.bullets.push(new am4charts.CircleBullet())
-        series2.tooltipText = 'ECNEC in {date}: {value2}'
-        series2.legendSettings.valueText = '{value2}'
+        // var series2 = chart.series.push(new am4charts.LineSeries())
+        // series2.dataFields.valueY = 'value2'
+        // series2.dataFields.categoryX = 'date'
+        // series2.name = 'ECNEC'
+        // series2.strokeWidth = 3
+        // series2.bullets.push(new am4charts.CircleBullet())
+        // series2.tooltipText = 'ECNEC in {date}: {value2}'
+        // series2.legendSettings.valueText = '{value2}'
 
         var series3 = chart.series.push(new am4charts.LineSeries())
         series3.dataFields.valueY = 'value3'
@@ -213,14 +213,14 @@ const LatestNews = () => {
         series4.tooltipText = 'Cement Industry in {date}: {value4}'
         series4.legendSettings.valueText = '{value4}'
 
-        var series5 = chart.series.push(new am4charts.LineSeries())
-        series5.dataFields.valueY = 'value5'
-        series5.dataFields.categoryX = 'date'
-        series5.name = 'Others'
-        series5.strokeWidth = 3
-        series5.bullets.push(new am4charts.CircleBullet())
-        series5.tooltipText = 'Others in {date}: {value5}'
-        series5.legendSettings.valueText = '{value5}'
+        // var series5 = chart.series.push(new am4charts.LineSeries())
+        // series5.dataFields.valueY = 'value5'
+        // series5.dataFields.categoryX = 'date'
+        // series5.name = 'Others'
+        // series5.strokeWidth = 3
+        // series5.bullets.push(new am4charts.CircleBullet())
+        // series5.tooltipText = 'Others in {date}: {value5}'
+        // series5.legendSettings.valueText = '{value5}'
 
         // Add chart cursor
         chart.cursor = new am4charts.XYCursor()
