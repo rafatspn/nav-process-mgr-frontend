@@ -315,7 +315,12 @@ const LatestNews = () => {
                                             />
                                         </div>
                                         <span className="head">
-                                            Govt Project
+                                            Govt Project (
+                                            {
+                                                allMasterData.govtProjectNews
+                                                    .length
+                                            }
+                                            )
                                         </span>
                                     </div>
                                 </div>
@@ -329,7 +334,10 @@ const LatestNews = () => {
                                                 src="/assets/water.webp"
                                             />
                                         </div>
-                                        <span className="head">ECNEC</span>
+                                        <span className="head">
+                                            ECNEC (
+                                            {allMasterData.ecnecNews.length})
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -343,7 +351,12 @@ const LatestNews = () => {
                                             />
                                         </div>
                                         <span className="head">
-                                            Construction
+                                            Construction (
+                                            {
+                                                allMasterData.constructionNews
+                                                    .length
+                                            }
+                                            )
                                         </span>
                                     </div>
                                 </div>
@@ -358,7 +371,8 @@ const LatestNews = () => {
                                             />
                                         </div>
                                         <span className="head">
-                                            Cement Industry
+                                            Cement Industry (
+                                            {allMasterData.cementNews.length})
                                         </span>
                                     </div>
                                 </div>
