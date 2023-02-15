@@ -18,243 +18,248 @@ const PostPerformance = () => {
     const [postOneTotal, setPostOneTotal] = useState(0)
     const [postTwoTotal, setPostTwoTotal] = useState(0)
     const [postThreeTotal, setPostThreeTotal] = useState(0)
+    const [loading, setLoading] = useState(false)
     const [topThreePosts, setTopThreePosts] = useState([])
 
-    useEffect(() => {
-        const generateGraph = async () => {
-            const configData = {
-                headers: {
-                    Authorization: `Bearer ${
-                        JSON.parse(localStorage.getItem('user')).token
-                    }`
-                }
+    const currentDate = new Date()
+    const sixMonthsAgo = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth() - 12,
+        currentDate.getDate()
+    )
+    const fromDate = sixMonthsAgo.toISOString().slice(0, 10)
+    const toDate = currentDate.toISOString().slice(0, 10)
+
+    const [from, setFrom] = useState(fromDate)
+    const [to, setTo] = useState(toDate)
+
+    const generateGraph = async () => {
+        setLoading(true)
+        const configData = {
+            headers: {
+                Authorization: `Bearer ${
+                    JSON.parse(localStorage.getItem('user')).token
+                }`
             }
-
-            let pageId = '730393906972869'
-            const { data } = await axios.get(
-                `${config.url}/api/posts/performance/${pageId}`,
-                configData
-            )
-            console.log(data)
-            setTopThreePosts(data.postTopics.postData)
-            let typeOfComments = data.talkingAbout
-            let tcmnt = 0
-
-            for (let i = 0; i < typeOfComments.length; i++) {
-                if (typeOfComments[i].area == 'Others') {
-                    typeOfComments[i].count = Math.round(
-                        typeOfComments[i].count * 0.1
-                    )
-                }
-                tcmnt = tcmnt + typeOfComments[i].count
-            }
-
-            setTotalComments(tcmnt)
-            drawBarChartWithImage(
-                'typeOfComments',
-                typeOfComments,
-                'area',
-                'count'
-            )
-
-            // let typeOfFeedback = data.perception
-            // drawPieChart('typeOfFeedback', typeOfFeedback)
-
-            let typeOfQueries = [
-                {
-                    topic: 'Price',
-                    count: 1021
-                },
-                {
-                    topic: 'Contact Number',
-                    count: 97
-                },
-                {
-                    topic: 'Job Seeking',
-                    count: 12
-                },
-                {
-                    topic: 'Usage',
-                    count: 122
-                }
-            ]
-            setTotalQueries(1252)
-            drawBarChartWithImage(
-                'typeOfQueries',
-                typeOfQueries,
-                'topic',
-                'count'
-            )
-
-            let typeOfComplainNegativeComments = [
-                {
-                    type: 'Gift',
-                    count: 37
-                },
-                {
-                    type: 'Price',
-                    count: 36
-                },
-                {
-                    type: 'Info',
-                    count: 7
-                },
-                {
-                    type: 'Quality',
-                    count: 20
-                }
-            ]
-            drawPieChart(
-                'typeOfComplainNegativeComments',
-                typeOfComplainNegativeComments
-            )
-
-            let typesOfAppreciation = [
-                {
-                    type: 'Wish',
-                    count: 38
-                },
-                {
-                    type: 'Congratulations',
-                    count: 48
-                },
-                {
-                    type: 'Quality',
-                    count: 14
-                }
-            ]
-            drawPieChart('typesOfAppreciation', typesOfAppreciation)
-
-            setTopThreePosts(data.topThreePosts)
-            let publicEngagementByPost = [
-                {
-                    post: 'এলো বিশ্ব ফুটবলের গ্রেটেস্ট..',
-                    comment: 959
-                },
-                {
-                    post: 'বাংলাদেশী তরুণ অণুজীব বিজ্ঞানী..',
-                    comment: 495
-                },
-                {
-                    post: 'লাল সবুজেই..',
-                    comment: 419
-                }
-            ]
-            // let publicEngagementByPost = [
-            //     {
-            //         post: 'Post 1',
-            //         reaction: 190,
-            //         comment: 12,
-            //         reply: 17,
-            //         share: 19,
-            //         total: 238
-            //     },
-            //     {
-            //         post: 'Post 2',
-            //         reaction: 67,
-            //         comment: 14,
-            //         reply: 14,
-            //         share: 16,
-            //         total: 111
-            //     },
-            //     {
-            //         post: 'Post 3',
-            //         reaction: 150,
-            //         comment: 18,
-            //         reply: 12,
-            //         share: 11,
-            //         total: 191
-            //     }
-            // ]
-            setPostOneTotal(959)
-            setPostTwoTotal(495)
-            setPostThreeTotal(419)
-            // drawMultiLineChart('publicEngagementByPost', publicEngagementByPost)
-
-            // let sentimentData = data.publicSentiment
-            // for (let i = 0; i < sentimentData.length; i++) {
-            //     if (sentimentData[i].sentiment === 'Unknown') {
-            //         sentimentData.splice(i, 1)
-            //     }
-            // }
-            // drawColumnChartWithImageBullets('publicSentiment', sentimentData)
-
-            let topicData = []
-            let topPostData = data.postTopics.postData
-            for (let n = 0; n < data.postTopics.topicData.length; n++) {
-                topicData.push([
-                    {
-                        x: am5.percent(50),
-                        y: am5.percent(50),
-                        image: '/assets/shah_cement_logo.jpg',
-                        children: data.postTopics.topicData[n]
-                    }
-                ])
-            }
-
-            // let postData_1 = [
-            //     {
-            //         x: am5.percent(50),
-            //         y: am5.percent(50),
-            //         image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg',
-            //         children: data.postTopics[0]
-            //     }
-            // ]
-            // let postData_2 = [
-            //     {
-            //         x: am5.percent(50),
-            //         y: am5.percent(50),
-            //         image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg',
-            //         children: data.postTopics[2]
-            //     }
-            // ]
-            // let postData_3 = [
-            //     {
-            //         x: am5.percent(50),
-            //         y: am5.percent(50),
-            //         image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg',
-            //         children: data.postTopics[3]
-            //     }
-            // ]
-            // let postData = [
-            //     {
-            //         x: am5.percent(50),
-            //         y: am5.percent(50),
-            //         image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg',
-            //         children: [
-            //             {
-            //                 name: 'Chrome',
-            //                 value: 1,
-            //                 image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
-            //             },
-            //             {
-            //                 name: 'Firefox',
-            //                 value: 2,
-            //                 image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
-            //             },
-            //             {
-            //                 name: 'IE',
-            //                 value: 9,
-            //                 image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
-            //             },
-            //             {
-            //                 name: 'Safari',
-            //                 value: 1,
-            //                 image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
-            //             },
-            //             {
-            //                 name: 'Opera',
-            //                 value: 1,
-            //                 image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
-            //             }
-            //         ]
-            //     }
-            // ]
-            drawForcedDirectedTreeGraphs('postAnatomy_1', topicData[0])
-            drawForcedDirectedTreeGraphs('postAnatomy_2', topicData[1])
-            drawForcedDirectedTreeGraphs('postAnatomy_3', topicData[2])
-            drawForcedDirectedTreeGraphs('postAnatomy_4', topicData[3])
         }
+
+        let pageId = '730393906972869'
+        const { data } = await axios.get(
+            `${config.url}/api/posts/performance/${pageId}?from=${from}&to=${to}`,
+            configData
+        )
+        setLoading(false)
+        setTopThreePosts(data.postTopics.postData)
+        let typeOfComments = data.talkingAbout
+        let tcmnt = 0
+
+        for (let i = 0; i < typeOfComments.length; i++) {
+            if (typeOfComments[i].area == 'Others') {
+                typeOfComments[i].count = Math.round(
+                    typeOfComments[i].count * 0.1
+                )
+            }
+            tcmnt = tcmnt + typeOfComments[i].count
+        }
+
+        setTotalComments(tcmnt)
+        drawBarChartWithImage('typeOfComments', typeOfComments, 'area', 'count')
+
+        // let typeOfFeedback = data.perception
+        // drawPieChart('typeOfFeedback', typeOfFeedback)
+
+        let typeOfQueries = [
+            {
+                topic: 'Price',
+                count: 1021
+            },
+            {
+                topic: 'Contact Number',
+                count: 97
+            },
+            {
+                topic: 'Job Seeking',
+                count: 12
+            },
+            {
+                topic: 'Usage',
+                count: 122
+            }
+        ]
+        setTotalQueries(1252)
+        drawBarChartWithImage('typeOfQueries', typeOfQueries, 'topic', 'count')
+
+        let typeOfComplainNegativeComments = [
+            {
+                type: 'Gift',
+                count: 37
+            },
+            {
+                type: 'Price',
+                count: 36
+            },
+            {
+                type: 'Info',
+                count: 7
+            },
+            {
+                type: 'Quality',
+                count: 20
+            }
+        ]
+        drawPieChart(
+            'typeOfComplainNegativeComments',
+            typeOfComplainNegativeComments
+        )
+
+        let typesOfAppreciation = [
+            {
+                type: 'Wish',
+                count: 38
+            },
+            {
+                type: 'Congratulations',
+                count: 48
+            },
+            {
+                type: 'Quality',
+                count: 14
+            }
+        ]
+        drawPieChart('typesOfAppreciation', typesOfAppreciation)
+
+        setTopThreePosts(data.topThreePosts)
+        let publicEngagementByPost = [
+            {
+                post: 'এলো বিশ্ব ফুটবলের গ্রেটেস্ট..',
+                comment: 959
+            },
+            {
+                post: 'বাংলাদেশী তরুণ অণুজীব বিজ্ঞানী..',
+                comment: 495
+            },
+            {
+                post: 'লাল সবুজেই..',
+                comment: 419
+            }
+        ]
+        // let publicEngagementByPost = [
+        //     {
+        //         post: 'Post 1',
+        //         reaction: 190,
+        //         comment: 12,
+        //         reply: 17,
+        //         share: 19,
+        //         total: 238
+        //     },
+        //     {
+        //         post: 'Post 2',
+        //         reaction: 67,
+        //         comment: 14,
+        //         reply: 14,
+        //         share: 16,
+        //         total: 111
+        //     },
+        //     {
+        //         post: 'Post 3',
+        //         reaction: 150,
+        //         comment: 18,
+        //         reply: 12,
+        //         share: 11,
+        //         total: 191
+        //     }
+        // ]
+        setPostOneTotal(959)
+        setPostTwoTotal(495)
+        setPostThreeTotal(419)
+        // drawMultiLineChart('publicEngagementByPost', publicEngagementByPost)
+
+        // let sentimentData = data.publicSentiment
+        // for (let i = 0; i < sentimentData.length; i++) {
+        //     if (sentimentData[i].sentiment === 'Unknown') {
+        //         sentimentData.splice(i, 1)
+        //     }
+        // }
+        // drawColumnChartWithImageBullets('publicSentiment', sentimentData)
+
+        let topicData = []
+        let topPostData = data.postTopics.postData
+        for (let n = 0; n < data.postTopics.topicData.length; n++) {
+            topicData.push([
+                {
+                    x: am5.percent(50),
+                    y: am5.percent(50),
+                    image: '/assets/shah_cement_logo.jpg',
+                    children: data.postTopics.topicData[n]
+                }
+            ])
+        }
+
+        // let postData_1 = [
+        //     {
+        //         x: am5.percent(50),
+        //         y: am5.percent(50),
+        //         image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg',
+        //         children: data.postTopics[0]
+        //     }
+        // ]
+        // let postData_2 = [
+        //     {
+        //         x: am5.percent(50),
+        //         y: am5.percent(50),
+        //         image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg',
+        //         children: data.postTopics[2]
+        //     }
+        // ]
+        // let postData_3 = [
+        //     {
+        //         x: am5.percent(50),
+        //         y: am5.percent(50),
+        //         image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg',
+        //         children: data.postTopics[3]
+        //     }
+        // ]
+        // let postData = [
+        //     {
+        //         x: am5.percent(50),
+        //         y: am5.percent(50),
+        //         image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg',
+        //         children: [
+        //             {
+        //                 name: 'Chrome',
+        //                 value: 1,
+        //                 image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
+        //             },
+        //             {
+        //                 name: 'Firefox',
+        //                 value: 2,
+        //                 image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
+        //             },
+        //             {
+        //                 name: 'IE',
+        //                 value: 9,
+        //                 image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
+        //             },
+        //             {
+        //                 name: 'Safari',
+        //                 value: 1,
+        //                 image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
+        //             },
+        //             {
+        //                 name: 'Opera',
+        //                 value: 1,
+        //                 image: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-160/icon_opera.svg'
+        //             }
+        //         ]
+        //     }
+        // ]
+        drawForcedDirectedTreeGraphs('postAnatomy_1', topicData[0])
+        drawForcedDirectedTreeGraphs('postAnatomy_2', topicData[1])
+        drawForcedDirectedTreeGraphs('postAnatomy_3', topicData[2])
+        drawForcedDirectedTreeGraphs('postAnatomy_4', topicData[3])
+    }
+
+    useEffect(() => {
         generateGraph()
     }, [])
 
@@ -747,6 +752,10 @@ const PostPerformance = () => {
         chart.appear(1000, 100)
     }
 
+    const filterHandler = () => {
+        console.log('')
+    }
+
     return (
         <>
             <div className="row mt-4">
@@ -756,7 +765,7 @@ const PostPerformance = () => {
                         <option value="GoZayaan">GoZayaan</option>
                     </select>
                 </div> */}
-                <div className="col-md-2">
+                {/* <div className="col-md-2">
                     <label>Filter</label>
                     <select className="form-control">
                         <option value="24hours">Last 24 hours</option>
@@ -764,22 +773,42 @@ const PostPerformance = () => {
                         <option value="1month">Last 1 month</option>
                         <option value="custom">Custom range</option>
                     </select>
-                </div>
+                </div> */}
                 <div className="col-md-2">
                     <label>From</label>
-                    <input type="date" className="form-control" />
+                    <input
+                        type="date"
+                        className="form-control"
+                        value={from}
+                        onChange={(e) => setFrom(e.target.value)}
+                    />
                 </div>
                 <div className="col-md-2">
                     <label>To</label>
-                    <input type="date" className="form-control" />
+                    <input
+                        type="date"
+                        className="form-control"
+                        value={to}
+                        onChange={(e) => setTo(e.target.value)}
+                    />
                 </div>
                 <div className="col-md-2 ">
                     <label className="d-block">&nbsp;</label>
-                    <button type="date" className="btn btn_primary ">
+                    <button
+                        type="date"
+                        className="btn btn_primary"
+                        onClick={() => generateGraph()}>
                         Apply
                     </button>
                 </div>
             </div>
+            {loading && (
+                <div className="row mt-3">
+                    <div className="col-md-12">
+                        <h3>Loading..</h3>
+                    </div>
+                </div>
+            )}
             <div className="row mt-3">
                 <div className="col-md-12">
                     <div className="bg-white rounded p-4 shadow">
