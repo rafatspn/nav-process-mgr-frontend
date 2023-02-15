@@ -1,88 +1,90 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import axios from 'axios'
+
+import { AuthContext } from '../../context/AuthContext'
+import config from '../../config/config.json'
+
 import './Leads.css'
 
-let option1 = [
-    {
-        id: 1,
-        email: 'Data 1',
-        phone: 'phone 1',
-        madid: 'cdg',
-        fn: 'cdg',
-        ln: 'cdg',
-        ct: 'cdg',
-        gen: 'cdg',
-        age: '123',
-        uid: '12'
-    }
+let optionsArr = [
+    { text: 'Select', id: 'select' },
+    { text: 'Who are Complaining', id: 'Complain' },
+    { text: 'Who are Appreciating', id: 'Appreciation' },
+    { text: 'Queries', id: 'Queries' }
 ]
-let option2 = [
-    {
-        id: 1,
-        email: 'Data 1',
-        phone: 'phone 1',
-        madid: 'abc',
-        fn: 'abc',
-        ln: 'abc',
-        ct: 'abc',
-        gen: 'abc',
-        age: '123',
-        uid: '12'
-    }
-]
-let option3 = [
-    {
-        id: 1,
-        email: 'Data 1',
-        phone: 'phone 1',
-        madid: 'gggg',
-        fn: 'gggg',
-        ln: 'gggg',
-        ct: 'gggg',
-        gen: 'gggg',
-        age: '123',
-        uid: '12'
-    },
-    {
-        id: 1,
-        email: 'Data 1',
-        phone: 'phone 1',
-        madid: 'ffff',
-        fn: 'ffff',
-        ln: 'ffff',
-        ct: 'ffff',
-        gen: 'ffff',
-        age: '123',
-        uid: '12'
-    },
-    {
-        id: 1,
-        email: 'Data 1',
-        phone: 'phone 1',
-        madid: 'jjjj',
-        fn: 'jjjj',
-        ln: 'jjjj',
-        ct: 'jjjj',
-        gen: 'jjjj',
-        age: '123',
-        uid: '12'
-    }
-]
-let optionsArr = ['select', 'option1', 'option2', 'option3']
 
 const Leads = () => {
+    const auth = useContext(AuthContext)
     const [selectedOption, setSelectedOption] = useState(null)
     const [filteredValues, setFilteredValues] = useState(null)
 
     const handleSelectChange = (event) => {
         setSelectedOption(event.target.value)
         console.log('event.target.value', event.target.value)
-        if (event.target.value == 'option1') {
-            setFilteredValues(option1)
-        } else if (event.target.value == 'option2') {
-            setFilteredValues(option2)
-        } else {
-            setFilteredValues(option3)
+        // if (event.target.value == 'option1') {
+        //     setFilteredValues(option1)
+        // } else if (event.target.value == 'option2') {
+        //     setFilteredValues(option2)
+        // } else {
+        //     setFilteredValues(option3)
+        // }
+    }
+
+    useEffect(() => {
+        const getLeads = async () => {
+            const configData = {
+                headers: {
+                    Authorization: `Bearer ${
+                        JSON.parse(localStorage.getItem('user')).token
+                    }`
+                }
+            }
+            console.log('Hello Arafat')
+            console.log(
+                `${config.url}/api/comments/users?pageId=${
+                    auth.page ? auth.page.pdageId : null
+                }&topic=${selectedOption}&type=data`
+            )
+            const { data } = await axios.get(
+                `${config.url}/api/comments/users?pageId=${
+                    auth.page ? auth.page.pdageId : null
+                }&topic=${selectedOption}&type=data`,
+                configData
+            )
+            console.log(data)
+            setFilteredValues(data)
         }
+
+        getLeads()
+    }, [selectedOption])
+
+    const downloadExcel = async () => {
+        const response = await axios({
+            url: `${config.url}/api/comments/users?pageId=${
+                auth.page ? auth.page.pdageId : null
+            }&topic=${selectedOption}&type=excel`,
+            method: 'GET',
+            responseType: 'blob',
+            headers: {
+                Authorization: `Bearer ${
+                    JSON.parse(localStorage.getItem('user')).token
+                }`
+            }
+        })
+
+        const href = URL.createObjectURL(response.data)
+
+        const link = document.createElement('a')
+        link.href = href
+        link.setAttribute(
+            'download',
+            `userData_${new Date().getTime()}_${selectedOption}_dn.xlsx`
+        )
+        document.body.appendChild(link)
+        link.click()
+
+        document.body.removeChild(link)
+        URL.revokeObjectURL(href)
     }
 
     return (
@@ -119,8 +121,8 @@ const Leads = () => {
                         className="select_custom "
                         onChange={handleSelectChange}>
                         {optionsArr.map((option, index) => (
-                            <option key={index} value={option}>
-                                {option}
+                            <option key={index} value={option.id}>
+                                {option.text}
                             </option>
                         ))}
                     </select>
@@ -140,23 +142,24 @@ const Leads = () => {
                                     </tr>
                                 </thead>
                                 <tbody className="table_body">
-                                    {filteredValues.map((data) => (
-                                        <tr key={data.id}>
-                                            <td>{data.email}</td>
-                                            <td>{data.phone}</td>
-                                            <td>{data.madid}</td>
+                                    {filteredValues &&
+                                        filteredValues.map((data, index) => (
+                                            <tr key={index}>
+                                                <td>{data.email}</td>
+                                                <td>{data.phone}</td>
+                                                <td>{data.madid}</td>
 
-                                            <td>{data.fn}</td>
-                                            <td>{data.ln}</td>
-                                            <td>{data.ct}</td>
-                                            <td>{data.gen}</td>
-                                            <td>{data.age}</td>
-                                            <td>{data.uid}</td>
-                                        </tr>
-                                    ))}
+                                                <td>{data.fn}</td>
+                                                <td>{data.ln}</td>
+                                                <td>{data.ct}</td>
+                                                <td>{data.gen}</td>
+                                                <td>{data.age}</td>
+                                                <td>{data.uid}</td>
+                                            </tr>
+                                        ))}
                                 </tbody>
                             </table>
-                            <div className="mt-3">
+                            <div className="mt-3" onClick={downloadExcel}>
                                 <img
                                     className="img_width ms-2"
                                     src="/assets/download.svg"
