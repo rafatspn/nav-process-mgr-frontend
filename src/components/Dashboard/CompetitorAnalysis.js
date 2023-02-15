@@ -27,6 +27,8 @@ const CompetitorAnalysis = () => {
 
             let activityData = data.activityData
 
+            console.log(activityData)
+
             drawBarChart('activityChart', activityData, 'name', 'activityScore')
 
             let sentimentData = data.sentimentData
@@ -157,6 +159,8 @@ const CompetitorAnalysis = () => {
     }
 
     const drawBarChart = (destinationDiv, finalData, keyName, valueName) => {
+        // Create root element
+        // https://www.amcharts.com/docs/v5/getting-started/#Root_element
         var root = am5.Root.new(destinationDiv)
 
         // Set themes
@@ -169,159 +173,98 @@ const CompetitorAnalysis = () => {
             am5xy.XYChart.new(root, {
                 panX: false,
                 panY: false,
-                wheelX: 'none',
-                wheelY: 'none'
+                wheelX: 'panX',
+                wheelY: 'zoomX',
+                layout: root.verticalLayout
             })
         )
 
+        // Add legend
+        // https://www.amcharts.com/docs/v5/charts/xy-chart/legend-xy-series/
+        var legend = chart.children.push(
+            am5.Legend.new(root, {
+                centerX: am5.p50,
+                x: am5.p50
+            })
+        )
+
+        var data = finalData
         // Create axes
         // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
-        var yRenderer = am5xy.AxisRendererY.new(root, { minGridDistance: 30 })
-
-        var yAxis = chart.yAxes.push(
-            am5xy.CategoryAxis.new(root, {
-                maxDeviation: 0,
-                categoryField: 'name',
-                renderer: yRenderer
-            })
-        )
+        var xRenderer = am5xy.AxisRendererX.new(root, {
+            cellStartLocation: 0.1,
+            cellEndLocation: 0.9
+        })
 
         var xAxis = chart.xAxes.push(
+            am5xy.CategoryAxis.new(root, {
+                categoryField: 'name',
+                renderer: xRenderer,
+                tooltip: am5.Tooltip.new(root, {})
+            })
+        )
+
+        xRenderer.grid.template.setAll({
+            location: 1
+        })
+
+        xAxis.data.setAll(data)
+
+        var yAxis = chart.yAxes.push(
             am5xy.ValueAxis.new(root, {
-                maxDeviation: 0,
-                min: 0,
-                renderer: am5xy.AxisRendererX.new(root, {})
+                renderer: am5xy.AxisRendererY.new(root, {
+                    strokeOpacity: 0.1
+                })
             })
         )
 
-        // Create series
+        // Add series
         // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
-        var series = chart.series.push(
-            am5xy.ColumnSeries.new(root, {
-                name: 'Series 1',
-                xAxis: xAxis,
-                yAxis: yAxis,
-                valueXField: 'activityScore',
-                sequencedInterpolation: true,
-                categoryYField: 'name'
+        function makeSeries(name, fieldName) {
+            var series = chart.series.push(
+                am5xy.ColumnSeries.new(root, {
+                    name: name,
+                    xAxis: xAxis,
+                    yAxis: yAxis,
+                    valueYField: fieldName,
+                    categoryXField: 'name'
+                })
+            )
+
+            series.columns.template.setAll({
+                tooltipText: '{name}, {categoryX}:{valueY}',
+                width: am5.percent(90),
+                tooltipY: 0,
+                strokeOpacity: 0
             })
-        )
 
-        var columnTemplate = series.columns.template
+            series.data.setAll(data)
 
-        columnTemplate.setAll({
-            draggable: true,
-            cursorOverStyle: 'pointer',
-            tooltipText: 'drag to rearrange',
-            cornerRadiusBR: 10,
-            cornerRadiusTR: 10
-        })
-        columnTemplate.adapters.add('fill', (fill, target) => {
-            return chart.get('colors').getIndex(series.columns.indexOf(target))
-        })
+            // Make stuff animate on load
+            // https://www.amcharts.com/docs/v5/concepts/animations/
+            series.appear()
 
-        columnTemplate.adapters.add('stroke', (stroke, target) => {
-            return chart.get('colors').getIndex(series.columns.indexOf(target))
-        })
+            series.bullets.push(function () {
+                return am5.Bullet.new(root, {
+                    locationY: 0,
+                    sprite: am5.Label.new(root, {
+                        text: '{valueY}',
+                        fill: root.interfaceColors.get('alternativeText'),
+                        centerY: 0,
+                        centerX: am5.p50,
+                        populateText: true
+                    })
+                })
+            })
 
-        columnTemplate.events.on('dragstop', () => {
-            sortCategoryAxis()
-        })
-
-        // Get series item by category
-        function getSeriesItem(category) {
-            for (var i = 0; i < series.dataItems.length; i++) {
-                var dataItem = series.dataItems[i]
-                if (dataItem.get('categoryY') == category) {
-                    return dataItem
-                }
-            }
+            legend.data.push(series)
         }
 
-        // Axis sorting
-        function sortCategoryAxis() {
-            // Sort by value
-            series.dataItems.sort(function (x, y) {
-                return y.get('graphics').y() - x.get('graphics').y()
-            })
-
-            var easing = am5.ease.out(am5.ease.cubic)
-
-            // Go through each axis item
-            am5.array.each(yAxis.dataItems, function (dataItem) {
-                // get corresponding series item
-                var seriesDataItem = getSeriesItem(dataItem.get('category'))
-
-                if (seriesDataItem) {
-                    // get index of series data item
-                    var index = series.dataItems.indexOf(seriesDataItem)
-
-                    var column = seriesDataItem.get('graphics')
-
-                    // position after sorting
-                    var fy =
-                        yRenderer.positionToCoordinate(
-                            yAxis.indexToPosition(index)
-                        ) -
-                        column.height() / 2
-
-                    // set index to be the same as series data item index
-                    if (index != dataItem.get('index')) {
-                        dataItem.set('index', index)
-
-                        // current position
-                        var x = column.x()
-                        var y = column.y()
-
-                        column.set('dy', -(fy - y))
-                        column.set('dx', x)
-
-                        column.animate({
-                            key: 'dy',
-                            to: 0,
-                            duration: 600,
-                            easing: easing
-                        })
-                        column.animate({
-                            key: 'dx',
-                            to: 0,
-                            duration: 600,
-                            easing: easing
-                        })
-                    } else {
-                        column.animate({
-                            key: 'y',
-                            to: fy,
-                            duration: 600,
-                            easing: easing
-                        })
-                        column.animate({
-                            key: 'x',
-                            to: 0,
-                            duration: 600,
-                            easing: easing
-                        })
-                    }
-                }
-            })
-
-            // Sort axis items by index.
-            // This changes the order instantly, but as dx and dy is set and animated,
-            // they keep in the same places and then animate to true positions.
-            yAxis.dataItems.sort(function (x, y) {
-                return x.get('index') - y.get('index')
-            })
-        }
-
-        // Set data
-        var data = finalData
-
-        yAxis.data.setAll(data)
-        series.data.setAll(data)
+        makeSeries('Post', 'post')
+        makeSeries('Comment', 'comment')
 
         // Make stuff animate on load
         // https://www.amcharts.com/docs/v5/concepts/animations/
-        series.appear(1000)
         chart.appear(1000, 100)
     }
     return (
