@@ -147,9 +147,9 @@ const Leads = () => {
             </div>
 
             <div className="row mt-3">
-                <div className=" pe-4 pb-4">
+                <div className="pe-4 pb-4">
                     <select
-                        className="select_custom "
+                        className="form-control w-25"
                         onChange={handleSelectChange}>
                         {optionsArr.map((option, index) => (
                             <option key={index} value={option.id}>
