@@ -294,7 +294,11 @@ const LatestNews = () => {
             <div className="row mt-3">
                 <div className="col-md-12">
                     <div className="bg-white rounded p-4 shadow">
-                        {!allData && <h3 className="text-center">Loading..</h3>}
+                        {!allData && <h5 className="text-center">Loading..</h5>}
+                        <small className="text-center d-block">
+                            This graph shows latest news revealing around the
+                            industry and how it has changed over time
+                        </small>
                         <div id="latestNews"></div>
                     </div>
                 </div>

@@ -814,9 +814,18 @@ const PostPerformance = () => {
                     <div className="bg-white rounded p-4 shadow">
                         <div className="row">
                             <div className="d-flex justify-content-between">
-                                <h5 className="text-primary pb-3">
-                                    What people are talking about
-                                </h5>
+                                <div className="pb-3">
+                                    <h5 className="text-primary">
+                                        What people are talking about{' '}
+                                    </h5>
+                                    <small>
+                                        This graph shows the number of responses
+                                        from customers related to each area of
+                                        conversation in the industry. Please
+                                        note, only customer perception is taken
+                                        into account here.
+                                    </small>
+                                </div>
                                 <h5 className="text-success">
                                     Total: {totalComments}
                                 </h5>
@@ -844,7 +853,15 @@ const PostPerformance = () => {
             <div className="row mt-3">
                 <div className="col-md-12">
                     <div className="bg-white rounded p-4 shadow">
-                        <h5 className="text-primary pb-3">What matters most</h5>
+                        <div className="pb-3">
+                            <h5 className="text-primary">What matters most </h5>
+                            <small>
+                                This graph shows the various things that
+                                customers care about and is categorised into
+                                things customers ask about, complain about and
+                                appreciate.
+                            </small>
+                        </div>
                         <Tabs
                             defaultActiveKey="queries"
                             id="justify-tab-example"

@@ -235,9 +235,14 @@ const CompetitorAnalysis = () => {
             <div className="row mt-3 mb-3">
                 <div className="col-md-12">
                     <div className="bg-white rounded p-4 shadow">
-                        <h5 className="text-primary">
-                            Activity of Competitors
-                        </h5>
+                        <div className="pb-3">
+                            <h5 className="text-primary">
+                                Post engagement by activity
+                            </h5>
+                            <small>
+                                This graph shows total post vs total engagement
+                            </small>
+                        </div>
                         <div id="activityChart"></div>
                     </div>
                 </div>
@@ -245,7 +250,15 @@ const CompetitorAnalysis = () => {
             <div className="row mt-3 mb-3">
                 <div className="col-md-12">
                     <div className="bg-white rounded p-4 shadow">
-                        <h5 className="text-primary">Market Sentiment</h5>
+                        <div className="pb-3">
+                            <h5 className="text-primary">Market Sentiment</h5>
+                            <small>
+                                This shows how people perceive each brand, with
+                                figures above 50% indicating positive sentiment
+                                and figures below 50% indicating negative
+                                sentiment, while 50% is neutral
+                            </small>
+                        </div>
                         <div className="row text-center mb-5">
                             <div className="col-lg-2 col-sm-6 col-md-2"></div>
 
@@ -435,9 +448,15 @@ const CompetitorAnalysis = () => {
             <div className="row mt-3 mb-3">
                 <div className="col-md-12">
                     <div className="bg-white rounded p-4 shadow">
-                        <h5 className="text-primary">
-                            Most talked topics in the market
-                        </h5>
+                        <div className="pb-3">
+                            <h5 className="text-primary">
+                                Most talked topics in the market
+                            </h5>
+                            <small>
+                                This list shows the popularity of the brands in
+                                the industry
+                            </small>
+                        </div>
                         <div className="table-responsive">
                             <table className="table table-striped">
                                 <thead>
