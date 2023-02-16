@@ -345,7 +345,7 @@ const LatestNews = () => {
                                     <div className="me">
                                         <img
                                             className="img_width"
-                                            src="/assets/const.jpg"
+                                            src="/assets/building.png"
                                         />
                                     </div>
                                     <span className="head">
