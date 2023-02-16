@@ -50,7 +50,7 @@ function Card({ title, description, imageUrl, dateTime, name, url, category }) {
     return (
         <div className="mb-2">
             <a href={url} target="_blank" className="text-decoration-none">
-                <div className="card card_news">
+                <div className="card card_news rounded">
                     <div className="d-flex mb-2 justify-content-end">
                         {/* <span className="me-2">0</span> */}
                         {/* <img
@@ -307,7 +307,7 @@ const LatestNews = () => {
             </div>
             {allData && (
                 <>
-                    <div className="row mt-4">
+                    <div className="row mt-3">
                         <div className="col-lg-3 col-md-3 col-sm-6">
                             <div className="card card_custom">
                                 <div className="d-flex">
@@ -408,7 +408,7 @@ const LatestNews = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="row mt-4">
+                    <div className="row mt-3 mb-3">
                         <div className="col-lg-3 col-md-3 col-3">
                             {allData.govtProjectNews &&
                                 allData.govtProjectNews.map(
