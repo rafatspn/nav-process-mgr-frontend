@@ -213,6 +213,8 @@ const CompetitorAnalysis = () => {
                     <div className="bg-white rounded p-4 shadow">
                         <h5 className="text-primary">Market Sentiment</h5>
                         <div className="row text-center mb-5">
+                            <div className="col-lg-2 col-sm-6 col-md-2"></div>
+
                             <div className="col-lg-2 col-sm-6 col-md-2">
                                 <div className="d-flex justify-content-center">
                                     <img
@@ -263,7 +265,7 @@ const CompetitorAnalysis = () => {
                             graphData.sentimentData &&
                             graphData.sentimentData.map((dt) => (
                                 <div className="row mt-3 mb-3">
-                                    <div className="col-lg-2 col-sm-6 col-md-4">
+                                    <div className="col-lg-3 col-sm-6 col-md-4">
                                         <div className="d-flex justify-content-left">
                                             {/* <img
                                                 className="img_width_img mb-2"
@@ -272,24 +274,24 @@ const CompetitorAnalysis = () => {
                                             <p>{dt.name}</p>
                                         </div>
                                     </div>
-                                    <div className="col-lg-2 col-sm-6 col-md-4">
-                                        <h6 className="text-center">
+                                    <div className="col-lg-1 col-sm-6 col-md-4">
+                                        <h6 className="text-center mt-2">
                                             {Math.round(
                                                 dt.sentimentScore * 100
                                             ).toFixed(2)}
                                             %
                                         </h6>
                                     </div>
-                                    <div className="col-lg-6 col-sm-12 col-md-4">
+                                    <div className="col-lg-6 col-sm-12 col-md-4 ">
                                         <ProgressBar
-                                            className="progress progress_custom"
+                                            className="progress  progress_custom"
                                             progress={dt.sentimentScore}
                                         />
                                     </div>
                                     <div className="col-lg-2 col-sm-6 col-md-4">
                                         <div className="d-flex justify-content-center">
                                             <img
-                                                className="img_width_emoji  mb-2"
+                                                className="img_width_emoji  "
                                                 src={dt.icon}
                                             />
                                         </div>

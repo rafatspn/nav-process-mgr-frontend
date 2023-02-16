@@ -46,4 +46,5 @@
 }
 .progress {
     height: unset;
+    margin-top: 0.7rem;
 }
