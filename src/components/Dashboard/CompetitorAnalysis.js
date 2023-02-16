@@ -275,11 +275,14 @@ const CompetitorAnalysis = () => {
                                         </div>
                                     </div>
                                     <div className="col-lg-1 col-sm-6 col-md-4">
-                                        <h6 className="text-center mt-2">
+                                        {/* <h6 className="text-center mt-2">
                                             {Math.round(
                                                 dt.sentimentScore * 100
                                             ).toFixed(2)}
                                             %
+                                        </h6> */}
+                                        <h6 className="text-center mt-2">
+                                            {dt.sentimentScore.toFixed(2)}
                                         </h6>
                                     </div>
                                     <div className="col-lg-6 col-sm-12 col-md-4 ">
