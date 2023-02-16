@@ -58,8 +58,8 @@
     padding: 5px 14px;
 }
 .login_btnlog {
-    background-color: #1e2a4e;
-    color: #fff;
+    background-color: #e5e5ff;
+    color: #3b2f76;
     font-weight: 600;
     font-size: 16px;
     padding: 5px 14px;
@@ -148,11 +148,11 @@
     margin-right: 10px;
     margin-bottom: 2px;
 }
-.padding_custom {
+/* .padding_custom {
     padding-top: 0px;
 }
 @media (min-width: 576px) {
     .padding_custom {
         padding-top: 100px;
     }
-}
+} */
