@@ -101,7 +101,7 @@ const Leads = () => {
 
     return (
         <>
-            <div className="row mt-4">
+            <div className="row mt-3">
                 {/* <div className="col-md-2">
                     <label>Page</label>
                     <select className="form-control">
