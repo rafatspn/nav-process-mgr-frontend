@@ -13,7 +13,7 @@ import '../styles/login.css'
 
 export default function Login({ location, history }) {
     const [expanded, setExpanded] = useState(false)
-    const [expandedo, setExpandedo] = useState(false)
+    const [expandedo, setExpandedo] = useState(true)
     const [expandedp, setExpandedp] = useState(false)
     const handleClick = () => {
         setExpanded(!expanded)
@@ -55,16 +55,16 @@ export default function Login({ location, history }) {
         <>
             <section className="login_form ">
                 <div className=" container">
-                    <div className=" row justify-content-center align-items-center">
-                        <div className="   col-12 col-sm-10 col-md-8 col-lg-9 col-xl-9 col-xll-9 align-items-center">
-                            <h6 className="text-center mt-5">
+                    <div className=" row justify-content-start align-items-center padding_custom">
+                        <div className="   col-12 col-sm-10 col-md-8 col-lg-5 col-xl-5 col-xll-5 align-items-center">
+                            <h6 className="text-start mt-5">
                                 Sign in with your Facebook Profile to start your
                                 journey...Select your facebook pages while
                                 Signing In.
                             </h6>
                         </div>{' '}
                     </div>
-                    <div className=" row justify-content-center align-items-center pb-5">
+                    <div className=" row justify-content-start align-items-start pb-5">
                         <div className="  col-12 col-sm-10 col-md-8 col-lg-5 col-xl-5 col-xll-5 align-items-center">
                             <div className=" d-flex justify-content-center align-items-center">
                                 <button
@@ -84,7 +84,7 @@ export default function Login({ location, history }) {
                             </div>
 
                             <div className="accordion_box p-3 mt-4">
-                                <div className="card">
+                                {/* <div className="card">
                                     <button
                                         className="btn w-100 login_btnbox "
                                         onClick={handleClick}>
@@ -124,7 +124,7 @@ export default function Login({ location, history }) {
                                             Sign Up
                                         </button>
                                     </form>
-                                </div>
+                                </div> */}
                                 <div className="card">
                                     <button
                                         className="btn w-100 login_btnbox "
@@ -167,7 +167,7 @@ export default function Login({ location, history }) {
                                         </button>
                                     </form>
                                 </div>
-                                <div className="card">
+                                {/* <div className="card">
                                     <button
                                         className="btn w-100 login_btnbox "
                                         onClick={handleClick2}>
@@ -196,7 +196,7 @@ export default function Login({ location, history }) {
                                             Next
                                         </button>
                                     </form>
-                                </div>
+                                </div> */}
                             </div>
 
                             <div
