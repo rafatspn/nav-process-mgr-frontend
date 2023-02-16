@@ -17,6 +17,7 @@ const Leads = () => {
     const auth = useContext(AuthContext)
     const [selectedOption, setSelectedOption] = useState(null)
     const [filteredValues, setFilteredValues] = useState(null)
+    const [downloadLoading, setDownloadLoading] = useState(false)
 
     const currentDate = new Date()
     const sixMonthsAgo = new Date(
@@ -71,6 +72,7 @@ const Leads = () => {
     }, [selectedOption])
 
     const downloadExcel = async () => {
+        setDownloadLoading(true)
         const response = await axios({
             url: `${config.url}/api/comments/users?pageId=${
                 auth.page ? auth.page.pdageId : null
@@ -83,6 +85,7 @@ const Leads = () => {
                 }`
             }
         })
+        setDownloadLoading(false)
 
         const href = URL.createObjectURL(response.data)
 
@@ -157,6 +160,7 @@ const Leads = () => {
                             </option>
                         ))}
                     </select>
+                    {downloadLoading && <h5 className="mt-3">Downloading..</h5>}
                     {selectedOption !== null && (
                         <div className="d-flex">
                             <table className="mt-3  table table-striped table-hover table-responsive">
