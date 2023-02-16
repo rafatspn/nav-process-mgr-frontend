@@ -173,7 +173,7 @@ const CompetitorAnalysis = () => {
 
     return (
         <>
-            <div className="row mt-4">
+            <div className="row mt-3">
                 {/* <div className="col-md-2">
                     <label>Filter</label>
                     <select className="form-control">
@@ -317,9 +317,9 @@ const CompetitorAnalysis = () => {
                     <h6 className="text-center">78.8%</h6>
                 </div>
                 <div className="col-lg-6 col-sm-12 col-md-4">
-                    <div class="progress progress_custom">
+                    <div className="progress progress_custom">
                         <div
-                            class="progress-bar bg-warning w-75"
+                            className="progress-bar bg-warning w-75"
                             role="progressbar"
                             aria-valuenow="75"
                             aria-valuemin="0"
@@ -348,9 +348,9 @@ const CompetitorAnalysis = () => {
                     <h6 className="text-center">78.8%</h6>
                 </div>
                 <div className="col-lg-6 col-sm-12 col-md-4">
-                    <div class="progress progress_custom">
+                    <div className="progress progress_custom">
                         <div
-                            class="progress-bar bg-warning w-75"
+                            className="progress-bar bg-warning w-75"
                             role="progressbar"
                             aria-valuenow="75"
                             aria-valuemin="0"
@@ -379,9 +379,9 @@ const CompetitorAnalysis = () => {
                     <h6 className="text-center">78.8%</h6>
                 </div>
                 <div className="col-lg-6 col-sm-12 col-md-4">
-                    <div class="progress progress_custom">
+                    <div className="progress progress_custom">
                         <div
-                            class="progress-bar bg-warning w-75"
+                            className="progress-bar bg-warning w-75"
                             role="progressbar"
                             aria-valuenow="75"
                             aria-valuemin="0"
@@ -397,6 +397,39 @@ const CompetitorAnalysis = () => {
                     </div>
                 </div>
             </div> */}
+
+            <div className="row mt-3 mb-3">
+                <div className="col-md-12">
+                    <div className="bg-white rounded p-4 shadow">
+                        <h5 className="text-primary">
+                            Most talked topics in the market
+                        </h5>
+                        <div className="table-responsive">
+                            <table className="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Page Name</th>
+                                        <th scope="col">Last</th>
+                                        <th scope="col">Last</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@fat</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </>
     )
 }
