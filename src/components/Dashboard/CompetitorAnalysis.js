@@ -253,10 +253,12 @@ const CompetitorAnalysis = () => {
                         <div className="pb-3">
                             <h5 className="text-primary">Market Sentiment</h5>
                             <small>
-                                This shows how people perceive each brand, with
-                                figures above 50% indicating positive sentiment
-                                and figures below 50% indicating negative
-                                sentiment, while 50% is neutral
+                                This graph show people’s overall conversations
+                                about companies in the industry. The sentiments
+                                are shown on a scale of -1 to 1, where 0.61 to
+                                1.00 is Very Happy, 0.21 to 0.60 is Happy, -0.20
+                                to 0.20 is Neutral, -0.60 to -0.21 is Sad, -1.00
+                                to 0.61 is Very Sad
                             </small>
                         </div>
                         <div className="row text-center mb-5">

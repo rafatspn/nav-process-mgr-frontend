@@ -1030,7 +1030,8 @@ const PostPerformance = () => {
                         {topThreePosts[3] && (
                             <a
                                 className="text-primary pb-3 ellipsis"
-                                href={topThreePosts[3].url}>
+                                href={topThreePosts[3].url}
+                                target="_blank">
                                 Post 4: {topThreePosts[3].message}
                             </a>
                         )}
