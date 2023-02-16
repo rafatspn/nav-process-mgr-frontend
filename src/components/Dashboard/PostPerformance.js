@@ -758,7 +758,7 @@ const PostPerformance = () => {
 
     return (
         <>
-            <div className="row mt-4">
+            <div className="row mt-3">
                 {/* <div className="col-md-2">
                     <label>Page</label>
                     <select className="form-control">
@@ -805,7 +805,7 @@ const PostPerformance = () => {
             {loading && (
                 <div className="row mt-3">
                     <div className="col-md-12">
-                        <h3>Loading..</h3>
+                        <h5>Loading..</h5>
                     </div>
                 </div>
             )}

@@ -11,17 +11,15 @@ import Leads from '../components/Dashboard/Leads'
 export default function Dashboard() {
     return (
         <Container fluid>
-            <div className="row">
+            <div className="row mt-3">
                 <div className="col-md-12">
                     <Tabs
                         defaultActiveKey="latestNews"
-                        id="uncontrolled-tab-example"
-                        className="mb-3 mt-3">
+                        id="uncontrolled-tab-example">
                         <Tab eventKey="latestNews" title="Latest News">
                             <LatestNews />
                         </Tab>
                         <Tab
-                            className="ps-5 pe-5 "
                             eventKey="postPerformance"
                             title="Post Performance">
                             <PostPerformance />
