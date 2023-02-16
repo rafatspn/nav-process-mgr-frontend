@@ -466,13 +466,19 @@ const CompetitorAnalysis = () => {
                                             Appreciation
                                         </th>
                                         <th scope="col" className="text-center">
-                                            Order
-                                        </th>
-                                        <th scope="col" className="text-center">
                                             Queries
                                         </th>
                                         <th scope="col" className="text-center">
                                             Complain
+                                        </th>
+                                        <th scope="col" className="text-center">
+                                            Order
+                                        </th>
+                                        <th scope="col" className="text-center">
+                                            Irrelivant
+                                        </th>
+                                        <th scope="col" className="text-center">
+                                            Dealership
                                         </th>
                                     </tr>
                                 </thead>
@@ -483,16 +489,82 @@ const CompetitorAnalysis = () => {
                                                 <tr>
                                                     <td>{item.pageName}</td>
                                                     <td className="text-center">
-                                                        34
+                                                        {item.topics.map(
+                                                            (childItem) =>
+                                                                childItem.name ===
+                                                                    'Appreciation' && (
+                                                                    <span>
+                                                                        {
+                                                                            childItem.count
+                                                                        }
+                                                                    </span>
+                                                                )
+                                                        )}
                                                     </td>
                                                     <td className="text-center">
-                                                        55
+                                                        {item.topics.map(
+                                                            (childItem) =>
+                                                                childItem.name ===
+                                                                    'Queries' && (
+                                                                    <span>
+                                                                        {
+                                                                            childItem.count
+                                                                        }
+                                                                    </span>
+                                                                )
+                                                        )}
                                                     </td>
                                                     <td className="text-center">
-                                                        65
+                                                        {item.topics.map(
+                                                            (childItem) =>
+                                                                childItem.name ===
+                                                                    'Complain' && (
+                                                                    <span>
+                                                                        {
+                                                                            childItem.count
+                                                                        }
+                                                                    </span>
+                                                                )
+                                                        )}
                                                     </td>
                                                     <td className="text-center">
-                                                        98
+                                                        {item.topics.map(
+                                                            (childItem) =>
+                                                                childItem.name ===
+                                                                    'Order' && (
+                                                                    <span>
+                                                                        {
+                                                                            childItem.count
+                                                                        }
+                                                                    </span>
+                                                                )
+                                                        )}
+                                                    </td>
+                                                    <td className="text-center">
+                                                        {item.topics.map(
+                                                            (childItem) =>
+                                                                childItem.name ===
+                                                                    'Irrelivant' && (
+                                                                    <span>
+                                                                        {
+                                                                            childItem.count
+                                                                        }
+                                                                    </span>
+                                                                )
+                                                        )}
+                                                    </td>
+                                                    <td className="text-center">
+                                                        {item.topics.map(
+                                                            (childItem) =>
+                                                                childItem.name ===
+                                                                    'Dealership' && (
+                                                                    <span>
+                                                                        {
+                                                                            childItem.count
+                                                                        }
+                                                                    </span>
+                                                                )
+                                                        )}
                                                     </td>
                                                 </tr>
                                             )
