@@ -314,7 +314,7 @@ const LatestNews = () => {
                                     <div className="me">
                                         <img
                                             className="img_width"
-                                            src="/assets/waterfire.jpg"
+                                            src="/assets/govt.png"
                                         />
                                     </div>
                                     <span className="head">
@@ -330,7 +330,7 @@ const LatestNews = () => {
                                     <div className="me">
                                         <img
                                             className="img_width2"
-                                            src="/assets/water.webp"
+                                            src="/assets/econo.jpg"
                                         />
                                     </div>
                                     <span className="head">
@@ -345,7 +345,7 @@ const LatestNews = () => {
                                     <div className="me">
                                         <img
                                             className="img_width"
-                                            src="/assets/medicine.webp"
+                                            src="/assets/const.jpg"
                                         />
                                     </div>
                                     <span className="head">
