@@ -18,6 +18,18 @@ const Leads = () => {
     const [selectedOption, setSelectedOption] = useState(null)
     const [filteredValues, setFilteredValues] = useState(null)
 
+    const currentDate = new Date()
+    const sixMonthsAgo = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth() - 12,
+        currentDate.getDate()
+    )
+    const fromDate = sixMonthsAgo.toISOString().slice(0, 10)
+    const toDate = currentDate.toISOString().slice(0, 10)
+
+    const [from, setFrom] = useState(fromDate)
+    const [to, setTo] = useState(toDate)
+
     const handleSelectChange = (event) => {
         setSelectedOption(event.target.value)
         console.log('event.target.value', event.target.value)
@@ -30,31 +42,31 @@ const Leads = () => {
         // }
     }
 
-    useEffect(() => {
-        const getLeads = async () => {
-            const configData = {
-                headers: {
-                    Authorization: `Bearer ${
-                        JSON.parse(localStorage.getItem('user')).token
-                    }`
-                }
+    const getLeads = async () => {
+        const configData = {
+            headers: {
+                Authorization: `Bearer ${
+                    JSON.parse(localStorage.getItem('user')).token
+                }`
             }
-            console.log('Hello Arafat')
-            console.log(
-                `${config.url}/api/comments/users?pageId=${
-                    auth.page ? auth.page.pdageId : null
-                }&topic=${selectedOption}&type=data`
-            )
-            const { data } = await axios.get(
-                `${config.url}/api/comments/users?pageId=${
-                    auth.page ? auth.page.pdageId : null
-                }&topic=${selectedOption}&type=data`,
-                configData
-            )
-            console.log(data)
-            setFilteredValues(data)
         }
+        // console.log('Hello Arafat')
+        // console.log(
+        //     `${config.url}/api/comments/users?pageId=${
+        //         auth.page ? auth.page.pdageId : null
+        //     }&topic=${selectedOption}&type=data`
+        // )
+        const { data } = await axios.get(
+            `${config.url}/api/comments/users?pageId=${
+                auth.page ? auth.page.pdageId : null
+            }&topic=${selectedOption}&type=data&from=${from}&to=${to}`,
+            configData
+        )
+        console.log(data)
+        setFilteredValues(data)
+    }
 
+    useEffect(() => {
         getLeads()
     }, [selectedOption])
 
@@ -62,7 +74,7 @@ const Leads = () => {
         const response = await axios({
             url: `${config.url}/api/comments/users?pageId=${
                 auth.page ? auth.page.pdageId : null
-            }&topic=${selectedOption}&type=excel`,
+            }&topic=${selectedOption}&type=excel&from=${from}&to=${to}`,
             method: 'GET',
             responseType: 'blob',
             headers: {
@@ -90,7 +102,13 @@ const Leads = () => {
     return (
         <>
             <div className="row mt-4">
-                <div className="col-md-2">
+                {/* <div className="col-md-2">
+                    <label>Page</label>
+                    <select className="form-control">
+                        <option value="GoZayaan">GoZayaan</option>
+                    </select>
+                </div> */}
+                {/* <div className="col-md-2">
                     <label>Filter</label>
                     <select className="form-control">
                         <option value="24hours">Last 24 hours</option>
@@ -98,18 +116,31 @@ const Leads = () => {
                         <option value="1month">Last 1 month</option>
                         <option value="custom">Custom range</option>
                     </select>
-                </div>
+                </div> */}
                 <div className="col-md-2">
                     <label>From</label>
-                    <input type="date" className="form-control" />
+                    <input
+                        type="date"
+                        className="form-control"
+                        value={from}
+                        onChange={(e) => setFrom(e.target.value)}
+                    />
                 </div>
                 <div className="col-md-2">
                     <label>To</label>
-                    <input type="date" className="form-control" />
+                    <input
+                        type="date"
+                        className="form-control"
+                        value={to}
+                        onChange={(e) => setTo(e.target.value)}
+                    />
                 </div>
                 <div className="col-md-2 ">
                     <label className="d-block">&nbsp;</label>
-                    <button type="date" className="btn btn_primary ">
+                    <button
+                        type="date"
+                        className="btn btn_primary"
+                        onClick={() => getLeads()}>
                         Apply
                     </button>
                 </div>
