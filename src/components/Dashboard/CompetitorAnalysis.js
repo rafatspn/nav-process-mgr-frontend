@@ -409,20 +409,48 @@ const CompetitorAnalysis = () => {
                                 <thead>
                                     <tr>
                                         <th scope="col">Page Name</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Last</th>
+                                        <th scope="col" className="text-center">
+                                            Appreciation
+                                        </th>
+                                        <th scope="col" className="text-center">
+                                            Order
+                                        </th>
+                                        <th scope="col" className="text-center">
+                                            Queries
+                                        </th>
+                                        <th scope="col" className="text-center">
+                                            Complain
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
+                                        <td>Seven Rings Cement</td>
+                                        <td className="text-center">34</td>
+                                        <td className="text-center">55</td>
+                                        <td className="text-center">65</td>
+                                        <td className="text-center">98</td>
                                     </tr>
                                     <tr>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
+                                        <td>Shah Cement</td>
+                                        <td className="text-center">34</td>
+                                        <td className="text-center">55</td>
+                                        <td className="text-center">65</td>
+                                        <td className="text-center">98</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Premier Cement Mills PLC</td>
+                                        <td className="text-center">34</td>
+                                        <td className="text-center">55</td>
+                                        <td className="text-center">65</td>
+                                        <td className="text-center">98</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Crown Cement</td>
+                                        <td className="text-center">34</td>
+                                        <td className="text-center">55</td>
+                                        <td className="text-center">65</td>
+                                        <td className="text-center">98</td>
                                     </tr>
                                 </tbody>
                             </table>
