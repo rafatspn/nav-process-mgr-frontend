@@ -29,35 +29,49 @@ function ProgressBar({ progress }) {
 }
 const CompetitorAnalysis = () => {
     const [graphData, setGraphData] = useState()
+    const [loading, setLoading] = useState(false)
 
-    useEffect(() => {
-        const generateGraph = async () => {
-            const configData = {
-                headers: {
-                    Authorization: `Bearer ${
-                        JSON.parse(localStorage.getItem('user')).token
-                    }`
-                }
+    const currentDate = new Date()
+    const sixMonthsAgo = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth() - 12,
+        currentDate.getDate()
+    )
+    const fromDate = sixMonthsAgo.toISOString().slice(0, 10)
+    const toDate = currentDate.toISOString().slice(0, 10)
+
+    const [from, setFrom] = useState(fromDate)
+    const [to, setTo] = useState(toDate)
+
+    const generateGraph = async () => {
+        setLoading(true)
+        const configData = {
+            headers: {
+                Authorization: `Bearer ${
+                    JSON.parse(localStorage.getItem('user')).token
+                }`
             }
-
-            let pageId = '730393906972869'
-            const { data } = await axios.get(
-                `${config.url}/api/posts/competitor/${pageId}`,
-                configData
-            )
-
-            setGraphData(data)
-            console.log('graphData', graphData)
-
-            // for (let i = 0; i < graphData.length; i++) {
-            //     setProgress(graphData[i].sentimentData)
-            // }
-            // console.log('progress', progress)
-            let activityData = data.activityData
-
-            drawBarChart('activityChart', activityData, 'name', 'activityScore')
         }
 
+        let pageId = '730393906972869'
+        const { data } = await axios.get(
+            `${config.url}/api/posts/competitor/${pageId}?from=${from}&to=${to}`,
+            configData
+        )
+        setLoading(false)
+        setGraphData(data)
+        console.log('graphData', graphData)
+
+        // for (let i = 0; i < graphData.length; i++) {
+        //     setProgress(graphData[i].sentimentData)
+        // }
+        // console.log('progress', progress)
+        let activityData = data.activityData
+
+        drawBarChart('activityChart', activityData, 'name', 'activityScore')
+    }
+
+    useEffect(() => {
         generateGraph()
     }, [])
 
@@ -185,19 +199,39 @@ const CompetitorAnalysis = () => {
                 </div> */}
                 <div className="col-md-2">
                     <label>From</label>
-                    <input type="date" className="form-control" />
+                    <input
+                        type="date"
+                        value={from}
+                        onChange={(e) => setFrom(e.target.value)}
+                        className="form-control"
+                    />
                 </div>
                 <div className="col-md-2">
                     <label>To</label>
-                    <input type="date" className="form-control" />
+                    <input
+                        type="date"
+                        value={to}
+                        onChange={(e) => setTo(e.target.value)}
+                        className="form-control"
+                    />
                 </div>
                 <div className="col-md-2 ">
                     <label className="d-block">&nbsp;</label>
-                    <button type="date" className="btn btn_primary ">
+                    <button
+                        type="date"
+                        className="btn btn_primary"
+                        onClick={() => generateGraph()}>
                         Apply
                     </button>
                 </div>
             </div>
+            {loading && (
+                <div className="row mt-3">
+                    <div className="col-md-12">
+                        <h5>Loading..</h5>
+                    </div>
+                </div>
+            )}
             <div className="row mt-3 mb-3">
                 <div className="col-md-12">
                     <div className="bg-white rounded p-4 shadow">
@@ -424,34 +458,26 @@ const CompetitorAnalysis = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Seven Rings Cement</td>
-                                        <td className="text-center">34</td>
-                                        <td className="text-center">55</td>
-                                        <td className="text-center">65</td>
-                                        <td className="text-center">98</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Shah Cement</td>
-                                        <td className="text-center">34</td>
-                                        <td className="text-center">55</td>
-                                        <td className="text-center">65</td>
-                                        <td className="text-center">98</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Premier Cement Mills PLC</td>
-                                        <td className="text-center">34</td>
-                                        <td className="text-center">55</td>
-                                        <td className="text-center">65</td>
-                                        <td className="text-center">98</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Crown Cement</td>
-                                        <td className="text-center">34</td>
-                                        <td className="text-center">55</td>
-                                        <td className="text-center">65</td>
-                                        <td className="text-center">98</td>
-                                    </tr>
+                                    {graphData &&
+                                        graphData.mattersMostData.map(
+                                            (item) => (
+                                                <tr>
+                                                    <td>{item.pageName}</td>
+                                                    <td className="text-center">
+                                                        34
+                                                    </td>
+                                                    <td className="text-center">
+                                                        55
+                                                    </td>
+                                                    <td className="text-center">
+                                                        65
+                                                    </td>
+                                                    <td className="text-center">
+                                                        98
+                                                    </td>
+                                                </tr>
+                                            )
+                                        )}
                                 </tbody>
                             </table>
                         </div>
