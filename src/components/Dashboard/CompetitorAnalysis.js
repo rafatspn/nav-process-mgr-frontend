@@ -174,7 +174,7 @@ const CompetitorAnalysis = () => {
     return (
         <>
             <div className="row mt-4">
-                <div className="col-md-2">
+                {/* <div className="col-md-2">
                     <label>Filter</label>
                     <select className="form-control">
                         <option value="24hours">Last 24 hours</option>
@@ -182,7 +182,7 @@ const CompetitorAnalysis = () => {
                         <option value="1month">Last 1 month</option>
                         <option value="custom">Custom range</option>
                     </select>
-                </div>
+                </div> */}
                 <div className="col-md-2">
                     <label>From</label>
                     <input type="date" className="form-control" />
@@ -208,88 +208,97 @@ const CompetitorAnalysis = () => {
                     </div>
                 </div>
             </div>
-            <div className="row mt-5 mb-5">
-                <div className="col-lg-2 col-sm-6 col-md-2"></div>
-                <div className="col-lg-2 col-sm-6 col-md-2">
-                    <div className="d-flex justify-content-center">
-                        <img
-                            className="img_width mb-2"
-                            src="/assets/emoji.webp"
-                        />
+            <div className="row mt-3 mb-3">
+                <div className="col-md-12">
+                    <div className="bg-white rounded p-4 shadow">
+                        <h5 className="text-primary">Market Sentiment</h5>
+                        <div className="row text-center mb-5">
+                            <div className="col-lg-2 col-sm-6 col-md-2">
+                                <div className="d-flex justify-content-center">
+                                    <img
+                                        className="img_width mb-2"
+                                        src="https://e7.pngegg.com/pngimages/726/726/png-clipart-smiling-emoji-illustration-emoji-happiness-smiley-sticker-applause-love-heart.png"
+                                    />
+                                </div>
+                                <div className="pBox c1">0.61-1.00</div>
+                            </div>
+                            <div className="col-lg-2 col-sm-6 col-md-2">
+                                <div className="d-flex justify-content-center">
+                                    <img
+                                        className="img_width mb-2"
+                                        src="https://icon2.cleanpng.com/20180202/veq/kisspng-emoji-blushing-smiley-clip-art-blushing-emoji-png-hd-5a753fbd3e1a52.2262150515176334692544.jpg"
+                                    />
+                                </div>
+                                <div className="pBox c2">0.21-0.60</div>
+                            </div>
+                            <div className="col-lg-2 col-sm-6 col-md-2">
+                                <div className="d-flex justify-content-center">
+                                    <img
+                                        className="img_width mb-2"
+                                        src="https://www.pngfind.com/pngs/m/10-102223_download-slightly-smiling-emoji-icon-emojis-png-ios.png"
+                                    />
+                                </div>
+                                <div className="pBox c3">-0.20-0.20</div>
+                            </div>
+                            <div className="col-lg-2 col-sm-6 col-md-2">
+                                <div className="d-flex justify-content-center">
+                                    <img
+                                        className="img_width mb-2"
+                                        src="https://www.transparentpng.com/thumb/sad-emoji/Ej7iyi-sad-emoji-cut-out.png"
+                                    />
+                                </div>
+                                <div className="pBox c4">-0.60--0.21</div>
+                            </div>
+                            <div className="col-lg-2 col-sm-6 col-md-2">
+                                <div className="d-flex justify-content-center">
+                                    <img
+                                        className="img_width mb-2"
+                                        src="https://img.favpng.com/0/25/24/face-with-tears-of-joy-emoji-crying-laughter-sticker-png-favpng-gxKCtgzxBTVc3b4cdSe49qkJd_t.jpg"
+                                    />
+                                </div>
+                                <div className="pBox c5">-1.00--0.61</div>
+                            </div>
+                        </div>
+                        {graphData &&
+                            graphData.sentimentData &&
+                            graphData.sentimentData.map((dt) => (
+                                <div className="row mt-3 mb-3">
+                                    <div className="col-lg-2 col-sm-6 col-md-4">
+                                        <div className="d-flex justify-content-left">
+                                            {/* <img
+                                                className="img_width_img mb-2"
+                                                src="/assets/cp.jpg"
+                                            /> */}
+                                            <p>{dt.name}</p>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-2 col-sm-6 col-md-4">
+                                        <h6 className="text-center">
+                                            {Math.round(
+                                                dt.sentimentScore * 100
+                                            ).toFixed(2)}
+                                            %
+                                        </h6>
+                                    </div>
+                                    <div className="col-lg-6 col-sm-12 col-md-4">
+                                        <ProgressBar
+                                            className="progress progress_custom"
+                                            progress={dt.sentimentScore}
+                                        />
+                                    </div>
+                                    <div className="col-lg-2 col-sm-6 col-md-4">
+                                        <div className="d-flex justify-content-center">
+                                            <img
+                                                className="img_width_emoji  mb-2"
+                                                src={dt.icon}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
                     </div>
-                    <div className="pBox c1">0%-20%</div>
-                </div>
-                <div className="col-lg-2 col-sm-6 col-md-2">
-                    <div className="d-flex justify-content-center">
-                        <img
-                            className="img_width mb-2"
-                            src="/assets/emoji.webp"
-                        />
-                    </div>
-                    <div className="pBox c2">20%-40%</div>
-                </div>
-                <div className="col-lg-2 col-sm-6 col-md-2">
-                    <div className="d-flex justify-content-center">
-                        <img
-                            className="img_width mb-2"
-                            src="/assets/emoji.webp"
-                        />
-                    </div>
-                    <div className="pBox c3">40%-60%</div>
-                </div>
-                <div className="col-lg-2 col-sm-6 col-md-2">
-                    <div className="d-flex justify-content-center">
-                        <img
-                            className="img_width mb-2"
-                            src="/assets/emoji.webp"
-                        />
-                    </div>
-                    <div className="pBox c4">60%-80%</div>
-                </div>
-                <div className="col-lg-2 col-sm-6 col-md-2">
-                    <div className="d-flex justify-content-center">
-                        <img
-                            className="img_width mb-2"
-                            src="/assets/emoji.webp"
-                        />
-                    </div>
-                    <div className="pBox c5">80%-100%</div>
                 </div>
             </div>
-            {graphData &&
-                graphData.sentimentData &&
-                graphData.sentimentData.map((dt) => (
-                    <div className="row mt-3 mb-3">
-                        <div className="col-lg-2 col-sm-6 col-md-4">
-                            <div className="d-flex justify-content-center">
-                                <img
-                                    className="img_width_img mb-2"
-                                    src="/assets/cp.jpg"
-                                />
-                            </div>
-                        </div>
-                        <div className="col-lg-2 col-sm-6 col-md-4">
-                            <h6 className="text-center">
-                                {Math.round(dt.sentimentScore * 100).toFixed(2)}
-                                %
-                            </h6>
-                        </div>
-                        <div className="col-lg-6 col-sm-12 col-md-4">
-                            <ProgressBar
-                                className="progress progress_custom"
-                                progress={dt.sentimentScore}
-                            />
-                        </div>
-                        <div className="col-lg-2 col-sm-6 col-md-4">
-                            <div className="d-flex justify-content-center">
-                                <img
-                                    className="img_width_emoji  mb-2"
-                                    src={dt.icon}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                ))}
             {/* <div className="row mt-3 mb-3">
                 <div className="col-lg-2 col-sm-6 col-md-4">
                     <div className="d-flex justify-content-center">
