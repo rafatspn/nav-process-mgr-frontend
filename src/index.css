@@ -56,3 +56,13 @@ body {
 .loading-icon {
     width: 9rem;
 }
+.terms_cont {
+    color: #000;
+}
+.term_head {
+    color: #000;
+    font-weight: 600;
+}
+.termsbody {
+    text-align: justify;
+}
