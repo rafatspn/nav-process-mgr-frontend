@@ -16,6 +16,8 @@ import Logout from './pages/Logout'
 import Reports from './pages/Reports'
 import Summary from './pages/Summary'
 import Dashboard from './pages/Dashboard'
+import Terms from './pages/Terms'
+import Policy from './pages/Policy'
 
 import { AuthContext } from './context/AuthContext'
 import Navigator from './components/Navigation/Navigator'
@@ -57,6 +59,8 @@ function App() {
             <Routes>
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/terms" element={<Terms />} />
+                <Route path="/policy" element={<Policy />} />
                 <Route path="*" element={<Navigate to="/login" />}></Route>
             </Routes>
         )

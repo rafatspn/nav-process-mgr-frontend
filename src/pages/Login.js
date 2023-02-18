@@ -4,6 +4,7 @@ import React, { useState, useContext, useCallback, useEffect } from 'react'
 import { Form, Card, Container, Row, Col } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { initializeFacebookSdk } from '../utils/fb-sdk'
+import { NavLink } from 'react-router-dom'
 
 import { faFacebook } from '@fortawesome/free-solid-svg-icons'
 import { AuthContext } from '../context/AuthContext'
@@ -199,13 +200,14 @@ export default function Login({ location, history }) {
                                 </div> */}
                             </div>
 
-                            <div
-                                className="mt-3 pb-5 text-center
-                        ">
+                            <div className="mt-3 pb-5 text-center">
                                 By Signing Up or Logging In I agree with the{' '}
                                 <br></br>
-                                <a href="#">Terms and Conditions</a>
-                                and <a href="#">Privacy Policy</a>
+                                <NavLink to="/terms">
+                                    Terms and Conditions
+                                </NavLink>
+                                and{' '}
+                                <NavLink to="/policy">Privacy Policy</NavLink>
                                 <link rel="stylesheet" href="Shop.js" />
                             </div>
                         </div>
