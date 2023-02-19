@@ -71,7 +71,7 @@ export default function Home() {
                             </p> */}
                         </div>
                     </div>
-                    <div className="col-5">
+                    {/* <div className="col-5">
                         <div className="flex-sm-column  flex-column flex-md-row flex-lg-row d-flex mb-3">
                             <input
                                 type="text"
@@ -88,7 +88,7 @@ export default function Home() {
                                 Search
                             </button>{' '}
                         </div>{' '}
-                    </div>
+                    </div> */}
                     <div className="col-10 mt-5">
                         {searchResults &&
                             searchResults.map((page, idx) => (
@@ -146,7 +146,7 @@ export default function Home() {
                                                     <span>234567589</span>
                                                 </strong>
                                             </div> */}
-                                            <div className="d-flex mt-3">
+                                            {/* <div className="d-flex mt-3">
                                                 <button
                                                     className="btn trand_btnbox me-2"
                                                     onClick={() =>
@@ -154,10 +154,10 @@ export default function Home() {
                                                     }>
                                                     MANAGE
                                                 </button>
-                                                {/* <button className="btn trand_btnbox ">
+                                                <button className="btn trand_btnbox ">
                                                     REMOVE LICENSE
-                                                </button> */}
-                                            </div>
+                                                </button>
+                                            </div> */}
                                         </div>
                                     </div>
                                 </div>
