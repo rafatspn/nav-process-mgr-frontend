@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import * as am5 from '@amcharts/amcharts5'
 import * as am5xy from '@amcharts/amcharts5/xy'
 import * as am5percent from '@amcharts/amcharts5/percent'
@@ -10,8 +10,11 @@ import Tabs from 'react-bootstrap/Tabs'
 
 import './PostPerformance.css'
 import config from '../../config/config.json'
+import { AuthContext } from '../../context/AuthContext'
 
 const PostPerformance = () => {
+    const auth = useContext(AuthContext)
+
     const [totalComments, setTotalComments] = useState(0)
     const [totalfFeedback, setTotalfFeedback] = useState(0)
     const [totalQueries, setTotalQueries] = useState(0)
@@ -20,6 +23,8 @@ const PostPerformance = () => {
     const [postThreeTotal, setPostThreeTotal] = useState(0)
     const [loading, setLoading] = useState(false)
     const [topThreePosts, setTopThreePosts] = useState([])
+    const [selectedTopic, setSelectedTopic] = useState()
+    const [comments, setComments] = useState([])
 
     const currentDate = new Date()
     const sixMonthsAgo = new Date(
@@ -330,6 +335,14 @@ const PostPerformance = () => {
                 )
             })
         }
+
+        var selectedDataItem
+
+        series.nodes.template.events.on('click', function (e) {
+            // check if we have a selected data item
+            const clickedTopic = e.target.dataItem.dataContext.topic
+            setSelectedTopic(clickedTopic)
+        })
 
         series.data.setAll(data)
 
