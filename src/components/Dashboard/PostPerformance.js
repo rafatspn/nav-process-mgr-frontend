@@ -25,7 +25,7 @@ const PostPerformance = () => {
     const [loading, setLoading] = useState(false)
     const [topThreePosts, setTopThreePosts] = useState([])
     const [selectedTopic, setSelectedTopic] = useState()
-    const [comments, setComments] = useState([])
+    const [topicComments, setTopicComments] = useState([])
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
 
@@ -361,11 +361,25 @@ const PostPerformance = () => {
             })
         }
 
-        series.nodes.template.events.on('click', function (e) {
+        series.nodes.template.events.on('click', async function (e) {
             // check if we have a selected data item
             const clickedTopic = e.target.dataItem.dataContext.topic
             console.log(post)
-            setSelectedTopic(clickedTopic)
+
+            const configData = {
+                headers: {
+                    Authorization: `Bearer ${
+                        JSON.parse(localStorage.getItem('user')).token
+                    }`
+                }
+            }
+
+            const { data } = await axios.get(
+                `${config.url}/api/comments/topic?topic=${clickedTopic}&postId=${post.postId}`,
+                configData
+            )
+
+            setTopicComments(data)
             setShow(true)
         })
 
@@ -801,10 +815,10 @@ const PostPerformance = () => {
                     <Modal.Title>Comments</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {data.map((item, index) => (
+                    {topicComments.map((item, index) => (
                         <div key={index}>
                             <div className="card p-2 mt-1">
-                                <span>{item.comment}</span>
+                                <span>{item.message}</span>
                             </div>
                         </div>
                     ))}
