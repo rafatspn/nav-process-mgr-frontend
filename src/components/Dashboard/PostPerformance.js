@@ -258,17 +258,33 @@ const PostPerformance = () => {
         //         ]
         //     }
         // ]
-        drawForcedDirectedTreeGraphs('postAnatomy_1', topicData[0])
-        drawForcedDirectedTreeGraphs('postAnatomy_2', topicData[1])
-        drawForcedDirectedTreeGraphs('postAnatomy_3', topicData[2])
-        drawForcedDirectedTreeGraphs('postAnatomy_4', topicData[3])
+        drawForcedDirectedTreeGraphs(
+            'postAnatomy_1',
+            topicData[0],
+            topPostData[0]
+        )
+        drawForcedDirectedTreeGraphs(
+            'postAnatomy_2',
+            topicData[1],
+            topPostData[1]
+        )
+        drawForcedDirectedTreeGraphs(
+            'postAnatomy_3',
+            topicData[2],
+            topPostData[2]
+        )
+        drawForcedDirectedTreeGraphs(
+            'postAnatomy_4',
+            topicData[3],
+            topPostData[3]
+        )
     }
 
     useEffect(() => {
         generateGraph()
     }, [])
 
-    const drawForcedDirectedTreeGraphs = (destinationDiv, data) => {
+    const drawForcedDirectedTreeGraphs = (destinationDiv, data, post) => {
         var root = am5.Root.new(destinationDiv)
 
         root.setThemes([am5themes_Animated.new(root)])
@@ -341,6 +357,7 @@ const PostPerformance = () => {
         series.nodes.template.events.on('click', function (e) {
             // check if we have a selected data item
             const clickedTopic = e.target.dataItem.dataContext.topic
+            console.log(post)
             setSelectedTopic(clickedTopic)
         })
 
