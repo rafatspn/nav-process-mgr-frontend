@@ -28,9 +28,6 @@ const PostPerformance = () => {
     const [comments, setComments] = useState([])
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
-    const handleShow = () => {
-        setShow(true)
-    }
 
     const [data, setData] = useState([
         { comment: 'Comment 1' },
@@ -364,13 +361,12 @@ const PostPerformance = () => {
             })
         }
 
-        var selectedDataItem
-
         series.nodes.template.events.on('click', function (e) {
             // check if we have a selected data item
             const clickedTopic = e.target.dataItem.dataContext.topic
             console.log(post)
             setSelectedTopic(clickedTopic)
+            setShow(true)
         })
 
         series.data.setAll(data)
@@ -800,10 +796,6 @@ const PostPerformance = () => {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
-                Launch demo modal
-            </Button>
-
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Comments</Modal.Title>
