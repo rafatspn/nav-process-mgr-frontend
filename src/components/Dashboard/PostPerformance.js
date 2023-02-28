@@ -11,7 +11,8 @@ import Tabs from 'react-bootstrap/Tabs'
 import './PostPerformance.css'
 import config from '../../config/config.json'
 import { AuthContext } from '../../context/AuthContext'
-
+import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal'
 const PostPerformance = () => {
     const auth = useContext(AuthContext)
 
@@ -25,6 +26,17 @@ const PostPerformance = () => {
     const [topThreePosts, setTopThreePosts] = useState([])
     const [selectedTopic, setSelectedTopic] = useState()
     const [comments, setComments] = useState([])
+    const [show, setShow] = useState(false)
+    const handleClose = () => setShow(false)
+    const handleShow = () => {
+        setShow(true)
+    }
+
+    const [data, setData] = useState([
+        { comment: 'Comment 1' },
+        { comment: 'Comment 2' },
+        { comment: 'Comment 3' }
+    ])
 
     const currentDate = new Date()
     const sixMonthsAgo = new Date(
@@ -771,6 +783,30 @@ const PostPerformance = () => {
 
     return (
         <>
+            <Button variant="primary" onClick={handleShow}>
+                Launch demo modal
+            </Button>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Comments</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {data.map((item, index) => (
+                        <div key={index}>
+                            <div className="card p-2 mt-1">
+                                <span>{item.comment}</span>
+                            </div>
+                        </div>
+                    ))}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button className="btn btn_primary" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
             <div className="row mt-3">
                 {/* <div className="col-md-2">
                     <label>Page</label>
