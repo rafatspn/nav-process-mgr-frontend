@@ -203,12 +203,12 @@ const PostPerformance = () => {
                 {
                     x: am5.percent(50),
                     y: am5.percent(50),
-                    image: '/assets/shah_cement_logo.jpg',
+                    image: '/assets/shah_cement_logo.png',
                     children: data.postTopics.topicData[n]
                 }
             ])
         }
-
+        console.log('logo print ', topicData)
         // let postData_1 = [
         //     {
         //         x: am5.percent(50),
@@ -295,13 +295,19 @@ const PostPerformance = () => {
 
     const drawForcedDirectedTreeGraphs = (destinationDiv, data, post) => {
         var root = am5.Root.new(destinationDiv)
-
-        root.setThemes([am5themes_Animated.new(root)])
+        const myTheme = am5.Theme.new(root)
+        myTheme.rule('Label').setAll({
+            fill: am5.color('#171717'),
+            width: '40px',
+            height: '40px',
+            fontSize: '.75rem'
+        })
+        root.setThemes([am5themes_Animated.new(root), myTheme])
 
         var container = root.container.children.push(
             am5.Container.new(root, {
-                width: am5.percent(100),
-                height: am5.percent(100),
+                width: am5.percent(50),
+                height: am5.percent(50),
                 layout: root.verticalLayout
             })
         )
@@ -1081,10 +1087,10 @@ const PostPerformance = () => {
             </div>
             <div className="row mt-3 mb-3">
                 <div className="col-md-6">
-                    <div className="bg-white rounded p-4 shadow">
+                    <div className="bg-white rounded ps-4 pe-4 pb-4 pt-2 shadow post1">
                         {topThreePosts[0] && (
                             <a
-                                className="text-primary pb-3 ellipsis"
+                                className="text-primary pb-5 ellipsis mb-3"
                                 target="_blank"
                                 href={topThreePosts[0].url}>
                                 Post 1: {topThreePosts[0].message}
@@ -1095,24 +1101,24 @@ const PostPerformance = () => {
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <div className="bg-white rounded p-4 shadow">
+                    <div className="bg-white rounded ps-4 pe-4 pb-4 pt-2 shadow post1">
                         {topThreePosts[1] && (
                             <a
-                                className="text-primary pb-3 ellipsis"
+                                className="text-primary pb-5 ellipsis"
                                 href={topThreePosts[1].url}>
                                 Post 2: {topThreePosts[1].message}
                             </a>
                         )}
-                        <div id="postAnatomy_2"></div>
+                        <div className="mt-3" id="postAnatomy_2"></div>
                     </div>
                 </div>
             </div>
             <div className="row mt-3 mb-3">
                 <div className="col-md-6">
-                    <div className="bg-white rounded p-4 shadow">
+                    <div className="bg-white rounded ps-4 pe-4 pb-4 pt-2 shadow post1">
                         {topThreePosts[2] && (
                             <a
-                                className="text-primary pb-3 ellipsis"
+                                className="text-primary pb-5 ellipsis"
                                 href={topThreePosts[2].url}>
                                 Post 3: {topThreePosts[2].message}
                             </a>
@@ -1121,10 +1127,10 @@ const PostPerformance = () => {
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <div className="bg-white rounded p-4 shadow">
+                    <div className="bg-white rounded ps-4 pe-4 pb-4 pt-2 shadow post1">
                         {topThreePosts[3] && (
                             <a
-                                className="text-primary pb-3 ellipsis"
+                                className="text-primary pb-5 ellipsis"
                                 href={topThreePosts[3].url}
                                 target="_blank">
                                 Post 4: {topThreePosts[3].message}

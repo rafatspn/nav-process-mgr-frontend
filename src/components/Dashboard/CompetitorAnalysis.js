@@ -257,11 +257,13 @@ const CompetitorAnalysis = () => {
             )}
             <div className="row mt-5 mb-3">
                 <div className="col-md-5">
-                    <img
-                        style={{ width: '500px' }}
-                        className="img-fluid ms-5 mt-3"
-                        src="/assets/activities.jpg"
-                    />
+                    <div className="mt-5 ms-5">
+                        <img
+                            style={{ width: '430px' }}
+                            className="img-fluid ms-5 mt-5"
+                            src="/assets/activities.png"
+                        />
+                    </div>
                 </div>
                 <div className="col-md-7">
                     <div className="bg-white rounded p-4 shadow">
