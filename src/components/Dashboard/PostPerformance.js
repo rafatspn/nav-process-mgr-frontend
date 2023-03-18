@@ -298,8 +298,7 @@ const PostPerformance = () => {
         const myTheme = am5.Theme.new(root)
         myTheme.rule('Label').setAll({
             fill: am5.color('#171717'),
-            width: '40px',
-            height: '40px',
+
             fontSize: '.75rem'
         })
         root.setThemes([am5themes_Animated.new(root), myTheme])
