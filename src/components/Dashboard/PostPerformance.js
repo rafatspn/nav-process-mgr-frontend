@@ -881,11 +881,30 @@ const PostPerformance = () => {
                     </div>
                 </div>
             )}
-            <div className="row mt-3">
-                <div className="col-md-12">
-                    <div className="bg-white rounded p-4 shadow">
+            <div className="row mt-5 ms-2 me-2 bg-white rounded p-4 shadow">
+                <div className="col-md-4">
+                    <div
+                        style={{ height: '344px' }}
+                        className="b pt-4 pe-4 pb-4">
+                        <div className="d-flex justify-content-between mt-2">
+                            <h6 className="people_taking  p-2 mb-3 mt-3 ms-4">
+                                What people are talking about{' '}
+                            </h6>
+                        </div>
+                        <div className="mt-5-3 p-4 ">
+                            <small className="mt-5">
+                                This graph shows the number of responses from
+                                customers related to each area of conversation
+                                in the industry. Please note, only customer
+                                perception is taken into account here.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-md-8">
+                    <div className="">
                         <div className="row">
-                            <div className="d-flex justify-content-between">
+                            {/* <div className="d-flex justify-content-between">
                                 <div className="pb-3">
                                     <h5 className="text-primary">
                                         What people are talking about{' '}
@@ -901,8 +920,12 @@ const PostPerformance = () => {
                                 <h5 className="text-success">
                                     Total: {totalComments}
                                 </h5>
-                            </div>
+                            </div> */}
+                            <h5 className="text-success text-end pe-4 mb-4 ms-3">
+                                Total: {totalComments}
+                            </h5>
                         </div>
+
                         <div id="typeOfComments"></div>
                     </div>
                 </div>

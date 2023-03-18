@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import * as am4core from '@amcharts/amcharts4/core'
 import * as am4charts from '@amcharts/amcharts4/charts'
-import am4themes_animated from '@amcharts/amcharts4/themes/animated'
+// import am4themes_animated from '@amcharts/amcharts4/themes/animated'
+import am4themes_material from '@amcharts/amcharts4/themes/material'
 import axios from 'axios'
 
 import './LatestNews.css'
@@ -84,7 +85,16 @@ function Card({ title, description, imageUrl, dateTime, name, url, category }) {
         </div>
     )
 }
-
+function am4themes_myTheme(target) {
+    if (target instanceof am4core.ColorSet) {
+        target.list = [
+            am4core.color('#ff0000'),
+            am4core.color('#008000'),
+            am4core.color('#0000ff'),
+            am4core.color('#ffff00')
+        ]
+    }
+}
 const LatestNews = () => {
     const [allData, setAllData] = useState('')
     const [allMasterData, setAllMasterData] = useState({})
@@ -116,17 +126,18 @@ const LatestNews = () => {
             data.ecnecNews = data.ecnecNews.slice(0, 10)
             data.constructionNews = data.constructionNews.slice(0, 10)
             data.cementNews = data.cementNews.slice(0, 10)
-
+            console.log('latestNeswData', data)
             setAllData(data)
         }
 
         getAllData()
     }, [])
+    console.log('all data print', allData)
 
     function latestNewsChart(newsData) {
         var canv = document.getElementById('latestNews')
         var input = []
-        am4core.useTheme(am4themes_animated)
+        am4core.useTheme(am4themes_myTheme)
         //var chart = am4core.create("chartdiv", am4charts.XYChart);
         var chart = am4core.create(canv, am4charts.XYChart)
         chart.paddingRight = 20
@@ -162,7 +173,8 @@ const LatestNews = () => {
             }
             input.push(entry)
         }
-        console.log(input)
+        console.log('input Print', input)
+        console.log('newsData', newsData)
         chart.data = input
 
         var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis())
@@ -187,14 +199,14 @@ const LatestNews = () => {
         series1.legendSettings.valueText = '{value}'
         series1.visible = false
 
-        // var series2 = chart.series.push(new am4charts.LineSeries())
-        // series2.dataFields.valueY = 'value2'
-        // series2.dataFields.categoryX = 'date'
-        // series2.name = 'ECNEC'
-        // series2.strokeWidth = 3
-        // series2.bullets.push(new am4charts.CircleBullet())
-        // series2.tooltipText = 'ECNEC in {date}: {value2}'
-        // series2.legendSettings.valueText = '{value2}'
+        var series2 = chart.series.push(new am4charts.LineSeries())
+        series2.dataFields.valueY = 'value2'
+        series2.dataFields.categoryX = 'date'
+        series2.name = 'ECNEC'
+        series2.strokeWidth = 3
+        series2.bullets.push(new am4charts.CircleBullet())
+        series2.tooltipText = 'ECNEC in {date}: {value2}'
+        series2.legendSettings.valueText = '{value2}'
 
         var series3 = chart.series.push(new am4charts.LineSeries())
         series3.dataFields.valueY = 'value3'
@@ -275,6 +287,12 @@ const LatestNews = () => {
                 ]
             })
             setConstNewsNoOfClick(constNewsNoOfClick + 1)
+            console.log(
+                start,
+                end,
+                ecnecNoOfClick,
+                allMasterData.constructionNews
+            )
             console.log(allMasterData.constructionNews)
         } else if (callFor === 'Cement Industry') {
             let start = cementNewsNoOfClick * 10

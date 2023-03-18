@@ -54,3 +54,7 @@
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
 }
+.people_taking {
+    color: #fff;
+    background-color: #6771dc;
+}
