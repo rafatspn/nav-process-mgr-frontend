@@ -5,6 +5,7 @@ import * as am5xy from '@amcharts/amcharts5/xy'
 import * as am5percent from '@amcharts/amcharts5/percent'
 import am5themes_Animated from '@amcharts/amcharts5/themes/Animated'
 import am5themes_Kelly from '@amcharts/amcharts5/themes/Kelly'
+import am5themes_Micro from '@amcharts/amcharts5/themes/Micro'
 import config from '../../config/config.json'
 
 import './CompetitorAnalysis.css'
@@ -79,7 +80,8 @@ const CompetitorAnalysis = () => {
     const drawBarChart = (destinationDiv, finalData) => {
         const myTheme = am5.Theme.new(root)
         myTheme.rule('Label').setAll({
-            fill: am5.color('#171717'),
+            fill: am5.color('#000'),
+            fill: am5.color('#4473c5'),
 
             fontSize: '.75rem'
         })
@@ -90,8 +92,9 @@ const CompetitorAnalysis = () => {
 
         // Set themes
         // https://www.amcharts.com/docs/v5/concepts/themes/
-        // root.setThemes([am5themes_Animated.new(root)])
+        // root.setThemes([am5themes_Animated.new(root), myTheme])
         root.setThemes([am5themes_Kelly.new(root), myTheme])
+        // root.setThemes([am5themes_Micro.new(root), myTheme])
         // root.setThemes([am5themes_Micro.new(root)])
 
         // Create chart
@@ -165,18 +168,17 @@ const CompetitorAnalysis = () => {
 
                 strokeOpacity: 0
             })
-
-            chart
-                .get('colors')
-                .set('colors', [am5.color('#f3c300'), am5.color('#4473c5')])
-            series.columns.template.adapters.add(
-                'fill',
-                function (fill, target) {
-                    return chart
-                        .get('colors')
-                        .getIndex(series.columns.indexOf(target))
-                }
-            )
+            // chart
+            //     .get('colors')
+            //     .set('colors', [am5.color('#4473c5'), am5.color('#000')])
+            // series.columns.template.adapters.add(
+            //     'fill',
+            //     function (fill, target) {
+            //         return chart
+            //             .get('colors')
+            //             .getIndex(series.columns.indexOf(target))
+            //     }
+            // )
 
             series.data.setAll(data)
 
@@ -189,7 +191,7 @@ const CompetitorAnalysis = () => {
                     locationY: 0,
                     sprite: am5.Label.new(root, {
                         text: '{valueY}',
-                        fill: root.interfaceColors.get('alternativeText'),
+
                         centerY: 0,
                         centerX: am5.p50,
                         populateText: true
@@ -201,7 +203,7 @@ const CompetitorAnalysis = () => {
         }
 
         makeSeries('Post', 'post')
-        makeSeries('Comment', 'comment')
+        makeSeries('Engagement', 'comment')
 
         // Make stuff animate on load
         // https://www.amcharts.com/docs/v5/concepts/animations/
