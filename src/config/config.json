@@ -1,4 +1,5 @@
 {
-    "url": "https://navsocial.up.railway.app",
-    "url_extra": "https://gray-clear-xerus.cyclic.app"
+    "url": "http://localhost:5004",
+    "url_extra": "https://gray-clear-xerus.cyclic.app",
+    "process_mgr": "http://localhost:5000"
 }
