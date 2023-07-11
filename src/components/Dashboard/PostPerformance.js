@@ -203,12 +203,12 @@ const PostPerformance = () => {
                 {
                     x: am5.percent(50),
                     y: am5.percent(50),
-                    image: '/assets/shah_cement_logo.jpg',
+                    image: '/assets/shah_cement_logo.png',
                     children: data.postTopics.topicData[n]
                 }
             ])
         }
-
+        console.log('logo print ', topicData)
         // let postData_1 = [
         //     {
         //         x: am5.percent(50),
@@ -295,8 +295,13 @@ const PostPerformance = () => {
 
     const drawForcedDirectedTreeGraphs = (destinationDiv, data, post) => {
         var root = am5.Root.new(destinationDiv)
+        const myTheme = am5.Theme.new(root)
+        myTheme.rule('Label').setAll({
+            fill: am5.color('#171717'),
 
-        root.setThemes([am5themes_Animated.new(root)])
+            fontSize: '.75rem'
+        })
+        root.setThemes([am5themes_Animated.new(root), myTheme])
 
         var container = root.container.children.push(
             am5.Container.new(root, {
@@ -881,11 +886,30 @@ const PostPerformance = () => {
                     </div>
                 </div>
             )}
-            <div className="row mt-3">
-                <div className="col-md-12">
-                    <div className="bg-white rounded p-4 shadow">
+            <div className="row mt-5 ms-2 me-2 bg-white rounded p-4 shadow">
+                <div className="col-md-4">
+                    <div
+                        style={{ height: '344px' }}
+                        className="b pt-4 pe-4 pb-4">
+                        <div className="d-flex justify-content-between mt-2">
+                            <h6 className="people_taking  p-2 mb-3 mt-3 ms-4">
+                                What people are talking about{' '}
+                            </h6>
+                        </div>
+                        <div className="mt-5-3 p-4 ">
+                            <small className="mt-5">
+                                This graph shows the number of responses from
+                                customers related to each area of conversation
+                                in the industry. Please note, only customer
+                                perception is taken into account here.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-md-8">
+                    <div className="">
                         <div className="row">
-                            <div className="d-flex justify-content-between">
+                            {/* <div className="d-flex justify-content-between">
                                 <div className="pb-3">
                                     <h5 className="text-primary">
                                         What people are talking about{' '}
@@ -901,8 +925,12 @@ const PostPerformance = () => {
                                 <h5 className="text-success">
                                     Total: {totalComments}
                                 </h5>
-                            </div>
+                            </div> */}
+                            <h5 className="text-success text-end pe-4 mb-4 ms-3">
+                                Total: {totalComments}
+                            </h5>
                         </div>
+
                         <div id="typeOfComments"></div>
                     </div>
                 </div>
@@ -1058,10 +1086,10 @@ const PostPerformance = () => {
             </div>
             <div className="row mt-3 mb-3">
                 <div className="col-md-6">
-                    <div className="bg-white rounded p-4 shadow">
+                    <div className="bg-white rounded ps-4 pe-4 pb-4 pt-2 shadow post1">
                         {topThreePosts[0] && (
                             <a
-                                className="text-primary pb-3 ellipsis"
+                                className="text-primary pb-5 ellipsis mb-3"
                                 target="_blank"
                                 href={topThreePosts[0].url}>
                                 Post 1: {topThreePosts[0].message}
@@ -1072,24 +1100,24 @@ const PostPerformance = () => {
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <div className="bg-white rounded p-4 shadow">
+                    <div className="bg-white rounded ps-4 pe-4 pb-4 pt-2 shadow post1">
                         {topThreePosts[1] && (
                             <a
-                                className="text-primary pb-3 ellipsis"
+                                className="text-primary pb-5 ellipsis"
                                 href={topThreePosts[1].url}>
                                 Post 2: {topThreePosts[1].message}
                             </a>
                         )}
-                        <div id="postAnatomy_2"></div>
+                        <div className="mt-3" id="postAnatomy_2"></div>
                     </div>
                 </div>
             </div>
             <div className="row mt-3 mb-3">
                 <div className="col-md-6">
-                    <div className="bg-white rounded p-4 shadow">
+                    <div className="bg-white rounded ps-4 pe-4 pb-4 pt-2 shadow post1">
                         {topThreePosts[2] && (
                             <a
-                                className="text-primary pb-3 ellipsis"
+                                className="text-primary pb-5 ellipsis"
                                 href={topThreePosts[2].url}>
                                 Post 3: {topThreePosts[2].message}
                             </a>
@@ -1098,10 +1126,10 @@ const PostPerformance = () => {
                     </div>
                 </div>
                 <div className="col-md-6">
-                    <div className="bg-white rounded p-4 shadow">
+                    <div className="bg-white rounded ps-4 pe-4 pb-4 pt-2 shadow post1">
                         {topThreePosts[3] && (
                             <a
-                                className="text-primary pb-3 ellipsis"
+                                className="text-primary pb-5 ellipsis"
                                 href={topThreePosts[3].url}
                                 target="_blank">
                                 Post 4: {topThreePosts[3].message}
