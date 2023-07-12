@@ -3,7 +3,7 @@ import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 
 export default function FullWidthTextField(props) {
-    const { label, handleChange } = props
+    const { label, handleChange, value } = props
 
     return (
         <Box
@@ -16,6 +16,7 @@ export default function FullWidthTextField(props) {
                 label={label}
                 id="fullWidth"
                 onChange={handleChange}
+                value={value}
             />
         </Box>
     )

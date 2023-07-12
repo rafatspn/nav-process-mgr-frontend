@@ -37,9 +37,17 @@ export default function Home() {
                 `${config.url}/api/users/934522851260163/pages`,
                 configData
             )
+
             setPages(data)
 
-            console.log('creationDate', data.creationDate)
+            const comResp = await axios.get(
+                `${config.url}/api/users/934522851260163/competitors`,
+                configData
+            )
+
+            if (Array.isArray(comResp.data)) {
+                setCompetitors(comResp.data)
+            }
         }
 
         getPages()
@@ -98,6 +106,7 @@ export default function Home() {
 
         if (response.data?.code === 201) {
             alert('Page added successfully!')
+            setCompURL('')
         } else if (response.data?.code === 11000) {
             alert('Page alredy exists')
         }
@@ -180,7 +189,7 @@ export default function Home() {
                         </List>
                     </div>
                 </div>
-                <div className="competitors" style={{ width: '50%' }}>
+                <div className="competitors" style={{ width: '45%' }}>
                     <h5 style={{ textAlign: 'center', padding: '20px' }}>
                         My Competitors
                     </h5>
@@ -188,6 +197,7 @@ export default function Home() {
                         <FullWidthTextField
                             label="Competitor's facebook page url"
                             handleChange={handleCompetitor}
+                            value={compURL}
                         />
                         <CustomButton
                             iconType="add"
@@ -204,6 +214,7 @@ export default function Home() {
                                 bgcolor: 'background.paper'
                             }}>
                             {competitors &&
+                                competitors.length > 0 &&
                                 competitors.map((page, idx) => (
                                     <div>
                                         <ListItem alignItems="flex-start">
@@ -239,7 +250,7 @@ export default function Home() {
                                                         </>
                                                     }
                                                 />
-                                                <div
+                                                {/* <div
                                                     style={{
                                                         color: '#2ebf8b'
                                                     }}>
@@ -251,7 +262,7 @@ export default function Home() {
                                                             )
                                                         ).toLocaleString()}
                                                     </text>
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </ListItem>
                                         <Divider
@@ -260,6 +271,19 @@ export default function Home() {
                                         />
                                     </div>
                                 ))}
+                            {competitors.length == 0 && (
+                                <div
+                                    style={{
+                                        textAlign: 'center',
+                                        padding: '30px',
+                                        fontSize: '22px',
+                                        fontWeight: 'bolder'
+                                    }}>
+                                    <text>
+                                        You have not added any competitor yet.
+                                    </text>
+                                </div>
+                            )}
                         </List>
                     </div>
                 </div>
