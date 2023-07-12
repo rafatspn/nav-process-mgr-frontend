@@ -108,7 +108,7 @@ export default function Home() {
             alert('Page added successfully!')
             setCompURL('')
         } else if (response.data?.code === 11000) {
-            alert('Page alredy exists')
+            alert('Page already exists')
         }
 
         await getCompetitors()
