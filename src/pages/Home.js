@@ -34,14 +34,18 @@ export default function Home() {
             }
 
             const { data } = await axios.get(
-                `${config.url}/api/users/934522851260163/pages`,
+                `${config.url}/api/users/${
+                    JSON.parse(localStorage.getItem('user')).userId
+                }/pages`,
                 configData
             )
 
             setPages(data)
 
             const comResp = await axios.get(
-                `${config.url}/api/users/934522851260163/competitors`,
+                `${config.url}/api/users/${
+                    JSON.parse(localStorage.getItem('user')).userId
+                }/competitors`,
                 configData
             )
 
