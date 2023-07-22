@@ -21,7 +21,7 @@ const useFacebook = function () {
         login: async () => {
             const { authResponse, status } = await new Promise((resolve) =>
                 window.FB.login(resolve, {
-                    scope: 'public_profile, email, pages_show_list, pages_read_user_content,pages_messaging'
+                    scope: 'public_profile, email, pages_show_list, pages_read_user_content,pages_messaging,pages_manage_metadata'
                 })
             )
             if (!authResponse) return { status }
